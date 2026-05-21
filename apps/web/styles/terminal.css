@@ -35,6 +35,9 @@ body { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; }
 .masthead .right .avail::before { display: none; }
 .masthead .right .avail::after { content: " ▮"; animation: blink 1.2s infinite step-end; }
 @keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .masthead .right .avail::after { animation: none; }
+}
 
 .tab { font-family: var(--font-display); font-size: 14px; font-weight: 400; text-transform: lowercase; letter-spacing: 0; padding: 8px 12px 8px 0; }
 .tab::before { content: "["; color: var(--ink-faint); margin-right: 2px; }
