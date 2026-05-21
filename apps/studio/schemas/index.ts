@@ -1,1 +1,3 @@
-export const schemaTypes: unknown[] = []
+import { resumeSchema } from './resume'
+
+export const schemaTypes = [resumeSchema]
