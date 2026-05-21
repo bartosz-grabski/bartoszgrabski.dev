@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+apps/web/.next/
+apps/web/out/
+apps/studio/dist/
+
+# OS
+.DS_Store
+
+# Sanity
+apps/studio/.sanity/
