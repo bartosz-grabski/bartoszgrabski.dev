@@ -13,7 +13,7 @@ export function bilingualField(name: string, title: string) {
   })
 }
 
-/** Same but multi-line text */
+/** Same but multi-line text. Sub-fields are intentionally optional — add validation at call site if required. */
 export function bilingualText(name: string, title: string) {
   return defineField({
     name,

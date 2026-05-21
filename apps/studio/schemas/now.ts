@@ -52,4 +52,8 @@ export const nowSchema = defineType({
       of: [{ type: 'object', fields: [bilingualField('item', 'Item')] }],
     }),
   ],
+  // Singleton document — only one 'now' should ever exist
+  preview: {
+    select: { title: 'asOf.en' },
+  },
 })
