@@ -6,7 +6,7 @@ import type { Bilingual } from './types'
 interface LangContextValue {
   lang: Lang
   setLang: (lang: Lang) => void
-  T: Translations
+  T: Translations  // always the EN shape; both locales share identical keys
   t: (field: Bilingual) => string
 }
 
@@ -41,7 +41,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     document.documentElement.setAttribute('lang', l)
   }
 
-  const T = translations[lang]
+  const T = translations[lang] as Translations
   const t = (field: Bilingual) => field[lang] ?? field.en
 
   return (
