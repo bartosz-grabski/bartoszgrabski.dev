@@ -54,6 +54,7 @@ export const resumeSchema = defineType({
             name: 'positions',
             title: 'Positions',
             type: 'array',
+            validation: r => r.min(1),
             of: [{
               type: 'object',
               fields: [
