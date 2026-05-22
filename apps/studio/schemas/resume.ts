@@ -14,7 +14,7 @@ export const resumeSchema = defineType({
         defineField({ name: 'name', title: 'Name', type: 'string', validation: r => r.required() }),
         defineField({ name: 'email', title: 'Email', type: 'string' }),
         defineField({ name: 'phone', title: 'Phone', type: 'string' }),
-        defineField({ name: 'url', title: 'Website URL', type: 'url' }),
+        defineField({ name: 'url', title: 'Website URL', type: 'string' }),
         bilingualText('summary', 'Summary'),
         defineField({ name: 'image', title: 'Portrait Photo', type: 'image', options: { hotspot: true } }),
         defineField({
