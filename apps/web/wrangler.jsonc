@@ -1,0 +1,7 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "bartoszgrabski.dev",
+    "assets": {
+      "directory": "./dist" 
+    }
+  }
