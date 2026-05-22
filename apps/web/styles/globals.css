@@ -297,8 +297,8 @@ button { font-family: inherit; }
   .masthead .right { align-items: flex-start; text-align: left; }
   .header-actions { justify-content: flex-start; }
   .cv { grid-template-columns: 1fr; }
-  .cv .meta-col { order: 2; }
-  .cv .main-col { order: 1; }
+  .cv .meta-col { order: 1; }
+  .cv .main-col { order: 2; }
   .now-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
   .now { --now-label-col: 1fr; }
   .contact { grid-template-columns: 1fr; }
