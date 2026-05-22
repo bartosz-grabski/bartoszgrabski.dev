@@ -34,7 +34,7 @@ export interface WorkPosition {
   position: Bilingual
   startDate: string
   endDate: string
-  summary: Bilingual
+  summary?: Bilingual
   highlights: WorkHighlight[]
 }
 
