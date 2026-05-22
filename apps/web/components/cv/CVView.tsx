@@ -34,7 +34,7 @@ export function CVView({ resume, onExportJSON, onPrint }: CVViewProps) {
 
         <SkillsBlock skills={resume.skills} skillsNote={resume.skillsNote} />
         <EducationList education={resume.education} />
-        <SpeakingList speaking={resume.speaking} />
+        {resume.speaking.length > 0 && <SpeakingList speaking={resume.speaking} />}
         <LanguageList languages={resume.languages} />
       </aside>
 
