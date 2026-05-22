@@ -1,0 +1,86 @@
+/* Terminal variant overrides — loaded after globals.css */
+
+:root {
+  --bg: #0a0f0c;
+  --bg-elev: #0f1612;
+  --ink: #c7e6c5;
+  --ink-soft: #7fa37c;
+  --ink-faint: #4a6648;
+  --rule: #c7e6c526;
+  --rule-strong: #c7e6c544;
+  --accent: #6dff95;
+  --accent-soft: #6dff9518;
+}
+:root[data-theme="light"] {
+  --bg: #f1f4ef;
+  --bg-elev: #ffffff;
+  --ink: #1a2418;
+  --ink-soft: #4a5e47;
+  --ink-faint: #8a9a87;
+  --rule: #1a241829;
+  --rule-strong: #1a241852;
+  --accent: #1f6b3a;
+  --accent-soft: #1f6b3a18;
+}
+
+body { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; }
+
+.masthead { border-bottom: 1px dashed var(--rule-strong); }
+.masthead .name { font-size: clamp(28px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.02em; text-transform: lowercase; }
+.masthead .name::before { content: "$ "; color: var(--accent); font-weight: 400; }
+.masthead .name em { font-style: normal; color: var(--accent); font-weight: 700; }
+.masthead .role { text-transform: lowercase; letter-spacing: 0; color: var(--ink-soft); }
+.masthead .role::before { content: "# "; color: var(--accent); }
+.masthead .right .avail { text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+.masthead .right .avail::before { display: none; }
+.masthead .right .avail::after { content: " ▮"; animation: blink 1.2s infinite step-end; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .masthead .right .avail::after { animation: none; }
+}
+
+.tab { font-family: var(--font-display); font-size: 14px; font-weight: 400; text-transform: lowercase; letter-spacing: 0; padding: 8px 12px 8px 0; }
+.tab::before { content: "["; color: var(--ink-faint); margin-right: 2px; }
+.tab::after { content: "]"; color: var(--ink-faint); margin-left: 2px; }
+.tab[aria-current="page"] { color: var(--accent); }
+.tab[aria-current="page"]::before, .tab[aria-current="page"]::after { color: var(--accent); }
+.tab[aria-current="page"]::after { content: "]"; }
+
+.eyebrow { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: lowercase; color: var(--accent); border-bottom: 1px dashed var(--rule); }
+.eyebrow::before { content: "// "; color: var(--ink-faint); }
+
+.avatar-wrap { max-width: 200px; }
+.avatar-slot { aspect-ratio: 1 / 1; background: var(--bg-elev); box-shadow: 0 0 0 1px var(--rule-strong); filter: grayscale(100%) contrast(1.4) brightness(0.85) sepia(40%) hue-rotate(60deg); }
+
+.bio p { font-size: 14px; line-height: 1.6; }
+.bio p + p { font-size: 13px; }
+.exp-item { padding: 18px 0; border-bottom: 1px dashed var(--rule); }
+.exp-head .role { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.exp-head .role em { font-style: normal; color: var(--accent); font-weight: 700; }
+.exp-head .role .at { color: var(--ink-faint); }
+.exp-bullets li::before { content: ">"; background: none; color: var(--accent); position: absolute; left: 0; top: 6px; width: auto; height: auto; font-family: var(--font-display); }
+.exp-bullets li { padding-left: 18px; font-size: 14px; }
+
+.now-row { border-top: 1px dashed var(--rule); }
+.now-row dt { color: var(--accent); }
+.now-row dt::before { content: "[ "; color: var(--ink-faint); }
+.now-row dt::after { content: " ]"; color: var(--ink-faint); }
+.now-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.now-blurb, .now-line, .now-inline { font-family: var(--font-display); font-size: 14px; }
+.book-title { font-family: var(--font-display); font-weight: 700; }
+
+.contact .statement h2 { font-family: var(--font-display); font-size: clamp(28px, 4.5vw, 44px); text-transform: lowercase; font-weight: 700; }
+.contact .statement h2 em { font-style: normal; color: var(--accent); }
+.contact .statement p { font-family: var(--font-display); font-size: 14px; max-width: 50ch; }
+.contact .statement .signed { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.contact-row .handle { font-family: var(--font-display); font-size: 16px; font-weight: 500; }
+.contact-row .arrow::before { content: "→"; }
+
+.btn { border-radius: 0; text-transform: lowercase; font-weight: 500; }
+.btn::before { content: "["; margin-right: 4px; color: var(--ink-faint); }
+.btn::after { content: "]"; margin-left: 4px; color: var(--ink-faint); }
+.btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.btn.primary::before, .btn.primary::after { color: var(--bg); opacity: 0.6; }
+
+.theme-toggle { border-radius: 0; text-transform: lowercase; }
+.footer { border-color: var(--rule); }

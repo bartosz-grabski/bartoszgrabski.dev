@@ -1,0 +1,78 @@
+export type Lang = 'en' | 'pl'
+
+export const translations = {
+  en: {
+    role: 'Fullstack Developer',
+    location: 'Kraków, Poland',
+    available: 'Open for work',
+    tabs: { cv: 'cv', now: 'now', contact: 'contact' },
+    themeLight: '☀ light',
+    themeDark: '☾ dark',
+    sections: {
+      about: 'about', skills: 'skills', education: 'education',
+      speaking: 'speaking', languages: 'languages', experience: 'experience',
+      now: 'now', building: 'building', learning: 'learning',
+      reading: 'reading', around: 'around',
+      channels: 'channels', note: 'or write a note',
+    },
+    nowIntro: "A snapshot of what I'm working on, learning, and reading. Updated when things change — inspired by Derek Sivers' 'now' idea.",
+    nowAsOf: (date: string) => `As of ${date}`,
+    contactHead: ["Let's", 'talk', '.'] as [string, string, string],
+    contactSub1: (period: string) => `I'm currently ${period.toLowerCase()} — freelance, contract, or full-time.`,
+    contactSub2: 'Best by email, or book a 20-minute intro call — whichever you prefer.',
+    contactSign: (first: string) => `— ${first}`,
+    channels: { email: 'Email', github: 'GitHub', linkedin: 'LinkedIn', calendar: 'Book a call' },
+    form: {
+      name: 'Name', namePh: 'Your name',
+      email: 'Email', emailPh: 'you@company.com',
+      message: 'Message', messagePh: 'A short note about the project, timeline, budget if you have one.',
+      send: 'Send →', sent: '✓ Sent',
+    },
+    buttons: { json: '↓ json', pdf: '↓ pdf' },
+    toasts: { json: 'CV downloaded as JSON', queued: "Message queued — I'll reply within 48h" },
+    footer: {
+      copy: (y: number, n: string) => `© ${y} ${n}`,
+      built: 'Built by hand · Last updated May 2026',
+    },
+    atSep: ' at ',
+    langLevels: { Native: 'Native', Fluent: 'Fluent', Intermediate: 'Intermediate' } as Record<string, string>,
+  },
+  pl: {
+    role: 'Programista Fullstack',
+    location: 'Kraków, Polska',
+    available: 'Otwarty na projekty',
+    tabs: { cv: 'CV', now: 'Teraz', contact: 'Kontakt' },
+    themeLight: '☀ Jasny',
+    themeDark: '☾ Ciemny',
+    sections: {
+      about: 'o mnie', skills: 'umiejętności', education: 'wykształcenie',
+      speaking: 'wystąpienia', languages: 'języki', experience: 'doświadczenie',
+      now: 'teraz', building: 'buduję', learning: 'uczę się',
+      reading: 'czytam', around: 'wokół',
+      channels: 'kanały', note: 'lub napisz wiadomość',
+    },
+    nowIntro: "Migawka tego, nad czym pracuję, czego się uczę i co czytam. Aktualizowane, gdy coś się zmienia — inspirowane stroną 'now' Dereka Siversa.",
+    nowAsOf: (date: string) => `Stan na ${date}`,
+    contactHead: ['', 'Porozmawiajmy', '.'] as [string, string, string],
+    contactSub1: (period: string) => `Aktualnie ${period.toLowerCase()} — freelance, kontrakt lub na pełen etat.`,
+    contactSub2: 'Najlepiej mailem albo zarezerwuj 20-minutową rozmowę wstępną — jak wolisz.',
+    contactSign: (first: string) => `— ${first}`,
+    channels: { email: 'E-mail', github: 'GitHub', linkedin: 'LinkedIn', calendar: 'Umów rozmowę' },
+    form: {
+      name: 'Imię', namePh: 'Twoje imię',
+      email: 'E-mail', emailPh: 'ty@firma.com',
+      message: 'Wiadomość', messagePh: 'Krótko o projekcie, terminie, budżecie jeśli już masz.',
+      send: 'Wyślij →', sent: '✓ Wysłano',
+    },
+    buttons: { json: '↓ JSON', pdf: '↓ PDF' },
+    toasts: { json: 'CV pobrane jako JSON', queued: 'Wiadomość zapisana — odpiszę w ciągu 48h' },
+    footer: {
+      copy: (y: number, n: string) => `© ${y} ${n}`,
+      built: 'Wykonane ręcznie · Ostatnia aktualizacja: maj 2026',
+    },
+    atSep: ' w ',
+    langLevels: { Native: 'ojczysty', Fluent: 'biegły', Intermediate: 'średniozaawansowany' } as Record<string, string>,
+  },
+} as const
+
+export type Translations = typeof translations.en
