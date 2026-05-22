@@ -30,13 +30,18 @@ export interface WorkHighlight {
   text: Bilingual
 }
 
-export interface Work {
-  name: string
+export interface WorkPosition {
   position: Bilingual
   startDate: string
   endDate: string
   summary: Bilingual
   highlights: WorkHighlight[]
+}
+
+export interface Work {
+  name: string
+  location?: string
+  positions: WorkPosition[]
 }
 
 export interface Education {
@@ -76,6 +81,7 @@ export interface Resume {
   work: Work[]
   education: Education[]
   skills: Skill[]
+  skillsNote?: Bilingual
   languages: Language[]
   projects: Project[]
   speaking: Speaking[]
