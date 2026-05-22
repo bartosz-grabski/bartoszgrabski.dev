@@ -9,6 +9,8 @@
     "dev:studio": "npm run dev --workspace=apps/studio",
     "build:web": "npm run build --workspace=apps/web",
     "deploy:studio": "npm run deploy --workspace=apps/studio",
+    "login:studio": "npm run login --workspace=apps/studio",
+    "build:studio": "npm run build --workspace=apps/studio",
     "test": "npm run test --workspace=apps/web",
     "seed": "ts-node --project scripts/tsconfig.json scripts/seed-sanity.ts"
   },
