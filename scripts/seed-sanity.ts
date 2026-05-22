@@ -18,87 +18,189 @@ const resume = {
     email: 'hello@bartoszgrabski.dev',
     url: 'bartoszgrabski.dev',
     summary: {
-      en: 'Independent fullstack developer with a decade across product engineering, infrastructure and design systems.\nI work end-to-end — from API and database design through to interface details — and prefer small, high-trust teams where I can stay close to the problem.',
-      pl: 'Niezależny programista fullstack z dziesięcioletnim doświadczeniem w inżynierii produktu, infrastrukturze i systemach projektowych.\nPracuję od początku do końca — od projektowania API i baz danych po detale interfejsu — i wolę małe, zaufane zespoły, w których mogę być blisko problemu.',
+      en: 'Independent fullstack developer with over a decade across product engineering, cloud infrastructure, and data tooling.\nI work end-to-end — from API and database design through to interface details — and prefer small, high-trust teams where I can stay close to the problem.',
+      pl: 'Niezależny programista fullstack z ponad dziesięcioletnim doświadczeniem w inżynierii produktu, infrastrukturze chmurowej i narzędziach danych.\nPracuję od początku do końca — od projektowania API i baz danych po detale interfejsu — i wolę małe, zaufane zespoły, w których mogę być blisko problemu.',
     },
     location: { city: 'Kraków', countryCode: 'PL' },
     profiles: [
-      { network: 'GitHub',   username: 'bgrabski',         url: 'https://github.com/bgrabski' },
-      { network: 'LinkedIn', username: 'bartosz-grabski',  url: 'https://www.linkedin.com/in/bartosz-grabski-b89a0738/' },
+      { network: 'GitHub',   username: 'bartosz-grabski',          url: 'https://github.com/bartosz-grabski' },
+      { network: 'LinkedIn', username: 'bartosz-grabski-b89a0738', url: 'https://www.linkedin.com/in/bartosz-grabski-b89a0738/' },
     ],
   },
   work: [
     {
-      name: 'Halo Labs', startDate: '2022', endDate: 'Present',
-      position: { en: 'Tech Lead', pl: 'Tech Lead' },
-      summary: {
-        en: 'Lead engineer on a B2B scheduling product. Team of four; shipping on a six-week cycle.',
-        pl: 'Lead inżynier w produkcie B2B do zarządzania harmonogramami. Zespół czteroosobowy; wydania w cyklach sześciotygodniowych.',
-      },
-      highlights: [
-        { text: { en: 'Designed the data model, billing, and event pipeline; product now serves 140+ paying teams across Europe.', pl: 'Zaprojektowałem model danych, billing i potok zdarzeń; produkt obsługuje obecnie 140+ płacących zespołów w Europie.' } },
-        { text: { en: 'Owned the React + TypeScript frontend, including a custom calendar primitive used across three surfaces.', pl: 'Prowadziłem frontend React + TypeScript, w tym własny komponent kalendarza używany w trzech miejscach produktu.' } },
-        { text: { en: 'Set up CI/CD on Fly.io with preview environments per pull request; cut release cycle time from days to under an hour.', pl: 'Skonfigurowałem CI/CD na Fly.io z podglądem dla każdego pull requesta; czas wydania spadł z dni do godziny.' } },
+      name: 'FQ Enterprises AS',
+      location: 'Norway (Remote)',
+      positions: [{
+        position: { en: 'Full Stack Engineer', pl: 'Full Stack Engineer' },
+        startDate: '2021-01',
+        endDate: 'Present',
+        summary: {
+          en: 'End-to-end development of Layn, a queuing management system, using Flutter for client apps and Google Cloud (Firebase, Firestore, BigQuery, Data Studio) for backend and analytics.',
+          pl: 'Kompleksowy rozwój Layn, systemu zarządzania kolejkami, z wykorzystaniem Flutter dla aplikacji klienckich i Google Cloud (Firebase, Firestore, BigQuery, Data Studio) dla backendu i analityki.',
+        },
+        highlights: [
+          { text: { en: 'Built and maintained the Flutter frontend for Layn across multiple client deployments.', pl: 'Zbudowałem i utrzymywałem frontend Flutter dla Layn w wielu wdrożeniach klienckich.' } },
+          { text: { en: 'Integrated Firestore for real-time data sync and built BigQuery/Data Studio pipelines for statistics and reporting.', pl: 'Zintegrowałem Firestore do synchronizacji danych w czasie rzeczywistym i zbudowałem pipelines BigQuery/Data Studio do statystyk i raportowania.' } },
+        ],
+      }],
+    },
+    {
+      name: 'Voyantis',
+      location: 'Tel Aviv, Israel (Remote)',
+      positions: [{
+        position: { en: 'Full Stack Engineer', pl: 'Full Stack Engineer' },
+        startDate: '2022-01',
+        endDate: '2026-03',
+        summary: {
+          en: 'Built internal tools for data scientists and customer success managers at an Israeli AI startup. Worked across the full stack — React frontends, FastAPI/Flask backends, AWS infrastructure, and dbt data pipelines.',
+          pl: 'Budowałem narzędzia wewnętrzne dla data scientistów i customer success managerów w izraelskim startupie AI. Pracowałem na pełnym stosie — frontendy React, backendy FastAPI/Flask, infrastruktura AWS i pipelines dbt.',
+        },
+        highlights: [
+          { text: { en: 'Foresight UI — React + NestJS/TypeORM/Postgres admin dashboard used by customer-facing teams, built in an NX monorepo.', pl: 'Foresight UI — panel administracyjny React + NestJS/TypeORM/Postgres używany przez zespoły klienckie, zbudowany w monorepo NX.' } },
+          { text: { en: "Dexter's Lab — Dash/Plotly dashboard for monitoring, deploying and managing predictive models and data backfills.", pl: "Dexter's Lab — dashboard Dash/Plotly do monitorowania, wdrażania i zarządzania modelami predykcyjnymi i backfillem danych." } },
+          { text: { en: 'Built data loading jobs, dbt transformation scripts, and MCP servers to streamline data analysis workflows.', pl: 'Zbudowałem zadania ładowania danych, skrypty transformacji dbt i serwery MCP do usprawnienia przepływów analizy danych.' } },
+        ],
+      }],
+    },
+    {
+      name: 'IGT Poland',
+      location: 'Warsaw, Poland',
+      positions: [{
+        position: { en: 'Senior Software Engineer', pl: 'Senior Software Engineer' },
+        startDate: '2018-12',
+        endDate: '2022-07',
+        summary: {
+          en: 'Development and maintenance of enterprise-scale gaming platforms powering national lotteries across multiple countries.',
+          pl: 'Rozwój i utrzymanie platform gamingowych klasy enterprise obsługujących krajowe loterie w wielu krajach.',
+        },
+        highlights: [
+          { text: { en: 'Developed and maintained complex lottery platform components used by national lottery operators worldwide.', pl: 'Rozwijałem i utrzymywałem złożone komponenty platformy loteryjnej używane przez operatorów loterii krajowych na całym świecie.' } },
+          { text: { en: 'Technologies: Java/Spring, JBoss EAP, DB2, ActiveMQ Artemis, Apache Camel, JMX.', pl: 'Technologie: Java/Spring, JBoss EAP, DB2, ActiveMQ Artemis, Apache Camel, JMX.' } },
+        ],
+      }],
+    },
+    {
+      name: 'HSBC Service Delivery',
+      location: 'Kraków, Poland',
+      positions: [
+        {
+          position: { en: 'Acting Tech Lead', pl: 'Acting Tech Lead' },
+          startDate: '2018-08',
+          endDate: '2018-12',
+          summary: {
+            en: 'Led Originations SSP — a programme migrating 150+ customer journeys (loans, cards, mortgages) to a cloud-hosted tech stack.',
+            pl: 'Prowadziłem Originations SSP — program migrujący 150+ ścieżek klientów (pożyczki, karty, hipoteki) na stos technologiczny hostowany w chmurze.',
+          },
+          highlights: [],
+        },
+        {
+          position: { en: 'Senior Fullstack Engineer', pl: 'Senior Fullstack Engineer' },
+          startDate: '2018-02',
+          endDate: '2018-08',
+          summary: {
+            en: 'End-to-end new-to-bank loan application journey; TypeScript/React/Redux frontend, Java/Spring Boot/Mongo backend, PCF DevOps.',
+            pl: 'Kompleksowa ścieżka aplikacji kredytowej dla nowych klientów banku; frontend TypeScript/React/Redux, backend Java/Spring Boot/Mongo, DevOps na PCF.',
+          },
+          highlights: [],
+        },
+        {
+          position: { en: 'Senior Software Engineer', pl: 'Senior Software Engineer' },
+          startDate: '2017-07',
+          endDate: '2018-02',
+          summary: {
+            en: 'Delivered RACoE — lifecycle management of customer retirement cases, reducing manual processing at the bank.',
+            pl: 'Dostarczyłem RACoE — zarządzanie cyklem życia spraw emerytalnych klientów, redukując ręczne przetwarzanie w banku.',
+          },
+          highlights: [],
+        },
       ],
     },
     {
-      name: 'Estromark', startDate: '2019', endDate: '2022',
-      position: { en: 'Senior Software Engineer', pl: 'Senior Software Engineer' },
-      summary: {
-        en: 'Product engineering across web, mobile, and backend at a consumer fintech.',
-        pl: 'Inżynieria produktu — web, mobile i backend — w konsumenckim fintechu.',
-      },
-      highlights: [
-        { text: { en: 'Led the rebuild of the onboarding flow, improving completion from 41% to 68% over two quarters.', pl: 'Prowadziłem przebudowę procesu onboardingu — ukończenie wzrosło z 41% do 68% w ciągu dwóch kwartałów.' } },
-        { text: { en: "Migrated the monolith's payment surface to a typed RPC layer; cut runtime errors in checkout by 80%.", pl: 'Zmigrowałem część płatności z monolitu do typowanej warstwy RPC; błędy w runtime w checkoucie spadły o 80%.' } },
-        { text: { en: 'Mentored four engineers through promotion; ran the internal frontend guild.', pl: 'Mentorowałem czterech inżynierów do awansu; prowadziłem wewnętrzny frontend guild.' } },
-      ],
+      name: 'ReasonApps',
+      location: 'Kraków, Poland',
+      positions: [{
+        position: { en: 'Freelance Web Developer', pl: 'Freelance Web Developer' },
+        startDate: '2018-03',
+        endDate: '2018-05',
+        summary: {
+          en: 'Short-term freelance React development engagement.',
+          pl: 'Krótkoterminowe zlecenie freelance — rozwój w React.',
+        },
+        highlights: [],
+      }],
     },
     {
-      name: 'Krakatoa Studio', startDate: '2016', endDate: '2019',
-      position: { en: 'Software Engineer', pl: 'Software Engineer' },
-      summary: {
-        en: 'Mid-level engineer at a digital product studio. Worked across client projects and internal tooling.',
-        pl: 'Mid w studiu produktów cyfrowych. Praca przy projektach klienckich i narzędziach wewnętrznych.',
-      },
-      highlights: [
-        { text: { en: 'Built and maintained six client web apps in React + Node, shipping on tight agency timelines.', pl: 'Zbudowałem i utrzymywałem sześć aplikacji webowych klientów w React + Node — wydania w napiętych terminach agencyjnych.' } },
-        { text: { en: 'Wrote the internal admin tooling that the operations team still uses today.', pl: 'Napisałem wewnętrzne narzędzia administracyjne, z których zespół operacyjny korzysta do dziś.' } },
-      ],
+      name: 'Leanle',
+      location: 'Kraków, Poland',
+      positions: [{
+        position: { en: 'Freelance Web Developer', pl: 'Freelance Web Developer' },
+        startDate: '2017-03',
+        endDate: '2017-10',
+        summary: {
+          en: 'Freelance web development — React applications and WordPress sites.',
+          pl: 'Freelance web development — aplikacje React i strony WordPress.',
+        },
+        highlights: [],
+      }],
     },
     {
-      name: 'Comarch', startDate: '2014', endDate: '2016',
-      position: { en: 'Junior Developer', pl: 'Junior Developer' },
-      summary: {
-        en: 'First engineering role, on the customer service platform team.',
-        pl: 'Pierwsza rola inżynierska — w zespole platformy obsługi klienta.',
-      },
-      highlights: [
-        { text: { en: 'Built and maintained internal Angular dashboards used by 200+ support agents.', pl: 'Zbudowałem i utrzymywałem wewnętrzne dashboardy w Angularze używane przez 200+ agentów wsparcia.' } },
-        { text: { en: 'Wrote integration tests and operator runbooks that reduced on-call escalations by half.', pl: 'Pisałem testy integracyjne i runbooki operacyjne — eskalacje on-call spadły o połowę.' } },
-      ],
+      name: 'Idium Polska',
+      location: 'Kraków, Poland',
+      positions: [{
+        position: { en: 'Java Web Developer', pl: 'Java Web Developer' },
+        startDate: '2014-07',
+        endDate: '2017-07',
+        summary: {
+          en: "Subsidiary of Norway's leading media house. Developed and maintained Idium Web+ and Editap CMS platforms; launched Editap on the Norwegian market.",
+          pl: 'Spółka zależna wiodącego norweskiego domu mediowego. Rozwijałem i utrzymywałem platformy CMS Idium Web+ i Editap; wdrożyłem Editap na rynek norweski.',
+        },
+        highlights: [
+          { text: { en: 'Technologies: Java 8, OSGi (Apache Felix), Varnish, AWS, ELK Stack, Docker, Node.js, ES6, Dojo.', pl: 'Technologie: Java 8, OSGi (Apache Felix), Varnish, AWS, ELK Stack, Docker, Node.js, ES6, Dojo.' } },
+        ],
+      }],
+    },
+    {
+      name: 'IBM Poland',
+      location: 'Kraków, Poland',
+      positions: [{
+        position: { en: 'Software Engineer Intern', pl: 'Praktykant — Software Engineer' },
+        startDate: '2013-05',
+        endDate: '2014-07',
+        summary: {
+          en: 'Contributed to Eclipse Orion/JazzHub, an open-source web IDE and CI/CD platform, and IBM Maximo-based Smart Road Maintenance system.',
+          pl: "Brałem udział w projekcie Eclipse Orion/JazzHub — open-source'owym IDE webowym i platformie CI/CD, oraz systemie Smart Road Maintenance opartym na IBM Maximo.",
+        },
+        highlights: [],
+      }],
     },
   ],
   education: [
-    { institution: 'AGH University of Science and Technology', area: { en: 'Computer Science — Distributed Systems', pl: 'Informatyka — Systemy Rozproszone' }, studyType: 'MSc', startDate: '2014', endDate: '2016' },
-    { institution: 'AGH University of Science and Technology', area: { en: 'Computer Science', pl: 'Informatyka' }, studyType: 'BSc', startDate: '2010', endDate: '2014' },
+    {
+      institution: 'AGH University of Science and Technology',
+      area: { en: 'Computer Science', pl: 'Informatyka' },
+      studyType: 'MSc',
+      startDate: '2011-10',
+      endDate: '2017-06',
+    },
   ],
   skills: [
-    { name: 'Languages',  keywords: ['TypeScript', 'Python', 'Go', 'SQL', 'Rust (learning)'] },
-    { name: 'Frontend',   keywords: ['React', 'Next.js', 'Tailwind', 'Web Components', 'Framer Motion'] },
-    { name: 'Backend',    keywords: ['Node.js', 'PostgreSQL', 'Redis', 'tRPC', 'GraphQL'] },
-    { name: 'Infra',      keywords: ['Fly.io', 'AWS', 'Terraform', 'GitHub Actions', 'Docker'] },
-    { name: 'Practice',   keywords: ['Code review', 'Design systems', 'Accessibility (WCAG 2.2)', 'Mentoring'] },
+    { name: 'Languages',  keywords: ['TypeScript', 'Python', 'Java', 'SQL'] },
+    { name: 'Frontend',   keywords: ['React', 'Flutter', 'Next.js'] },
+    { name: 'Cloud',      keywords: ['GCP (Firebase · BigQuery · GCS)', 'AWS'] },
+    { name: 'Backend',    keywords: ['FastAPI', 'Flask', 'NestJS', 'Node.js', 'PostgreSQL', 'DynamoDB'] },
+    { name: 'AI Tools',   keywords: ['Cursor', 'Claude Code', 'Claude Design', 'Gemini', 'Google Stitch'] },
+    { name: 'Approach',   keywords: ['Stack-agnostic', 'AI-augmented workflow', 'Process over tools'] },
   ],
+  skillsNote: {
+    en: 'Tech stacks come and go. With AI-augmented workflows the time to productivity in a new stack has shrunk dramatically — what matters is knowing how to learn, not what you currently know.',
+    pl: 'Technologie przychodzą i odchodzą. Przy wsparciu AI czas potrzebny do produktywności w nowym stosie technologicznym drastycznie się skrócił — liczy się umiejętność uczenia się, nie to, co aktualnie znasz.',
+  },
   languages: [
-    { language: 'Polish',  fluency: 'Native' },
     { language: 'English', fluency: 'Fluent' },
-    { language: 'German',  fluency: 'Intermediate' },
+    { language: 'Polish',  fluency: 'Native' },
   ],
-  speaking: [
-    { title: { en: 'Designing for the team that maintains it', pl: 'Projektowanie dla zespołu, który to utrzyma' }, venue: 'Code Europe, Kraków', year: '2024' },
-    { title: { en: 'Small databases, big constraints', pl: 'Małe bazy danych, duże ograniczenia' }, venue: 'PolyConf, Poznań', year: '2023' },
-  ],
+  speaking: [],
   projects: [],
 }
 
