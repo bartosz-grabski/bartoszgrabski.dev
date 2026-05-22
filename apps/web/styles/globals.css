@@ -108,9 +108,16 @@ button { font-family: inherit; }
 .masthead .right .avail { display: inline-flex; align-items: center; gap: 8px; }
 .masthead .right .avail::before {
   content: "";
+  display: block;
+  flex-shrink: 0;
   width: 8px; height: 8px; border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
+  animation: avail-pulse 2s ease-in-out infinite;
+}
+@keyframes avail-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px var(--accent-soft); }
+  50% { box-shadow: 0 0 0 6px transparent; }
 }
 .theme-toggle {
   margin-top: 8px;
@@ -145,7 +152,7 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 24px 0 var(--section-gap);
+  margin: 24px 0 var(--row-gap);
   flex-wrap: wrap;
 }
 .tabs nav { display: flex; gap: 4px; flex-wrap: wrap; }

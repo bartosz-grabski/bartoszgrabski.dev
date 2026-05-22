@@ -12,7 +12,7 @@
     "login:studio": "npm run login --workspace=apps/studio",
     "build:studio": "npm run build --workspace=apps/studio",
     "test": "npm run test --workspace=apps/web",
-    "seed": "ts-node --project scripts/tsconfig.json scripts/seed-sanity.ts"
+    "seed": "cd scripts && ts-node --project tsconfig.json seed-sanity.ts"
   },
   "engines": {
     "node": ">=22.0.0"
