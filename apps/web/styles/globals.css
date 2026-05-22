@@ -237,8 +237,9 @@ button { font-family: inherit; }
 .exp-bullets li { position: relative; padding: 6px 0 6px 22px; color: var(--ink); max-width: 65ch; }
 .exp-bullets li::before { content: ""; position: absolute; left: 0; top: 15px; width: 10px; height: 1px; background: var(--accent); }
 
+.exp-subs { margin-top: 8px; }
 .exp-sub { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--rule); }
-.exp-sub:first-child { margin-top: 8px; }
+.exp-sub:first-child { margin-top: 0; }
 .exp-sub-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 4px; }
 .exp-sub-head .co { font-family: var(--font-display); font-weight: 500; font-size: 16px; letter-spacing: -0.005em; }
 .exp-sub-head .dates { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-soft); white-space: nowrap; }
