@@ -32,7 +32,7 @@ export function CVView({ resume, onExportJSON, onPrint }: CVViewProps) {
           ))}
         </section>
 
-        <SkillsBlock skills={resume.skills} />
+        <SkillsBlock skills={resume.skills} skillsNote={resume.skillsNote} />
         <EducationList education={resume.education} />
         <SpeakingList speaking={resume.speaking} />
         <LanguageList languages={resume.languages} />

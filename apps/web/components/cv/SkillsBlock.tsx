@@ -1,9 +1,14 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
-import type { Skill } from '@/lib/types'
+import type { Skill, Bilingual } from '@/lib/types'
 
-export function SkillsBlock({ skills }: { skills: Skill[] }) {
-  const { T } = useLang()
+interface SkillsBlockProps {
+  skills: Skill[]
+  skillsNote?: Bilingual
+}
+
+export function SkillsBlock({ skills, skillsNote }: SkillsBlockProps) {
+  const { T, t } = useLang()
   return (
     <section>
       <Eyebrow>{T.sections.skills}</Eyebrow>
@@ -13,6 +18,7 @@ export function SkillsBlock({ skills }: { skills: Skill[] }) {
           <p className="items">{s.keywords.join(' · ')}</p>
         </div>
       ))}
+      {skillsNote && <p className="skill-note">{t(skillsNote)}</p>}
     </section>
   )
 }

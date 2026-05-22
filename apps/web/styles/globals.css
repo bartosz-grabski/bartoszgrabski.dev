@@ -246,6 +246,7 @@ button { font-family: inherit; }
 .skill-block + .skill-block { margin-top: 14px; }
 .skill-block .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 4px; }
 .skill-block .items { color: var(--ink); line-height: 1.45; }
+.skill-note { font-size: 12px; line-height: 1.6; color: var(--ink-faint); margin: 16px 0 0; font-style: italic; }
 
 .edu-item, .talk-item, .lang-item { padding: 10px 0; border-bottom: 1px dashed var(--rule); }
 .edu-item:last-child, .talk-item:last-child, .lang-item:last-child { border-bottom: none; }
