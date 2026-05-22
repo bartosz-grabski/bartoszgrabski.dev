@@ -49,17 +49,25 @@ export const resumeSchema = defineType({
         type: 'object',
         fields: [
           defineField({ name: 'name', title: 'Company', type: 'string', validation: r => r.required() }),
-          bilingualField('position', 'Position / Role'),
-          defineField({ name: 'startDate', title: 'Start Date (YYYY or YYYY-MM)', type: 'string' }),
-          defineField({ name: 'endDate', title: 'End Date (YYYY, YYYY-MM, or "Present")', type: 'string' }),
-          bilingualText('summary', 'Summary'),
+          defineField({ name: 'location', title: 'Location', type: 'string' }),
           defineField({
-            name: 'highlights',
-            title: 'Highlights',
+            name: 'positions',
+            title: 'Positions',
             type: 'array',
             of: [{
               type: 'object',
-              fields: [bilingualField('text', 'Bullet text')],
+              fields: [
+                bilingualField('position', 'Position / Role'),
+                defineField({ name: 'startDate', title: 'Start Date (YYYY-MM)', type: 'string' }),
+                defineField({ name: 'endDate', title: 'End Date (YYYY-MM or "Present")', type: 'string' }),
+                bilingualText('summary', 'Summary'),
+                defineField({
+                  name: 'highlights',
+                  title: 'Highlights',
+                  type: 'array',
+                  of: [{ type: 'object', fields: [bilingualField('text', 'Bullet text')] }],
+                }),
+              ],
             }],
           }),
         ],
@@ -92,6 +100,7 @@ export const resumeSchema = defineType({
         ],
       }],
     }),
+    bilingualText('skillsNote', 'Skills Note'),
     defineField({
       name: 'languages',
       title: 'Languages',

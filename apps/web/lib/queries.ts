@@ -9,11 +9,12 @@ export async function fetchResume(): Promise<Resume> {
         summary, image, location, profiles
       },
       work[] {
-        name, position, startDate, endDate, summary,
-        highlights[]{ text }
+        name, location,
+        positions[]{ position, startDate, endDate, summary, highlights[]{ text } }
       },
       education[]{ institution, area, studyType, startDate, endDate },
       skills[]{ name, keywords },
+      skillsNote,
       languages[]{ language, fluency },
       projects[]{ name, description, roles, keywords, url },
       speaking[]{ title, venue, year }
