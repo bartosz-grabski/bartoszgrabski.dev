@@ -234,11 +234,22 @@ const now = {
   ],
 }
 
+const siteSettings = {
+  _id: 'siteSettings',
+  _type: 'siteSettings',
+  availabilityLabel: {
+    en: 'Open for work',
+    pl: 'Otwarty na projekty',
+  },
+}
+
 async function seed() {
   console.log('Seeding resume…')
   await client.createOrReplace(resume)
   console.log('Seeding now…')
   await client.createOrReplace(now)
+  console.log('Seeding siteSettings…')
+  await client.createOrReplace(siteSettings)
   console.log('Done.')
 }
 

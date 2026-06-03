@@ -105,6 +105,10 @@ export interface NowAround {
   item: Bilingual
 }
 
+export interface SiteSettings {
+  availabilityLabel: Bilingual
+}
+
 export interface Now {
   _updatedAt: string
   building: NowBuilding[]

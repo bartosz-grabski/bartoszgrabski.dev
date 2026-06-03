@@ -4,7 +4,6 @@ export const translations = {
   en: {
     role: 'Fullstack Developer',
     location: 'Kraków, Poland',
-    available: 'Open for work',
     tabs: { cv: 'cv', now: 'now', contact: 'contact' },
     themeLight: '☀ light',
     themeDark: '☾ dark',
@@ -40,7 +39,6 @@ export const translations = {
   pl: {
     role: 'Programista Fullstack',
     location: 'Kraków, Polska',
-    available: 'Otwarty na projekty',
     tabs: { cv: 'CV', now: 'Teraz', contact: 'Kontakt' },
     themeLight: '☀ Jasny',
     themeDark: '☾ Ciemny',

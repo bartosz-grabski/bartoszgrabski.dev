@@ -1,7 +1,7 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ContactForm } from './ContactForm'
-import type { Resume } from '@/lib/types'
+import type { Resume, Bilingual } from '@/lib/types'
 
 const LINKS = {
   email: 'mailto:hello@bartoszgrabski.dev',
@@ -13,17 +13,18 @@ const LINKS = {
 interface ContactViewProps {
   resume: Resume
   showToast: (msg: string) => void
+  availabilityLabel: Bilingual
 }
 
-export function ContactView({ resume, showToast }: ContactViewProps) {
-  const { T } = useLang()
+export function ContactView({ resume, showToast, availabilityLabel }: ContactViewProps) {
+  const { T, t } = useLang()
   const [pre, em, post] = T.contactHead
   const firstName = resume.basics.name.split(' ')[0]
 
   const rows = [
     { label: T.channels.email,    handle: resume.basics.email,          href: LINKS.email },
-    { label: T.channels.github,   handle: 'github.com/bgrabski',        href: LINKS.github },
     { label: T.channels.linkedin, handle: 'in/bartosz-grabski',         href: LINKS.linkedin },
+    { label: T.channels.github,   handle: 'github.com/bgrabski',        href: LINKS.github },
     { label: T.channels.calendar, handle: 'cal.com/bgrabski',           href: LINKS.calendar },
   ]
 
@@ -35,7 +36,7 @@ export function ContactView({ resume, showToast }: ContactViewProps) {
           {em && <em>{em}</em>}
           {post}
         </h2>
-        <p>{T.contactSub1(T.available)}</p>
+        <p>{T.contactSub1(t(availabilityLabel))}</p>
         <p>{T.contactSub2}</p>
         <p className="signed">{T.contactSign(firstName)}</p>
       </div>

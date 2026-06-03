@@ -1,5 +1,5 @@
 import { client } from './sanity'
-import type { Resume, Now } from './types'
+import type { Resume, Now, SiteSettings } from './types'
 
 export async function fetchResume(): Promise<Resume> {
   return client.fetch(`
@@ -20,6 +20,10 @@ export async function fetchResume(): Promise<Resume> {
       speaking[]{ title, venue, year }
     }
   `)
+}
+
+export async function fetchSiteSettings(): Promise<SiteSettings> {
+  return client.fetch(`*[_type == "siteSettings"][0]{ availabilityLabel }`)
 }
 
 export async function fetchNow(): Promise<Now> {

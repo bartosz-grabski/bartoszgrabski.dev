@@ -1,14 +1,15 @@
 import { useLang } from '@/lib/i18n'
-import type { Resume } from '@/lib/types'
+import type { Resume, Bilingual } from '@/lib/types'
 
 interface MastheadProps {
   resume: Resume
   theme: 'dark' | 'light'
   onToggleTheme: () => void
+  availabilityLabel: Bilingual
 }
 
-export function Masthead({ resume, theme, onToggleTheme }: MastheadProps) {
-  const { lang, setLang, T } = useLang()
+export function Masthead({ resume, theme, onToggleTheme, availabilityLabel }: MastheadProps) {
+  const { lang, setLang, T, t } = useLang()
   const [first, ...rest] = resume.basics.name.split(' ')
   const otherLang = lang === 'en' ? 'pl' : 'en'
 
@@ -21,7 +22,7 @@ export function Masthead({ resume, theme, onToggleTheme }: MastheadProps) {
         <p className="role">{T.role} · {T.location}</p>
       </div>
       <div className="right">
-        <span className="avail">{T.available}</span>
+        <span className="avail">{t(availabilityLabel)}</span>
         <span>{resume.basics.url}</span>
         <div className="header-actions no-print">
           <button

@@ -1,12 +1,13 @@
-import { fetchResume, fetchNow } from '@/lib/queries'
+import { fetchResume, fetchNow, fetchSiteSettings } from '@/lib/queries'
 import { fetchCurrentlyReading } from '@/lib/goodreads'
 import { Portfolio } from '@/components/Portfolio'
 
 export default async function Page() {
-  const [resume, now, goodreads] = await Promise.all([
+  const [resume, now, goodreads, siteSettings] = await Promise.all([
     fetchResume(),
     fetchNow(),
     fetchCurrentlyReading(),
+    fetchSiteSettings(),
   ])
 
   const sanityDate = now._updatedAt
@@ -15,5 +16,5 @@ export default async function Page() {
     ? goodreadsDate
     : (sanityDate ?? new Date().toISOString())
 
-  return <Portfolio resume={resume} now={now} books={goodreads.books} asOf={asOf} />
+  return <Portfolio resume={resume} now={now} books={goodreads.books} asOf={asOf} siteSettings={siteSettings} />
 }

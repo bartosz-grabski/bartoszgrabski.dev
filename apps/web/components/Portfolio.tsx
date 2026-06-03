@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { CVView } from '@/components/cv/CVView'
 import { NowView } from '@/components/now/NowView'
 import { ContactView } from '@/components/contact/ContactView'
-import type { Resume, Now } from '@/lib/types'
+import type { Resume, Now, SiteSettings } from '@/lib/types'
 import type { Book } from '@/lib/goodreads'
 
 type Tab = 'cv' | 'now' | 'contact'
@@ -18,9 +18,10 @@ interface PortfolioProps {
   now: Now
   books: Book[]
   asOf: string
+  siteSettings: SiteSettings
 }
 
-function PortfolioInner({ resume, now, books, asOf }: PortfolioProps) {
+function PortfolioInner({ resume, now, books, asOf, siteSettings }: PortfolioProps) {
   const { T } = useLang()
 
   const [tab, setTab] = useState<Tab>(() => {
@@ -83,6 +84,7 @@ function PortfolioInner({ resume, now, books, asOf }: PortfolioProps) {
           resume={resume}
           theme={theme}
           onToggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
+          availabilityLabel={siteSettings.availabilityLabel}
         />
         <Tabs tab={tab} onTabChange={setTab} />
         <div>
@@ -90,7 +92,7 @@ function PortfolioInner({ resume, now, books, asOf }: PortfolioProps) {
             <CVView resume={resume} onExportJSON={exportJSON} onPrint={printPDF} />
           )}
           {tab === 'now' && <NowView now={now} books={books} asOf={asOf} />}
-          {tab === 'contact' && <ContactView resume={resume} showToast={showToast} />}
+          {tab === 'contact' && <ContactView resume={resume} showToast={showToast} availabilityLabel={siteSettings.availabilityLabel} />}
         </div>
         <Footer name={resume.basics.name} />
       </div>
