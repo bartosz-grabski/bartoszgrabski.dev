@@ -15,5 +15,5 @@ export default async function Page() {
     ? goodreadsDate
     : (sanityDate ?? new Date().toISOString())
 
-  return <Portfolio resume={resume} now={now} initialBooks={goodreads.books} asOf={asOf} />
+  return <Portfolio resume={resume} now={now} books={goodreads.books} asOf={asOf} />
 }

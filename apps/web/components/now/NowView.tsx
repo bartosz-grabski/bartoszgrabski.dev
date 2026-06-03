@@ -6,11 +6,11 @@ import type { Book } from '@/lib/goodreads'
 
 interface NowViewProps {
   now: Now
-  initialBooks: Book[]
+  books: Book[]
   asOf: string
 }
 
-export function NowView({ now, initialBooks, asOf }: NowViewProps) {
+export function NowView({ now, books, asOf }: NowViewProps) {
   const { T, t, lang } = useLang()
   const asOfFormatted = new Intl.DateTimeFormat(lang === 'pl' ? 'pl-PL' : 'en-US', {
     month: 'long', year: 'numeric',
@@ -51,7 +51,7 @@ export function NowView({ now, initialBooks, asOf }: NowViewProps) {
         <div className="now-row">
           <dt>{T.sections.reading}</dt>
           <dd>
-            <GoodreadsBooks initialBooks={initialBooks.length > 0 ? initialBooks : now.reading as Book[]} />
+            <GoodreadsBooks books={books.length > 0 ? books : now.reading as Book[]} />
           </dd>
         </div>
 

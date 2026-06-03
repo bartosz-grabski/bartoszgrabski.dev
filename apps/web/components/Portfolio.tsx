@@ -16,11 +16,11 @@ type Tab = 'cv' | 'now' | 'contact'
 interface PortfolioProps {
   resume: Resume
   now: Now
-  initialBooks: Book[]
+  books: Book[]
   asOf: string
 }
 
-function PortfolioInner({ resume, now, initialBooks, asOf }: PortfolioProps) {
+function PortfolioInner({ resume, now, books, asOf }: PortfolioProps) {
   const { T } = useLang()
 
   const [tab, setTab] = useState<Tab>(() => {
@@ -89,7 +89,7 @@ function PortfolioInner({ resume, now, initialBooks, asOf }: PortfolioProps) {
           {tab === 'cv' && (
             <CVView resume={resume} onExportJSON={exportJSON} onPrint={printPDF} />
           )}
-          {tab === 'now' && <NowView now={now} initialBooks={initialBooks} asOf={asOf} />}
+          {tab === 'now' && <NowView now={now} books={books} asOf={asOf} />}
           {tab === 'contact' && <ContactView resume={resume} showToast={showToast} />}
         </div>
         <Footer name={resume.basics.name} />

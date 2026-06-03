@@ -1,25 +1,10 @@
-'use client'
-import { useState, useEffect } from 'react'
 import type { Book } from '@/lib/goodreads'
 
 interface GoodreadsBooksProps {
-  initialBooks: Book[]
+  books: Book[]
 }
 
-export function GoodreadsBooks({ initialBooks }: GoodreadsBooksProps) {
-  const [books, setBooks] = useState<Book[]>(initialBooks)
-
-  useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_GOODREADS_PROXY_URL
-    if (!url) return
-    fetch(url)
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (data?.book?.title) setBooks([{ title: data.book.title, author: data.book.author }])
-      })
-      .catch(() => {})
-  }, [])
-
+export function GoodreadsBooks({ books }: GoodreadsBooksProps) {
   return (
     <>
       {books.map((book, i) => (
