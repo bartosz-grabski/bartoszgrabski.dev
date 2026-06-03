@@ -17,12 +17,12 @@ describe('fetchCurrentlyReading', () => {
 
   it('fetches from proxy when GOODREADS_PROXY_URL is set', async () => {
     process.env.GOODREADS_PROXY_URL = 'https://proxy.example.com'
-    const books = [{ title: 'Test Book', author: 'Test Author' }]
-    fetchMock.mockResolvedValueOnce({ ok: true, json: async () => books })
+    const response = { book: { title: 'Test Book', author: 'Test Author' } }
+    fetchMock.mockResolvedValueOnce({ ok: true, json: async () => response })
 
     const result = await fetchCurrentlyReading()
     expect(fetchMock).toHaveBeenCalledWith('https://proxy.example.com')
-    expect(result).toEqual(books)
+    expect(result).toEqual([{ title: 'Test Book', author: 'Test Author' }])
   })
 
   it('falls back to MOCK_BOOKS when fetch fails', async () => {

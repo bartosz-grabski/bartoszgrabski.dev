@@ -13,8 +13,10 @@ export function GoodreadsBooks({ initialBooks }: GoodreadsBooksProps) {
     const url = process.env.NEXT_PUBLIC_GOODREADS_PROXY_URL
     if (!url) return
     fetch(url)
-      .then(r => r.ok ? r.json() as Promise<Book[]> : null)
-      .then(data => { if (data) setBooks(data) })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data?.book?.title) setBooks([{ title: data.book.title, author: data.book.author }])
+      })
       .catch(() => {})
   }, [])
 
