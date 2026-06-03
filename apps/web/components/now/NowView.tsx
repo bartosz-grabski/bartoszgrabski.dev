@@ -7,10 +7,14 @@ import type { Book } from '@/lib/goodreads'
 interface NowViewProps {
   now: Now
   initialBooks: Book[]
+  asOf: string
 }
 
-export function NowView({ now, initialBooks }: NowViewProps) {
-  const { T, t } = useLang()
+export function NowView({ now, initialBooks, asOf }: NowViewProps) {
+  const { T, t, lang } = useLang()
+  const asOfFormatted = new Intl.DateTimeFormat(lang === 'pl' ? 'pl-PL' : 'en-US', {
+    month: 'long', year: 'numeric',
+  }).format(new Date(asOf))
 
   return (
     <div className="now" data-view="now">
@@ -19,7 +23,7 @@ export function NowView({ now, initialBooks }: NowViewProps) {
           <Eyebrow>{T.sections.now}</Eyebrow>
           <p className="now-intro">{T.nowIntro}</p>
         </div>
-        <span className="now-asof">{T.nowAsOf(t(now.asOf))}</span>
+        <span className="now-asof">{T.nowAsOf(asOfFormatted)}</span>
       </header>
 
       <dl className="now-list">

@@ -25,7 +25,7 @@ export async function fetchResume(): Promise<Resume> {
 export async function fetchNow(): Promise<Now> {
   return client.fetch(`
     *[_type == "now"][0]{
-      asOf,
+      _updatedAt,
       building[]{ title, blurb },
       learning[]{ item },
       reading[]{ title, author },

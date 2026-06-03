@@ -7,15 +7,6 @@ export const nowSchema = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'asOf',
-      title: 'As of (display string, e.g. "May 2026")',
-      type: 'object',
-      fields: [
-        defineField({ name: 'en', title: 'English', type: 'string' }),
-        defineField({ name: 'pl', title: 'Polski', type: 'string' }),
-      ],
-    }),
-    defineField({
       name: 'building',
       title: 'Building',
       type: 'array',
@@ -54,6 +45,6 @@ export const nowSchema = defineType({
   ],
   // Singleton document — only one 'now' should ever exist
   preview: {
-    select: { title: 'asOf.en' },
+    select: { title: '_updatedAt' },
   },
 })

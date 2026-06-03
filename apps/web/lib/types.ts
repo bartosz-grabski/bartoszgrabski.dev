@@ -106,7 +106,7 @@ export interface NowAround {
 }
 
 export interface Now {
-  asOf: Bilingual
+  _updatedAt: string
   building: NowBuilding[]
   learning: NowLearning[]
   reading: NowBook[]
