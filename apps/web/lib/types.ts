@@ -107,6 +107,7 @@ export interface NowAround {
 
 export interface SiteSettings {
   availabilityLabel: Bilingual
+  calendarUrl?: string
 }
 
 export interface Now {

@@ -14,18 +14,20 @@ interface ContactViewProps {
   resume: Resume
   showToast: (msg: string) => void
   availabilityLabel: Bilingual
+  calendarUrl?: string
 }
 
-export function ContactView({ resume, showToast, availabilityLabel }: ContactViewProps) {
+export function ContactView({ resume, showToast, availabilityLabel, calendarUrl }: ContactViewProps) {
   const { T, t } = useLang()
   const [pre, em, post] = T.contactHead
   const firstName = resume.basics.name.split(' ')[0]
+  const calHref = calendarUrl ?? LINKS.calendar
 
   const rows = [
     { label: T.channels.email,    handle: resume.basics.email,          href: LINKS.email },
-    { label: T.channels.linkedin, handle: 'in/bartosz-grabski',         href: LINKS.linkedin },
     { label: T.channels.github,   handle: 'github.com/bgrabski',        href: LINKS.github },
-    { label: T.channels.calendar, handle: 'cal.com/bgrabski',           href: LINKS.calendar },
+    { label: T.channels.linkedin, handle: 'in/bartosz-grabski',         href: LINKS.linkedin },
+    { label: T.channels.calendar, handle: new URL(calHref).hostname + new URL(calHref).pathname, href: calHref },
   ]
 
   return (

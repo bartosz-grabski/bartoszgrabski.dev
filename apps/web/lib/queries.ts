@@ -23,7 +23,7 @@ export async function fetchResume(): Promise<Resume> {
 }
 
 export async function fetchSiteSettings(): Promise<SiteSettings> {
-  return client.fetch(`*[_type == "siteSettings"][0]{ availabilityLabel }`)
+  return client.fetch(`*[_type == "siteSettings"][0]{ availabilityLabel, calendarUrl }`)
 }
 
 export async function fetchNow(): Promise<Now> {

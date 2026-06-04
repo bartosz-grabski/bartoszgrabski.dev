@@ -92,7 +92,7 @@ function PortfolioInner({ resume, now, books, asOf, siteSettings }: PortfolioPro
             <CVView resume={resume} onExportJSON={exportJSON} onPrint={printPDF} />
           )}
           {tab === 'now' && <NowView now={now} books={books} asOf={asOf} />}
-          {tab === 'contact' && <ContactView resume={resume} showToast={showToast} availabilityLabel={siteSettings.availabilityLabel} />}
+          {tab === 'contact' && <ContactView resume={resume} showToast={showToast} availabilityLabel={siteSettings.availabilityLabel} calendarUrl={siteSettings.calendarUrl} />}
         </div>
         <Footer name={resume.basics.name} />
       </div>
