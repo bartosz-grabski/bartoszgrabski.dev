@@ -321,6 +321,18 @@ button { font-family: inherit; }
 
 @media print {
   @page { size: A4; margin: 16mm 14mm; }
+  /* Always print the light (white background) version, even from dark mode */
+  :root, :root[data-theme="dark"] {
+    --bg: #f5f6f4;
+    --bg-elev: #ffffff;
+    --ink: #0f1115;
+    --ink-soft: #404552;
+    --ink-faint: #8a8f99;
+    --rule: #0f111522;
+    --rule-strong: #0f111540;
+    --accent: oklch(56% 0.12 252);
+    --accent-soft: oklch(56% 0.12 252 / 0.12);
+  }
   body { background: #fff !important; color: #000 !important; font-size: 11pt; }
   .no-print, .theme-toggle, .footer, .cv-actions, .tabs { display: none !important; }
   .shell { padding: 0; max-width: none; }
