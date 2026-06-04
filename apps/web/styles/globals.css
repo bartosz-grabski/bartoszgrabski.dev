@@ -348,12 +348,17 @@ button { font-family: inherit; }
   .print-contacts { list-style: none; margin: 6px 0 0; padding: 0; }
   .print-contacts li { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: #000; line-height: 1.7; }
   .cv { grid-template-columns: 220px 1fr; gap: 28px; }
-  .exp-item { page-break-inside: avoid; padding: 14px 0; }
+  /* Let tall multi-position companies flow across pages (avoid clipping),
+     but keep each individual entry from splitting mid-block. */
+  .exp-item { padding: 14px 0; break-inside: auto; }
+  .exp-item:not(:has(.exp-subs)) { break-inside: avoid; }
+  .exp-sub { break-inside: avoid; }
   .exp-bullets li::before { background: #000; }
   .eyebrow { color: #555; border-color: #ccc; }
   /* Make faint subtitles legible — match the coloured heading where there is one */
   .exp-loc { color: var(--accent) !important; }
   .skill-block .label { color: #555 !important; }
   .skill-note, .exp-head .role .at { color: var(--ink-soft) !important; }
+  .edu-item .dates, .talk-item .year { color: var(--ink-soft) !important; }
   a { color: #000; text-decoration: none; }
 }
