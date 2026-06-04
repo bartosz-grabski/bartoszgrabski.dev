@@ -1,17 +1,35 @@
 import { useLang } from '@/lib/i18n'
-import type { Resume, Bilingual } from '@/lib/types'
+import type { Resume, Bilingual, Channel } from '@/lib/types'
 
 interface MastheadProps {
   resume: Resume
   theme: 'dark' | 'light'
   onToggleTheme: () => void
   availabilityLabel: Bilingual
+  channels?: Channel[]
+  calendarUrl?: string
 }
 
-export function Masthead({ resume, theme, onToggleTheme, availabilityLabel }: MastheadProps) {
+/** "https://www.linkedin.com/in/x" → "linkedin.com/in/x" */
+function handle(url: string): string {
+  try {
+    const u = new URL(url)
+    return u.hostname.replace(/^www\./, '') + (u.pathname === '/' ? '' : u.pathname)
+  } catch {
+    return url
+  }
+}
+
+export function Masthead({ resume, theme, onToggleTheme, availabilityLabel, channels, calendarUrl }: MastheadProps) {
   const { lang, setLang, T, t } = useLang()
   const [first, ...rest] = resume.basics.name.split(' ')
   const otherLang = lang === 'en' ? 'pl' : 'en'
+
+  const printContacts = [
+    resume.basics.email,
+    ...(channels ?? []).map(c => handle(c.url)),
+    ...(calendarUrl ? [handle(calendarUrl)] : []),
+  ]
 
   return (
     <header className="masthead">
@@ -24,6 +42,11 @@ export function Masthead({ resume, theme, onToggleTheme, availabilityLabel }: Ma
       <div className="right">
         <span className="avail">{t(availabilityLabel)}</span>
         <span>{resume.basics.url}</span>
+        <ul className="print-contacts print-only">
+          {printContacts.map(c => (
+            <li key={c}>{c}</li>
+          ))}
+        </ul>
         <div className="header-actions no-print">
           <button
             className="theme-toggle"

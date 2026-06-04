@@ -319,6 +319,8 @@ button { font-family: inherit; }
   .contact-row .label { grid-column: 1 / -1; }
 }
 
+.print-only { display: none; }
+
 @media print {
   @page { size: A4; margin: 16mm 14mm; }
   /* Always print the light (white background) version, even from dark mode */
@@ -335,13 +337,23 @@ button { font-family: inherit; }
   }
   body { background: #fff !important; color: #000 !important; font-size: 11pt; }
   .no-print, .theme-toggle, .footer, .cv-actions, .tabs { display: none !important; }
+  .print-only { display: revert !important; }
+  /* Hide the availability badge on the printed CV */
+  .masthead .right .avail { display: none !important; }
   .shell { padding: 0; max-width: none; }
-  .masthead { border-bottom: 1px solid #000; padding-bottom: 10px; }
+  .masthead { border-bottom: none; padding-bottom: 10px; }
   .masthead .name { font-size: 32pt; }
   .masthead .name em { color: #000; }
+  /* Print-only contact listing under the website URL */
+  .print-contacts { list-style: none; margin: 6px 0 0; padding: 0; }
+  .print-contacts li { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: #000; line-height: 1.7; }
   .cv { grid-template-columns: 220px 1fr; gap: 28px; }
   .exp-item { page-break-inside: avoid; padding: 14px 0; }
   .exp-bullets li::before { background: #000; }
   .eyebrow { color: #555; border-color: #ccc; }
+  /* Make faint subtitles legible — match the coloured heading where there is one */
+  .exp-loc { color: var(--accent) !important; }
+  .skill-block .label { color: #555 !important; }
+  .skill-note, .exp-head .role .at { color: var(--ink-soft) !important; }
   a { color: #000; text-decoration: none; }
 }

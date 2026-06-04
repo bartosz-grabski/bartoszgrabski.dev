@@ -85,6 +85,8 @@ function PortfolioInner({ resume, now, books, asOf, siteSettings }: PortfolioPro
           theme={theme}
           onToggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
           availabilityLabel={siteSettings.availabilityLabel}
+          channels={siteSettings.channels}
+          calendarUrl={siteSettings.calendarUrl}
         />
         <Tabs tab={tab} onTabChange={setTab} />
         <div>
