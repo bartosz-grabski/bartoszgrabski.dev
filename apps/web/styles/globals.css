@@ -347,7 +347,12 @@ button { font-family: inherit; }
   /* Print-only contact listing under the website URL */
   .print-contacts { list-style: none; margin: 6px 0 0; padding: 0; }
   .print-contacts li { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: #000; line-height: 1.7; }
-  .cv { grid-template-columns: 220px 1fr; gap: 28px; }
+  /* Grid containers don't fragment across print pages in WebKit/iOS
+     (trailing content gets clipped). Use a float-based two-column
+     layout so the experience column paginates as normal block flow. */
+  .cv { display: block; }
+  .cv .meta-col { float: left; width: 220px; }
+  .cv .main-col { margin-left: 248px; }
   /* Keep single-position entries from splitting across a page break.
      Tall multi-position companies are allowed to flow across pages
      (avoid clipping); their individual sub-positions stay intact. */
