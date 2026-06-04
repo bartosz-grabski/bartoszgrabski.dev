@@ -105,9 +105,16 @@ export interface NowAround {
   item: Bilingual
 }
 
+export type ChannelType = 'linkedin' | 'github'
+
+export interface Channel {
+  type: ChannelType
+}
+
 export interface SiteSettings {
   availabilityLabel: Bilingual
   calendarUrl?: string
+  channels?: Channel[]
 }
 
 export interface Now {

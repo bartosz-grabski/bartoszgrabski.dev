@@ -1,5 +1,7 @@
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, type Rule } from 'sanity'
 import { bilingualField } from './helpers'
+
+const CHANNEL_TYPES = ['linkedin', 'github'] as const
 
 export const siteSettingsSchema = defineType({
   name: 'siteSettings',
@@ -8,6 +10,40 @@ export const siteSettingsSchema = defineType({
   fields: [
     bilingualField('availabilityLabel', 'Availability label (e.g. "Open for work")'),
     defineField({ name: 'calendarUrl', title: 'Book a call URL (cal.com)', type: 'url' }),
+    defineField({
+      name: 'channels',
+      title: 'Social channels',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'type',
+              title: 'Channel',
+              type: 'string',
+              options: {
+                list: CHANNEL_TYPES.map(t => ({ title: t.charAt(0).toUpperCase() + t.slice(1), value: t })),
+                layout: 'radio',
+              },
+              validation: (Rule: Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'type' },
+            prepare: ({ title }: { title: string }) => ({ title: title?.charAt(0).toUpperCase() + title?.slice(1) }),
+          },
+        },
+      ],
+      validation: (Rule: Rule) =>
+        Rule.max(2).custom((channels: Array<{ type: string }> | undefined) => {
+          if (!channels || channels.length === 0) return true
+          const types = channels.map(c => c.type).filter(Boolean)
+          const unique = new Set(types)
+          if (unique.size !== types.length) return 'Each channel type can only appear once'
+          return true
+        }),
+    }),
   ],
   // Singleton document
   preview: {

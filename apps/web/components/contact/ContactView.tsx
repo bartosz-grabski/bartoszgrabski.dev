@@ -1,12 +1,15 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ContactForm } from './ContactForm'
-import type { Resume, Bilingual } from '@/lib/types'
+import type { Resume, Bilingual, Channel } from '@/lib/types'
+
+const CHANNEL_META = {
+  github:   { href: 'https://github.com/bgrabski',                              handle: 'github.com/bgrabski' },
+  linkedin: { href: 'https://www.linkedin.com/in/bartosz-grabski-b89a0738/',    handle: 'in/bartosz-grabski' },
+} as const
 
 const LINKS = {
-  email: 'mailto:hello@bartoszgrabski.dev',
-  github: 'https://github.com/bgrabski',
-  linkedin: 'https://www.linkedin.com/in/bartosz-grabski-b89a0738/',
+  email:    'mailto:hello@bartoszgrabski.dev',
   calendar: 'https://cal.com/bgrabski/intro',
 } as const
 
@@ -15,18 +18,24 @@ interface ContactViewProps {
   showToast: (msg: string) => void
   availabilityLabel: Bilingual
   calendarUrl?: string
+  channels?: Channel[]
 }
 
-export function ContactView({ resume, showToast, availabilityLabel, calendarUrl }: ContactViewProps) {
+export function ContactView({ resume, showToast, availabilityLabel, calendarUrl, channels }: ContactViewProps) {
   const { T, t } = useLang()
   const [pre, em, post] = T.contactHead
   const firstName = resume.basics.name.split(' ')[0]
   const calHref = calendarUrl ?? LINKS.calendar
 
+  const channelRows = (channels ?? []).map(c => ({
+    label: T.channels[c.type],
+    handle: CHANNEL_META[c.type].handle,
+    href: CHANNEL_META[c.type].href,
+  }))
+
   const rows = [
     { label: T.channels.email,    handle: resume.basics.email,          href: LINKS.email },
-    { label: T.channels.github,   handle: 'github.com/bgrabski',        href: LINKS.github },
-    { label: T.channels.linkedin, handle: 'in/bartosz-grabski',         href: LINKS.linkedin },
+    ...channelRows,
     { label: T.channels.calendar, handle: new URL(calHref).hostname + new URL(calHref).pathname, href: calHref },
   ]
 
