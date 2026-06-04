@@ -12,7 +12,7 @@ export function ExperienceList({ work }: { work: Work[] }) {
         const first = company.positions[0]
         const last = company.positions[company.positions.length - 1]
         return (
-          <article className="exp-item" key={i}>
+          <article className={`exp-item${isMulti ? ' exp-item--multi' : ''}`} key={i}>
             {isMulti ? (
               <>
                 <header className="exp-head">
