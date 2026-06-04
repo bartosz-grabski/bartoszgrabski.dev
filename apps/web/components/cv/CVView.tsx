@@ -20,6 +20,11 @@ export function CVView({ resume, onExportJSON, onPrint }: CVViewProps) {
 
   return (
     <div className="cv" data-view="cv">
+      <div className="cv-actions no-print">
+        <button className="btn" onClick={onExportJSON}>{T.buttons.json}</button>
+        <button className="btn primary" onClick={onPrint}>{T.buttons.pdf}</button>
+      </div>
+
       <aside className="meta-col">
         <div className="avatar-wrap no-print">
           <Avatar image={basics.image} name={basics.name} />
@@ -39,10 +44,6 @@ export function CVView({ resume, onExportJSON, onPrint }: CVViewProps) {
       </aside>
 
       <main className="main-col">
-        <div className="cv-actions no-print" style={{ marginBottom: 28, display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-          <button className="btn" onClick={onExportJSON}>{T.buttons.json}</button>
-          <button className="btn primary" onClick={onPrint}>{T.buttons.pdf}</button>
-        </div>
         <ExperienceList work={resume.work} />
       </main>
     </div>

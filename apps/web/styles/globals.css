@@ -180,7 +180,7 @@ button { font-family: inherit; }
   height: 1px;
   background: var(--accent);
 }
-.cv-actions { display: flex; gap: 8px; }
+.cv-actions { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 28px; grid-column: 2; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--font-mono);
@@ -305,6 +305,7 @@ button { font-family: inherit; }
   .masthead .right { align-items: flex-start; text-align: left; }
   .header-actions { justify-content: flex-start; }
   .cv { grid-template-columns: 1fr; }
+  .cv .cv-actions { grid-column: 1; order: 0; }
   .cv .meta-col { order: 1; }
   .cv .main-col { order: 2; }
   .now-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
