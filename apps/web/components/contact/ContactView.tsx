@@ -1,6 +1,5 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
-import { ContactForm } from './ContactForm'
 import type { Resume, Bilingual, Channel } from '@/lib/types'
 
 const LINKS = {
@@ -10,13 +9,12 @@ const LINKS = {
 
 interface ContactViewProps {
   resume: Resume
-  showToast: (msg: string) => void
   availabilityLabel: Bilingual
   calendarUrl?: string
   channels?: Channel[]
 }
 
-export function ContactView({ resume, showToast, availabilityLabel, calendarUrl, channels }: ContactViewProps) {
+export function ContactView({ resume, availabilityLabel, calendarUrl, channels }: ContactViewProps) {
   const { T, t } = useLang()
   const [pre, em, post] = T.contactHead
   const firstName = resume.basics.name.split(' ')[0]
@@ -65,10 +63,6 @@ export function ContactView({ resume, showToast, availabilityLabel, calendarUrl,
           ))}
         </div>
 
-        <section className="form-section">
-          <Eyebrow as="h3">{T.sections.note}</Eyebrow>
-          <ContactForm showToast={showToast} toastMessage={T.toasts.queued} />
-        </section>
       </div>
     </div>
   )
