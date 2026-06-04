@@ -28,10 +28,19 @@ export const siteSettingsSchema = defineType({
               },
               validation: (Rule: Rule) => Rule.required(),
             }),
+            defineField({
+              name: 'url',
+              title: 'Profile URL',
+              type: 'url',
+              validation: (Rule: Rule) => Rule.required(),
+            }),
           ],
           preview: {
-            select: { title: 'type' },
-            prepare: ({ title }: { title: string }) => ({ title: title?.charAt(0).toUpperCase() + title?.slice(1) }),
+            select: { title: 'type', subtitle: 'url' },
+            prepare: ({ title, subtitle }: { title: string; subtitle: string }) => ({
+              title: title?.charAt(0).toUpperCase() + title?.slice(1),
+              subtitle,
+            }),
           },
         },
       ],
@@ -45,8 +54,7 @@ export const siteSettingsSchema = defineType({
         }),
     }),
   ],
-  // Singleton document
   preview: {
-    select: { title: 'availabilityLabel.en' },
+    prepare: () => ({ title: 'Site Settings' }),
   },
 })

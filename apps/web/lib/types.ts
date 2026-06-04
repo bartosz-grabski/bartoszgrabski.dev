@@ -109,6 +109,7 @@ export type ChannelType = 'linkedin' | 'github'
 
 export interface Channel {
   type: ChannelType
+  url: string
 }
 
 export interface SiteSettings {

@@ -3,11 +3,6 @@ import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ContactForm } from './ContactForm'
 import type { Resume, Bilingual, Channel } from '@/lib/types'
 
-const CHANNEL_META = {
-  github:   { href: 'https://github.com/bgrabski',                              handle: 'github.com/bgrabski' },
-  linkedin: { href: 'https://www.linkedin.com/in/bartosz-grabski-b89a0738/',    handle: 'in/bartosz-grabski' },
-} as const
-
 const LINKS = {
   email:    'mailto:hello@bartoszgrabski.dev',
   calendar: 'https://cal.com/bgrabski/intro',
@@ -27,11 +22,11 @@ export function ContactView({ resume, showToast, availabilityLabel, calendarUrl,
   const firstName = resume.basics.name.split(' ')[0]
   const calHref = calendarUrl ?? LINKS.calendar
 
-  const channelRows = (channels ?? []).map(c => ({
-    label: T.channels[c.type],
-    handle: CHANNEL_META[c.type].handle,
-    href: CHANNEL_META[c.type].href,
-  }))
+  const channelRows = (channels ?? []).map(c => {
+    const parsed = new URL(c.url)
+    const handle = parsed.hostname.replace(/^www\./, '') + parsed.pathname
+    return { label: T.channels[c.type], handle, href: c.url }
+  })
 
   const rows = [
     { label: T.channels.email,    handle: resume.basics.email,          href: LINKS.email },
