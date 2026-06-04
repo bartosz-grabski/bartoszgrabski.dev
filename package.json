@@ -10,6 +10,7 @@
     "build:web": "npm run build --workspace=apps/web",
     "deploy:web": "npm run deploy --workspace=apps/web",
     "deploy:studio": "npm run deploy --workspace=apps/studio",
+    "deploy:trigger": "npm run deploy --workspace=apps/deploy-trigger",
     "login:studio": "npm run login --workspace=apps/studio",
     "build:studio": "npm run build --workspace=apps/studio",
     "test": "npm run test --workspace=apps/web",

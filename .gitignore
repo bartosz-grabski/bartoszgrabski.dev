@@ -5,6 +5,7 @@ node_modules/
 .env
 .env.*
 !.env.template
+.dev.vars
 
 # Build outputs
 apps/web/.next/

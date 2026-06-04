@@ -42,6 +42,28 @@ Studio will be available at `https://bartoszgrabski.sanity.studio`.
    - **Trigger on:** Create, Update, Delete
 3. Add the deploy hook URL to `.env` as `CLOUDFLARE_DEPLOY_HOOK_URL` (for reference only — it's not used in code)
 
+### Daily Goodreads cron (Cloudflare Worker)
+
+A Cloudflare Worker in `apps/deploy-trigger` fires the deploy hook daily at 06:00 UTC so the site rebuilds with any new Goodreads books.
+
+**First-time setup:**
+
+1. Authenticate with Cloudflare:
+   ```bash
+   npx wrangler login
+   ```
+2. Deploy the Worker (creates it in Cloudflare):
+   ```bash
+   npm run deploy:trigger
+   ```
+3. Set the deploy hook secret (get the URL from Cloudflare Pages → your project → Settings → Deploy Hooks):
+   ```bash
+   cd apps/deploy-trigger
+   npx wrangler secret put DEPLOY_HOOK_URL
+   ```
+
+To change the schedule, edit `crons` in [`apps/deploy-trigger/wrangler.toml`](apps/deploy-trigger/wrangler.toml) and redeploy.
+
 ## Local development
 
 ```bash
