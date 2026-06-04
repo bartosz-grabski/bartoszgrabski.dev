@@ -305,7 +305,7 @@ button { font-family: inherit; }
   .masthead .right { align-items: flex-start; text-align: left; }
   .header-actions { justify-content: flex-start; }
   .cv { grid-template-columns: 1fr; }
-  .cv .cv-actions { grid-column: 1; order: 0; }
+  .cv .cv-actions { grid-column: 1; order: 0; position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 10px 0; margin-bottom: 0; }
   .cv .meta-col { order: 1; }
   .cv .main-col { order: 2; }
   .now-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
