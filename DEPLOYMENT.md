@@ -31,8 +31,7 @@ Studio will be available at `https://bartoszgrabski.sanity.studio`.
    - `NEXT_PUBLIC_SANITY_PROJECT_ID`
    - `NEXT_PUBLIC_SANITY_DATASET`
    - `SANITY_API_TOKEN`
-   - `GOODREADS_PROXY_URL` *(optional)*
-   - `NEXT_PUBLIC_GOODREADS_PROXY_URL` *(optional)*
+   - `GOODREADS_PROXY_URL` *(optional)* - https://goodreads-six.vercel.app/goodreads/json?user=<user_id>
 
 ### Sanity webhook (automatic deploys on content publish)
 
