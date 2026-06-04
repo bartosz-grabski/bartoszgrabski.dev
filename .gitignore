@@ -16,3 +16,4 @@ apps/studio/dist/
 
 # Sanity
 apps/studio/.sanity/
+.claude/
