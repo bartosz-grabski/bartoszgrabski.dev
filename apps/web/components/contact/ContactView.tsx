@@ -1,23 +1,44 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
-import type { Resume, Bilingual, Channel } from '@/lib/types'
+import type { Resume, Bilingual, Channel, Contact } from '@/lib/types'
 
 const LINKS = {
   email:    'mailto:hello@bartoszgrabski.dev',
   calendar: 'https://cal.com/bgrabski/intro',
 } as const
 
+/** Splits a heading like "Let's *talk*." into [pre, emphasised, post]. */
+function parseHeading(heading: string): [string, string, string] {
+  const match = heading.match(/^(.*?)\*([^*]+)\*(.*)$/)
+  if (!match) return [heading, '', '']
+  return [match[1], match[2], match[3]]
+}
+
 interface ContactViewProps {
   resume: Resume
   availabilityLabel: Bilingual
   calendarUrl?: string
   channels?: Channel[]
+  contact?: Contact
 }
 
-export function ContactView({ resume, availabilityLabel, calendarUrl, channels }: ContactViewProps) {
+export function ContactView({ resume, availabilityLabel, calendarUrl, channels, contact }: ContactViewProps) {
   const { T, t } = useLang()
-  const [pre, em, post] = T.contactHead
   const firstName = resume.basics.name.split(' ')[0]
+  const period = t(availabilityLabel).toLowerCase()
+
+  // Prefer Sanity-managed copy; fall back to the hardcoded translations.
+  const [pre, em, post] = contact
+    ? parseHeading(t(contact.heading))
+    : T.contactHead
+  const availabilityText = contact
+    ? t(contact.availabilityLine).replace('{availability}', period)
+    : T.contactSub1(t(availabilityLabel))
+  const bookingText = contact ? t(contact.bookingLine) : T.contactSub2
+  const signText = contact
+    ? t(contact.signature).replace('{name}', firstName)
+    : T.contactSign(firstName)
+
   const calHref = calendarUrl ?? LINKS.calendar
 
   const channelRows = (channels ?? []).map(c => {
@@ -40,9 +61,9 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels }
           {em && <em>{em}</em>}
           {post}
         </h2>
-        <p>{T.contactSub1(t(availabilityLabel))}</p>
-        <p>{T.contactSub2}</p>
-        <p className="signed">{T.contactSign(firstName)}</p>
+        <p>{availabilityText}</p>
+        <p>{bookingText}</p>
+        <p className="signed">{signText}</p>
       </div>
 
       <div>

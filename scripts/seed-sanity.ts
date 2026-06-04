@@ -241,6 +241,24 @@ const siteSettings = {
     en: 'Open for work',
     pl: 'Otwarty na projekty',
   },
+  contact: {
+    heading: {
+      en: "Let's *talk*.",
+      pl: '*Porozmawiajmy*.',
+    },
+    availabilityLine: {
+      en: "I'm currently {availability} — freelance, contract, or full-time.",
+      pl: 'Aktualnie {availability} — freelance, kontrakt lub na pełen etat.',
+    },
+    bookingLine: {
+      en: 'Best by email, or book a 30-minute intro call — whichever you prefer.',
+      pl: 'Najlepiej mailem albo zarezerwuj 30-minutową rozmowę wstępną — jak wolisz.',
+    },
+    signature: {
+      en: '— {name}',
+      pl: '— {name}',
+    },
+  },
 }
 
 async function seed() {

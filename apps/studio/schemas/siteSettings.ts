@@ -1,5 +1,5 @@
 import { defineField, defineType, type Rule } from 'sanity'
-import { bilingualField } from './helpers'
+import { bilingualField, bilingualText } from './helpers'
 
 const CHANNEL_TYPES = ['linkedin', 'github'] as const
 
@@ -10,6 +10,19 @@ export const siteSettingsSchema = defineType({
   fields: [
     bilingualField('availabilityLabel', 'Availability label (e.g. "Open for work")'),
     defineField({ name: 'calendarUrl', title: 'Book a call URL (cal.com)', type: 'url' }),
+    defineField({
+      name: 'contact',
+      title: 'Contact',
+      description: 'The statement shown on the Contact tab',
+      type: 'object',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        bilingualField('heading', 'Heading — wrap the emphasised word in *asterisks*, e.g. "Let\'s *talk*."'),
+        bilingualText('availabilityLine', 'Availability line — use {availability} where the availability label should appear'),
+        bilingualText('bookingLine', 'Booking line'),
+        bilingualField('signature', 'Signature — use {name} for the first name, e.g. "— {name}"'),
+      ],
+    }),
     defineField({
       name: 'channels',
       title: 'Social channels',

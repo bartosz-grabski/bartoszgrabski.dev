@@ -112,10 +112,18 @@ export interface Channel {
   url: string
 }
 
+export interface Contact {
+  heading: Bilingual
+  availabilityLine: Bilingual
+  bookingLine: Bilingual
+  signature: Bilingual
+}
+
 export interface SiteSettings {
   availabilityLabel: Bilingual
   calendarUrl?: string
   channels?: Channel[]
+  contact?: Contact
 }
 
 export interface Now {
