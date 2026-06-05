@@ -42,7 +42,54 @@ const multiRoleWork: Work[] = [{
   ],
 }]
 
+// GROQ returns `null` (not `[]`) for array fields that are absent on a document,
+// e.g. a position with no highlights. The component must not crash on that.
+const nullHighlightsSingle = [{
+  name: 'FQ Enterprises AS',
+  location: 'Oslo, Norway',
+  positions: [{
+    position: { en: 'Consultant', pl: 'Konsultant' },
+    startDate: '2019-01',
+    endDate: '2019-12',
+    summary: { en: 'Contract work.', pl: 'Praca kontraktowa.' },
+    highlights: null,
+  }],
+}] as unknown as Work[]
+
+const nullHighlightsMulti = [{
+  name: 'HSBC Service Delivery',
+  location: 'Kraków, Poland',
+  positions: [
+    {
+      position: { en: 'Acting Tech Lead', pl: 'Acting Tech Lead' },
+      startDate: '2018-08',
+      endDate: '2018-12',
+      summary: { en: 'Led Originations SSP.', pl: 'Prowadziłem Originations SSP.' },
+      highlights: null,
+    },
+    {
+      position: { en: 'Senior Fullstack Engineer', pl: 'Senior Fullstack Engineer' },
+      startDate: '2018-02',
+      endDate: '2018-08',
+      summary: { en: 'Loans NTB journey.', pl: 'Ścieżka kredytowa NTB.' },
+      highlights: null,
+    },
+  ],
+}] as unknown as Work[]
+
 describe('ExperienceList', () => {
+  it('renders a single-role entry whose highlights field is null (absent in CMS)', () => {
+    renderWithLang(<ExperienceList work={nullHighlightsSingle} />)
+    expect(screen.getByText('Consultant')).toBeInTheDocument()
+    expect(screen.getByText('FQ Enterprises AS')).toBeInTheDocument()
+  })
+
+  it('renders a multi-role entry whose highlights fields are null (absent in CMS)', () => {
+    renderWithLang(<ExperienceList work={nullHighlightsMulti} />)
+    expect(screen.getByText('Acting Tech Lead')).toBeInTheDocument()
+    expect(screen.getByText('Senior Fullstack Engineer')).toBeInTheDocument()
+  })
+
   it('renders position and company for single-role entry', () => {
     renderWithLang(<ExperienceList work={singleRoleWork} />)
     expect(screen.getByText('Full Stack Engineer')).toBeInTheDocument()
