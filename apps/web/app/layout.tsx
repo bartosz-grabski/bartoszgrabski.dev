@@ -11,7 +11,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Bartosz Grabski — Fullstack Developer',
-  description: 'Independent fullstack developer based in Kraków, Poland.',
+  description: 'Fullstack developer based in Kraków, Poland.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
