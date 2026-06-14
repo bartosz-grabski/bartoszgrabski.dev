@@ -1,4 +1,5 @@
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { RichText } from '@/components/ui/RichText'
 import { useLang } from '@/lib/i18n'
 import type { Work } from '@/lib/types'
 
@@ -28,11 +29,11 @@ export function ExperienceList({ work }: { work: Work[] }) {
                         <span className="co">{t(pos.position)}</span>
                         <span className="dates">{pos.startDate} — {pos.endDate}</span>
                       </div>
-                      {pos.summary && <p className="exp-summary">{t(pos.summary)}</p>}
+                      {pos.summary && <p className="exp-summary"><RichText text={t(pos.summary)} /></p>}
                       {(pos.highlights?.length ?? 0) > 0 && (
                         <ul className="exp-bullets">
                           {pos.highlights.map((h, k) => (
-                            <li key={k}>{t(h.text)}</li>
+                            <li key={k}><RichText text={t(h.text)} /></li>
                           ))}
                         </ul>
                       )}
@@ -51,11 +52,11 @@ export function ExperienceList({ work }: { work: Work[] }) {
                   <span className="dates">{first.startDate} — {first.endDate}</span>
                 </header>
                 {company.location && <p className="exp-loc">{company.location}</p>}
-                {first.summary && <p className="exp-summary">{t(first.summary)}</p>}
+                {first.summary && <p className="exp-summary"><RichText text={t(first.summary)} /></p>}
                 {(first.highlights?.length ?? 0) > 0 && (
                   <ul className="exp-bullets">
                     {first.highlights.map((h, j) => (
-                      <li key={j}>{t(h.text)}</li>
+                      <li key={j}><RichText text={t(h.text)} /></li>
                     ))}
                   </ul>
                 )}
