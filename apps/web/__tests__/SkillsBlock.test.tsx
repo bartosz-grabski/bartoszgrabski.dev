@@ -38,4 +38,10 @@ describe('SkillsBlock', () => {
     const { container } = renderWithLang(<SkillsBlock skills={skills} />)
     expect(container.querySelector('.skill-note')).toBeNull()
   })
+
+  it('renders markdown in skillsNote', () => {
+    const rich: Bilingual = { en: 'Tools **change**.', pl: 'x' }
+    const { container } = renderWithLang(<SkillsBlock skills={skills} skillsNote={rich} />)
+    expect(container.querySelector('.skill-note strong')?.textContent).toBe('change')
+  })
 })

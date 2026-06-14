@@ -1,6 +1,7 @@
 import { useLang } from '@/lib/i18n'
 import { Avatar } from '@/components/ui/Avatar'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { RichText } from '@/components/ui/RichText'
 import { ExperienceList } from './ExperienceList'
 import { SkillsBlock } from './SkillsBlock'
 import { EducationList } from './EducationList'
@@ -33,7 +34,7 @@ export function CVView({ resume, onExportJSON, onPrint }: CVViewProps) {
         <section className="bio">
           <Eyebrow>{T.sections.about}</Eyebrow>
           {t(basics.summary).split('\n').filter(Boolean).map((p, i) => (
-            <p key={i}>{p}</p>
+            <p key={i}><RichText text={p} /></p>
           ))}
         </section>
 
