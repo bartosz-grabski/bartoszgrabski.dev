@@ -1,10 +1,11 @@
 import { defineField } from 'sanity'
 
 /** Inline object with `en` and `pl` string fields */
-export function bilingualField(name: string, title: string) {
+export function bilingualField(name: string, title: string, description?: string) {
   return defineField({
     name,
     title,
+    description,
     type: 'object',
     fields: [
       defineField({ name: 'en', title: 'English', type: 'string', validation: r => r.required() }),
@@ -14,10 +15,11 @@ export function bilingualField(name: string, title: string) {
 }
 
 /** Same but multi-line text. Sub-fields are intentionally optional — add validation at call site if required. */
-export function bilingualText(name: string, title: string) {
+export function bilingualText(name: string, title: string, description?: string) {
   return defineField({
     name,
     title,
+    description,
     type: 'object',
     fields: [
       defineField({ name: 'en', title: 'English', type: 'text', rows: 3 }),

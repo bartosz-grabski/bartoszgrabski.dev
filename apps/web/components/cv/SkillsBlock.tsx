@@ -1,5 +1,6 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { RichText } from '@/components/ui/RichText'
 import type { Skill, Bilingual } from '@/lib/types'
 
 interface SkillsBlockProps {
@@ -18,7 +19,7 @@ export function SkillsBlock({ skills, skillsNote }: SkillsBlockProps) {
           <p className="items">{s.keywords.join(' · ')}</p>
         </div>
       ))}
-      {skillsNote && <p className="skill-note">{t(skillsNote)}</p>}
+      {skillsNote && <p className="skill-note"><RichText text={t(skillsNote)} /></p>}
     </section>
   )
 }

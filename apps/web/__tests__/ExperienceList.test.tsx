@@ -121,4 +121,27 @@ describe('ExperienceList', () => {
     renderWithLang(<ExperienceList work={multiRoleWork} />)
     expect(screen.getByText('Kraków, Poland')).toBeInTheDocument()
   })
+
+  it('renders markdown links inside highlights', () => {
+    const work = [
+      {
+        name: 'Acme',
+        positions: [
+          {
+            position: { en: 'Engineer', pl: 'Inżynier' },
+            startDate: '2020-01',
+            endDate: 'Present',
+            summary: { en: '', pl: '' },
+            highlights: [
+              { text: { en: 'Shipped [docs](https://acme.dev)', pl: 'x' } },
+            ],
+          },
+        ],
+      },
+    ] as unknown as Work[]
+    const { container } = renderWithLang(<ExperienceList work={work} />)
+    const link = container.querySelector('a[href="https://acme.dev"]')
+    expect(link).not.toBeNull()
+    expect(link?.textContent).toBe('docs')
+  })
 })
