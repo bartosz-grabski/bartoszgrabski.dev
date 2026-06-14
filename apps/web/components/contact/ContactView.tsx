@@ -1,18 +1,12 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { RichText } from '@/components/ui/RichText'
 import type { Resume, Bilingual, Channel, Contact } from '@/lib/types'
 
 const LINKS = {
   email:    'mailto:hello@bartoszgrabski.dev',
   calendar: 'https://cal.com/bgrabski/intro',
 } as const
-
-/** Splits a heading like "Let's *talk*." into [pre, emphasised, post]. */
-function parseHeading(heading: string): [string, string, string] {
-  const match = heading.match(/^(.*?)\*([^*]+)\*(.*)$/)
-  if (!match) return [heading, '', '']
-  return [match[1], match[2], match[3]]
-}
 
 interface ContactViewProps {
   resume: Resume
@@ -28,9 +22,7 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
   const period = t(availabilityLabel).toLowerCase()
 
   // Prefer Sanity-managed copy; fall back to the hardcoded translations.
-  const [pre, em, post] = contact
-    ? parseHeading(t(contact.heading))
-    : T.contactHead
+  const headingText = contact ? t(contact.heading) : null
   const availabilityText = contact
     ? t(contact.availabilityLine).replace('{availability}', period)
     : T.contactSub1(t(availabilityLabel))
@@ -57,13 +49,20 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
     <div className="contact" data-view="contact">
       <div className="statement">
         <h2>
-          {pre}{pre && em ? ' ' : ''}
-          {em && <em>{em}</em>}
-          {post}
+          {headingText !== null ? (
+            <RichText text={headingText} />
+          ) : (
+            <>
+              {T.contactHead[0]}
+              {T.contactHead[0] && T.contactHead[1] ? ' ' : ''}
+              {T.contactHead[1] && <em>{T.contactHead[1]}</em>}
+              {T.contactHead[2]}
+            </>
+          )}
         </h2>
-        <p>{availabilityText}</p>
-        <p>{bookingText}</p>
-        <p className="signed">{signText}</p>
+        <p><RichText text={availabilityText} /></p>
+        <p><RichText text={bookingText} /></p>
+        <p className="signed"><RichText text={signText} /></p>
       </div>
 
       <div>
