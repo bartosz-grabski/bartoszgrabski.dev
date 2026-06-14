@@ -3,6 +3,8 @@ import { bilingualField, bilingualText } from './helpers'
 
 const CHANNEL_TYPES = ['linkedin', 'github'] as const
 
+const MARKDOWN_HINT = 'Supports markdown: **bold**, *italic*, `code`, [links](https://example.com).'
+
 export const siteSettingsSchema = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
@@ -18,8 +20,8 @@ export const siteSettingsSchema = defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         bilingualField('heading', 'Heading — wrap the emphasised word in *asterisks*, e.g. "Let\'s *talk*."'),
-        bilingualText('availabilityLine', 'Availability line — use {availability} where the availability label should appear'),
-        bilingualText('bookingLine', 'Booking line'),
+        bilingualText('availabilityLine', 'Availability line — use {availability} where the availability label should appear', MARKDOWN_HINT),
+        bilingualText('bookingLine', 'Booking line', MARKDOWN_HINT),
         bilingualField('signature', 'Signature — use {name} for the first name, e.g. "— {name}"'),
       ],
     }),

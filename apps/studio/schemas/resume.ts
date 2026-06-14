@@ -1,6 +1,8 @@
 import { defineField, defineType } from 'sanity'
 import { bilingualField, bilingualText } from './helpers'
 
+const MARKDOWN_HINT = 'Supports markdown: **bold**, *italic*, `code`, [links](https://example.com).'
+
 export const resumeSchema = defineType({
   name: 'resume',
   title: 'Resume',
@@ -15,7 +17,7 @@ export const resumeSchema = defineType({
         defineField({ name: 'email', title: 'Email', type: 'string' }),
         defineField({ name: 'phone', title: 'Phone', type: 'string' }),
         defineField({ name: 'url', title: 'Website URL', type: 'string' }),
-        bilingualText('summary', 'Summary'),
+        bilingualText('summary', 'Summary', MARKDOWN_HINT),
         defineField({ name: 'image', title: 'Portrait Photo', type: 'image', options: { hotspot: true } }),
         defineField({
           name: 'location',
@@ -61,12 +63,12 @@ export const resumeSchema = defineType({
                 bilingualField('position', 'Position / Role'),
                 defineField({ name: 'startDate', title: 'Start Date (YYYY-MM)', type: 'string' }),
                 defineField({ name: 'endDate', title: 'End Date (YYYY-MM or "Present")', type: 'string' }),
-                bilingualText('summary', 'Summary'),
+                bilingualText('summary', 'Summary', MARKDOWN_HINT),
                 defineField({
                   name: 'highlights',
                   title: 'Highlights',
                   type: 'array',
-                  of: [{ type: 'object', fields: [bilingualField('text', 'Bullet text')] }],
+                  of: [{ type: 'object', fields: [bilingualField('text', 'Bullet text', MARKDOWN_HINT)] }],
                 }),
               ],
             }],
@@ -101,7 +103,7 @@ export const resumeSchema = defineType({
         ],
       }],
     }),
-    bilingualText('skillsNote', 'Skills Note'),
+    bilingualText('skillsNote', 'Skills Note', MARKDOWN_HINT),
     defineField({
       name: 'languages',
       title: 'Languages',
@@ -122,7 +124,7 @@ export const resumeSchema = defineType({
         type: 'object',
         fields: [
           defineField({ name: 'name', title: 'Name', type: 'string' }),
-          bilingualText('description', 'Description'),
+          bilingualText('description', 'Description', MARKDOWN_HINT),
           defineField({ name: 'roles', title: 'Roles', type: 'array', of: [{ type: 'string' }] }),
           defineField({ name: 'keywords', title: 'Keywords', type: 'array', of: [{ type: 'string' }] }),
           defineField({ name: 'url', title: 'URL', type: 'url' }),
