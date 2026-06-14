@@ -14,7 +14,7 @@
   --font-body: var(--font-jetbrains), ui-monospace, monospace;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --pad-x: clamp(20px, 5vw, 64px);
-  --col-gap: clamp(24px, 4vw, 80px);
+  --col-gap: 24px;
   --row-gap: clamp(20px, 3vw, 40px);
   --section-gap: clamp(40px, 6vw, 96px);
 }
