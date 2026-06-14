@@ -1,5 +1,6 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { RichText } from '@/components/ui/RichText'
 import { GoodreadsBooks } from './GoodreadsBooks'
 import type { Now } from '@/lib/types'
 import type { Book } from '@/lib/goodreads'
@@ -32,8 +33,8 @@ export function NowView({ now, books, asOf }: NowViewProps) {
           <dd>
             {now.building.map((b, i) => (
               <div className="now-item" key={i}>
-                <p className="now-title">{t(b.title)}</p>
-                <p className="now-blurb">{t(b.blurb)}</p>
+                <p className="now-title"><RichText text={t(b.title)} /></p>
+                <p className="now-blurb"><RichText text={t(b.blurb)} /></p>
               </div>
             ))}
           </dd>
@@ -43,7 +44,12 @@ export function NowView({ now, books, asOf }: NowViewProps) {
           <dt>{T.sections.learning}</dt>
           <dd>
             <p className="now-inline">
-              {now.learning.map(l => t(l.item)).join('  ·  ')}
+              {now.learning.map((l, i) => (
+                <span key={i}>
+                  {i > 0 && '  ·  '}
+                  <RichText text={t(l.item)} />
+                </span>
+              ))}
             </p>
           </dd>
         </div>
@@ -59,7 +65,7 @@ export function NowView({ now, books, asOf }: NowViewProps) {
           <dt>{T.sections.around}</dt>
           <dd>
             {now.around.map((a, i) => (
-              <p className="now-line" key={i}>{t(a.item)}</p>
+              <p className="now-line" key={i}><RichText text={t(a.item)} /></p>
             ))}
           </dd>
         </div>
