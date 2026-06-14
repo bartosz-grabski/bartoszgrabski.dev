@@ -50,7 +50,7 @@ body { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; }
 .eyebrow::before { content: "// "; color: var(--ink-faint); }
 
 .avatar-wrap { max-width: 200px; }
-.avatar-slot { aspect-ratio: 1 / 1; background: var(--bg-elev); box-shadow: 0 0 0 1px var(--rule-strong); filter: grayscale(100%) contrast(1.4) brightness(0.85) sepia(40%) hue-rotate(60deg); }
+.avatar-slot { aspect-ratio: 1 / 1; background: var(--bg-elev); box-shadow: 0 0 0 1px var(--rule-strong); }
 
 .bio p { font-size: 14px; line-height: 1.6; }
 .bio p + p { font-size: 13px; }
