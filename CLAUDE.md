@@ -18,6 +18,12 @@ npm run dev:web      # Next.js on localhost:3000
 npm run dev:studio   # Sanity Studio
 npm run seed         # Seed Sanity with initial data (scripts/seed-sanity.ts)
 ```
+### Node.js Environment
+This project requires a specific Node.js version defined in `.nvmrc`. Always ensure your environment is synced before installing dependencies or running scripts:
+
+```bash
+nvm use                     # Switch to the Node version defined in .nvmrc
+# If the version is not installed locally, run: nvm install
 
 ## Notes
 
