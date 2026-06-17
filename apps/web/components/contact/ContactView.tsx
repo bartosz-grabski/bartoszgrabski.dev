@@ -23,12 +23,14 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
   const period = t(availabilityLabel).toLowerCase()
 
   // Prefer Sanity-managed copy; fall back to the hardcoded translations.
-  const headingText = contact ? t(contact.heading) : null
-  const availabilityText = contact
+  // Each field is checked individually — a contact document may exist with
+  // only some fields populated.
+  const headingText = contact?.heading ? t(contact.heading) : null
+  const availabilityText = contact?.availabilityLine
     ? t(contact.availabilityLine).replace('{availability}', period)
     : T.contactSub1(t(availabilityLabel))
-  const bookingText = contact ? t(contact.bookingLine) : T.contactSub2
-  const signText = contact
+  const bookingText = contact?.bookingLine ? t(contact.bookingLine) : T.contactSub2
+  const signText = contact?.signature
     ? t(contact.signature).replace('{name}', firstName)
     : T.contactSign(firstName)
 

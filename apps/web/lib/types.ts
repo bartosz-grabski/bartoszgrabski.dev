@@ -113,10 +113,10 @@ export interface Channel {
 }
 
 export interface Contact {
-  heading: Bilingual
-  availabilityLine: Bilingual
-  bookingLine: Bilingual
-  signature: Bilingual
+  heading?: Bilingual
+  availabilityLine?: Bilingual
+  bookingLine?: Bilingual
+  signature?: Bilingual
 }
 
 export interface Seo {

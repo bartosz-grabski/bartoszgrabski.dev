@@ -10,14 +10,14 @@ interface LangContextValue {
   /** Navigate to the equivalent page in the given locale (real URL change). */
   setLang: (lang: Lang) => void
   T: Translations // always the EN shape; both locales share identical keys
-  t: (field: Bilingual) => string
+  t: (field?: Bilingual | null) => string
 }
 
 export const LangContext = createContext<LangContextValue>({
   lang: 'en',
   setLang: () => {},
   T: translations.en,
-  t: (field) => field.en,
+  t: (field) => field?.en ?? '',
 })
 
 export function useLang() {
@@ -38,7 +38,7 @@ export function LangProvider({ lang, children }: { lang: Lang; children: ReactNo
   }
 
   const T = translations[lang] as Translations
-  const t = (field: Bilingual) => field[lang] ?? field.en
+  const t = (field?: Bilingual | null) => (field ? field[lang] ?? field.en : '')
 
   return (
     <LangContext.Provider value={{ lang, setLang, T, t }}>
