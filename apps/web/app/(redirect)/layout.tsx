@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   // No content of its own; the canonical entry point is the default locale.
   alternates: { canonical: localePath(defaultLocale) },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 }
 
 export default function RedirectLayout({ children }: { children: React.ReactNode }) {
