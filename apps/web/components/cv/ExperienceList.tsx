@@ -31,7 +31,7 @@ export function ExperienceList({ work }: { work: Work[] }) {
             {isMulti ? (
               <>
                 <header className="exp-head">
-                  <h4 className="role"><em>{company.name}</em></h4>
+                  <h3 className="role"><em>{company.name}</em></h3>
                   <span className="dates">{range.startDate} — {range.endDate}</span>
                 </header>
                 {company.location && <p className="exp-loc">{company.location}</p>}
@@ -57,11 +57,11 @@ export function ExperienceList({ work }: { work: Work[] }) {
             ) : (
               <>
                 <header className="exp-head">
-                  <h4 className="role">
+                  <h3 className="role">
                     <span className="co">{t(first.position)}</span>
                     <span className="at">{T.atSep}</span>
                     <em>{company.name}</em>
-                  </h4>
+                  </h3>
                   <span className="dates">{first.startDate} — {first.endDate}</span>
                 </header>
                 {company.location && <p className="exp-loc">{company.location}</p>}

@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { client } from './sanity'
 import type { Resume, Now, SiteSettings } from './types'
 
@@ -5,7 +6,11 @@ import type { Resume, Now, SiteSettings } from './types'
 // document. The TS types below declare these as plain arrays, so every array
 // projection is wrapped in `coalesce(..., [])` to keep the fetched shape honest
 // and stop `.length`/`.map` from throwing during render (and SSR prerender).
-export async function fetchResume(): Promise<Resume> {
+//
+// Each fetcher is wrapped in React `cache()` so that when both the locale
+// layout and a page request the same document during one render pass, Sanity
+// is hit only once.
+export const fetchResume = cache(async function fetchResume(): Promise<Resume> {
   return client.fetch(`
     *[_type == "resume"][0]{
       basics {
@@ -28,18 +33,18 @@ export async function fetchResume(): Promise<Resume> {
       "speaking": coalesce(speaking[]{ title, venue, year }, [])
     }
   `)
-}
+})
 
-export async function fetchSiteSettings(): Promise<SiteSettings> {
+export const fetchSiteSettings = cache(async function fetchSiteSettings(): Promise<SiteSettings> {
   return client.fetch(`*[_type == "siteSettings"][0]{
     availabilityLabel,
     calendarUrl,
     "channels": coalesce(channels[] { type, url }, []),
     contact { heading, availabilityLine, bookingLine, signature }
   }`)
-}
+})
 
-export async function fetchNow(): Promise<Now> {
+export const fetchNow = cache(async function fetchNow(): Promise<Now> {
   return client.fetch(`
     *[_type == "now"][0]{
       _updatedAt,
@@ -49,4 +54,4 @@ export async function fetchNow(): Promise<Now> {
       "around": coalesce(around[]{ item }, [])
     }
   `)
-}
+})

@@ -3,8 +3,13 @@ import { LangProvider } from '@/lib/i18n'
 import { SkillsBlock } from '@/components/cv/SkillsBlock'
 import type { Skill, Bilingual } from '@/lib/types'
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+  usePathname: () => '/en',
+}))
+
 function renderWithLang(ui: React.ReactElement) {
-  return render(<LangProvider>{ui}</LangProvider>)
+  return render(<LangProvider lang="en">{ui}</LangProvider>)
 }
 
 const skills: Skill[] = [

@@ -1,3 +1,4 @@
+'use client'
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { RichText } from '@/components/ui/RichText'
@@ -21,7 +22,7 @@ export function NowView({ now, books, asOf }: NowViewProps) {
     <div className="now" data-view="now">
       <header className="now-head">
         <div>
-          <Eyebrow>{T.sections.now}</Eyebrow>
+          <Eyebrow as="h1">{T.sections.now}</Eyebrow>
           <p className="now-intro">{T.nowIntro}</p>
         </div>
         <span className="now-asof">{T.nowAsOf(asOfFormatted)}</span>

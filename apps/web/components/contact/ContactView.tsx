@@ -1,3 +1,4 @@
+'use client'
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { RichText } from '@/components/ui/RichText'
@@ -48,7 +49,7 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
   return (
     <div className="contact" data-view="contact">
       <div className="statement">
-        <h2>
+        <h1>
           {headingText !== null ? (
             <RichText text={headingText} />
           ) : (
@@ -59,7 +60,7 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
               {T.contactHead[2]}
             </>
           )}
-        </h2>
+        </h1>
         <p><RichText text={availabilityText} /></p>
         <p><RichText text={bookingText} /></p>
         <p className="signed"><RichText text={signText} /></p>

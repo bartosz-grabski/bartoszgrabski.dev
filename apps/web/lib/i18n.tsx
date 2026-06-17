@@ -1,12 +1,15 @@
 'use client'
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { translations, type Lang, type Translations } from './translations'
 import type { Bilingual } from './types'
+import { swapLocale } from './site'
 
 interface LangContextValue {
   lang: Lang
+  /** Navigate to the equivalent page in the given locale (real URL change). */
   setLang: (lang: Lang) => void
-  T: Translations  // always the EN shape; both locales share identical keys
+  T: Translations // always the EN shape; both locales share identical keys
   t: (field: Bilingual) => string
 }
 
@@ -21,24 +24,17 @@ export function useLang() {
   return useContext(LangContext)
 }
 
-function detectLang(): Lang {
-  if (typeof window === 'undefined') return 'en'
-  const saved = localStorage.getItem('portfolio-lang')
-  if (saved === 'en' || saved === 'pl') return saved
-  return navigator.language.slice(0, 2).toLowerCase() === 'pl' ? 'pl' : 'en'
-}
+/**
+ * Locale now comes from the URL (`/en/...`, `/pl/...`), so there is no
+ * detection or persistence here. Switching language is a navigation to the
+ * equivalent path in the other locale.
+ */
+export function LangProvider({ lang, children }: { lang: Lang; children: ReactNode }) {
+  const router = useRouter()
+  const pathname = usePathname()
 
-export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('en')
-
-  useEffect(() => {
-    setLangState(detectLang())
-  }, [])
-
-  function setLang(l: Lang) {
-    setLangState(l)
-    localStorage.setItem('portfolio-lang', l)
-    document.documentElement.setAttribute('lang', l)
+  function setLang(next: Lang) {
+    router.push(swapLocale(pathname, next))
   }
 
   const T = translations[lang] as Translations
