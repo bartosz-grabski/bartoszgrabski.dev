@@ -122,6 +122,36 @@ describe('ExperienceList', () => {
     expect(screen.getByText('Kraków, Poland')).toBeInTheDocument()
   })
 
+  it('aggregates the multi-role header from earliest start to latest end', () => {
+    // positions are ordered newest-first; the header must span the whole tenure
+    const work = [
+      {
+        name: 'HSBC Service Delivery',
+        positions: [
+          { position: { en: 'Acting Tech Lead', pl: '' }, startDate: '2018-08', endDate: '2018-12', highlights: [] },
+          { position: { en: 'Senior Fullstack Engineer', pl: '' }, startDate: '2018-02', endDate: '2018-08', highlights: [] },
+          { position: { en: 'Senior Software Engineer', pl: '' }, startDate: '2017-08', endDate: '2018-02', highlights: [] },
+        ],
+      },
+    ] as unknown as Work[]
+    renderWithLang(<ExperienceList work={work} />)
+    expect(screen.getAllByText('2017-08 — 2018-12').length).toBeGreaterThan(0)
+  })
+
+  it('treats an ongoing position as the latest end in the aggregate header', () => {
+    const work = [
+      {
+        name: 'Acme',
+        positions: [
+          { position: { en: 'Lead', pl: '' }, startDate: '2021-01', endDate: 'Present', highlights: [] },
+          { position: { en: 'Engineer', pl: '' }, startDate: '2019-01', endDate: '2021-01', highlights: [] },
+        ],
+      },
+    ] as unknown as Work[]
+    renderWithLang(<ExperienceList work={work} />)
+    expect(screen.getAllByText('2019-01 — Present').length).toBeGreaterThan(0)
+  })
+
   it('renders markdown links inside highlights', () => {
     const work = [
       {

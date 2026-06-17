@@ -1,7 +1,20 @@
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { RichText } from '@/components/ui/RichText'
 import { useLang } from '@/lib/i18n'
-import type { Work } from '@/lib/types'
+import type { Work, WorkPosition } from '@/lib/types'
+
+// Positions arrive newest-first, so we can't rely on array order to derive the
+// company-level span. Take the earliest start and latest end across all roles.
+// An ongoing role (non YYYY-MM endDate, e.g. "Present") always wins as latest.
+function aggregateRange(positions: WorkPosition[]) {
+  const isOngoing = (end: string) => !/^\d{4}-\d{2}$/.test(end)
+  const startDate = positions.reduce((min, p) => (p.startDate < min ? p.startDate : min), positions[0].startDate)
+  const ongoing = positions.find((p) => isOngoing(p.endDate))
+  const endDate = ongoing
+    ? ongoing.endDate
+    : positions.reduce((max, p) => (p.endDate > max ? p.endDate : max), positions[0].endDate)
+  return { startDate, endDate }
+}
 
 export function ExperienceList({ work }: { work: Work[] }) {
   const { T, t } = useLang()
@@ -12,14 +25,14 @@ export function ExperienceList({ work }: { work: Work[] }) {
         const positions = company.positions ?? []
         const isMulti = positions.length > 1
         const first = positions[0]
-        const last = positions[positions.length - 1]
+        const range = aggregateRange(positions)
         return (
           <article className={`exp-item${isMulti ? ' exp-item--multi' : ''}`} key={i}>
             {isMulti ? (
               <>
                 <header className="exp-head">
                   <h4 className="role"><em>{company.name}</em></h4>
-                  <span className="dates">{first.startDate} — {last.endDate}</span>
+                  <span className="dates">{range.startDate} — {range.endDate}</span>
                 </header>
                 {company.location && <p className="exp-loc">{company.location}</p>}
                 <div className="exp-subs">
