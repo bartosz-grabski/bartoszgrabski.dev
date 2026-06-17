@@ -28,10 +28,19 @@ export function generateStaticParams() {
 export default async function OpengraphImage() {
   const { basics } = await fetchResume()
 
-  // The portrait used on the CV view. Square crop aligned to the top of the
-  // source image so the head stays in frame. Falls back to the favicon.
+  // Full-height portrait, narrower than the canvas, centered on the dark
+  // background. Crop aligned to the top of the source so the head stays in
+  // frame. Falls back to the favicon when no Sanity image is set.
+  const portraitWidth = 500
   const portrait = basics.image
-    ? builder.image(basics.image).width(480).height(480).fit('crop').crop('top').auto('format').url()
+    ? builder
+        .image(basics.image)
+        .width(portraitWidth * 2)
+        .height(size.height * 2)
+        .fit('crop')
+        .crop('top')
+        .auto('format')
+        .url()
     : faviconDataUri
 
   return new ImageResponse(
@@ -41,59 +50,24 @@ export default async function OpengraphImage() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           background: '#0e0e0e',
-          color: '#f5f5f5',
-          fontFamily: 'monospace',
         }}
       >
-        {/*
-         * Everything lives in a centered column inside a square safe-zone so
-         * chat apps (WhatsApp, iMessage…) that center-crop the 1200×630 image
-         * to a square thumbnail still show the name and title intact.
-         */}
-        <div
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={portrait}
+          alt=""
+          width={portraitWidth}
+          height={size.height}
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            width: 560,
+            width: portraitWidth,
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'top',
           }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={portrait}
-            alt=""
-            width={240}
-            height={240}
-            style={{
-              width: 240,
-              height: 240,
-              borderRadius: 24,
-              objectFit: 'cover',
-              border: '2px solid #2a2a2a',
-            }}
-          />
-          <div
-            style={{
-              fontSize: 76,
-              fontWeight: 700,
-              lineHeight: 1.05,
-              marginTop: 40,
-            }}
-          >
-            Bartosz Grabski
-          </div>
-          <div style={{ fontSize: 34, color: '#8ab4f8', marginTop: 18 }}>
-            Fullstack Developer · Kraków
-          </div>
-          <div style={{ fontSize: 26, color: '#9a9a9a', marginTop: 28 }}>
-            bartoszgrabski.dev
-          </div>
-        </div>
+        />
       </div>
     ),
     size,
