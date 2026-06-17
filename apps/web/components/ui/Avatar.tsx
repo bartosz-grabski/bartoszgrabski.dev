@@ -1,8 +1,8 @@
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { client } from '@/lib/sanity'
 import type { SanityImageAsset } from '@/lib/types'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 interface AvatarProps {
   image: SanityImageAsset | null | undefined

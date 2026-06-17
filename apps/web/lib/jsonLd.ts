@@ -1,9 +1,9 @@
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { client } from './sanity'
 import { siteUrl, localeUrl, type Locale } from './site'
 import type { Resume, SiteSettings } from './types'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 const JOB_TITLE: Record<Locale, string> = {
   en: 'Fullstack Developer',

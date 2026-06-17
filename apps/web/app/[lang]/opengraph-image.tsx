@@ -1,12 +1,12 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { locales } from '@/lib/site'
 import { client } from '@/lib/sanity'
 import { fetchResume } from '@/lib/queries'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 // Favicon used as a fallback portrait when the Sanity image is missing.
 // Embedded as a data URI so it resolves during the static (`output: export`) build.
