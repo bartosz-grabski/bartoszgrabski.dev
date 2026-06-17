@@ -40,7 +40,8 @@ export const fetchSiteSettings = cache(async function fetchSiteSettings(): Promi
     availabilityLabel,
     calendarUrl,
     "channels": coalesce(channels[] { type, url }, []),
-    contact { heading, availabilityLine, bookingLine, signature }
+    contact { heading, availabilityLine, bookingLine, signature },
+    seo { title, description }
   }`)
 })
 

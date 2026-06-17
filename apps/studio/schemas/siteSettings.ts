@@ -13,6 +13,17 @@ export const siteSettingsSchema = defineType({
     bilingualField('availabilityLabel', 'Availability label (e.g. "Open for work")'),
     defineField({ name: 'calendarUrl', title: 'Book a call URL (cal.com)', type: 'url' }),
     defineField({
+      name: 'seo',
+      title: 'SEO / Metadata',
+      description: 'Title and description used for browser tabs, search results, and link previews (Open Graph / Twitter cards)',
+      type: 'object',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        bilingualField('title', 'Title — shown in the browser tab and as the link-preview heading'),
+        bilingualText('description', 'Description — shown under the title in search results and link previews (~155 chars)'),
+      ],
+    }),
+    defineField({
       name: 'contact',
       title: 'Contact',
       description: 'The statement shown on the Contact tab',

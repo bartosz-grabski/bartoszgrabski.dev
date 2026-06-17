@@ -119,11 +119,17 @@ export interface Contact {
   signature: Bilingual
 }
 
+export interface Seo {
+  title?: Bilingual
+  description?: Bilingual
+}
+
 export interface SiteSettings {
   availabilityLabel: Bilingual
   calendarUrl?: string
   channels?: Channel[]
   contact?: Contact
+  seo?: Seo
 }
 
 export interface Now {

@@ -51,13 +51,19 @@ export async function generateMetadata({
   const locale: Locale = isLocale(lang) ? lang : defaultLocale
   const m = META[locale]
 
+  // Prefer SEO copy from Sanity; fall back to the hardcoded defaults above so
+  // metadata never renders empty if the field is unset.
+  const { seo } = await fetchSiteSettings()
+  const title = seo?.title?.[locale] ?? m.title
+  const description = seo?.description?.[locale] ?? m.description
+
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: m.title,
+      default: title,
       template: `%s · Bartosz Grabski`,
     },
-    description: m.description,
+    description,
     applicationName: 'Bartosz Grabski',
     authors: [{ name: 'Bartosz Grabski', url: siteUrl }],
     creator: 'Bartosz Grabski',
@@ -80,16 +86,16 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       siteName: 'Bartosz Grabski',
-      title: m.title,
-      description: m.description,
+      title,
+      description,
       url: localeUrl(locale),
       locale: m.ogLocale,
       alternateLocale: locale === 'en' ? 'pl_PL' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: m.title,
-      description: m.description,
+      title,
+      description,
     },
   }
 }

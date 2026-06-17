@@ -241,6 +241,16 @@ const siteSettings = {
     en: 'Open for work',
     pl: 'Otwarty na projekty',
   },
+  seo: {
+    title: {
+      en: 'Bartosz Grabski — Fullstack Developer',
+      pl: 'Bartosz Grabski — Programista Fullstack',
+    },
+    description: {
+      en: 'Bartosz Grabski — fullstack developer in Kraków, Poland. I build web apps end to end with TypeScript, React, Next.js and Node. Open to freelance and contract work.',
+      pl: 'Bartosz Grabski — programista fullstack z Krakowa. Tworzę aplikacje webowe od początku do końca w TypeScript, React, Next.js i Node. Otwarty na współpracę freelance i kontraktową.',
+    },
+  },
   contact: {
     heading: {
       en: "Let's *talk*.",
