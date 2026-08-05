@@ -17,6 +17,7 @@ export interface Profile {
 
 export interface Basics {
   name: string
+  label: Bilingual
   email: string
   phone?: string
   url?: string

@@ -2,8 +2,6 @@ export type Lang = 'en' | 'pl'
 
 export const translations = {
   en: {
-    role: 'Fullstack Developer',
-    location: 'Kraków, Poland',
     tabs: { cv: 'cv', now: 'now', contact: 'contact' },
     themeLight: '☀ light',
     themeDark: '☾ dark',
@@ -31,8 +29,6 @@ export const translations = {
     langLevels: { Native: 'Native', Fluent: 'Fluent', Intermediate: 'Intermediate' } as Record<string, string>,
   },
   pl: {
-    role: 'Programista Fullstack',
-    location: 'Kraków, Polska',
     tabs: { cv: 'CV', now: 'Teraz', contact: 'Kontakt' },
     themeLight: '☀ Jasny',
     themeDark: '☾ Ciemny',

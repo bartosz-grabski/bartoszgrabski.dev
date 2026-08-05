@@ -56,7 +56,7 @@ export async function GET() {
   }
   const profilesBlock = Array.from(seenLinks.values()).join('\n')
 
-  const body = `# ${basics.name} — Fullstack Developer
+  const body = `# ${basics.name} — ${basics.label.en}
 
 > ${summary}
 

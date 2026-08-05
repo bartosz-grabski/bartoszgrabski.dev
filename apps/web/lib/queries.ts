@@ -14,7 +14,7 @@ export const fetchResume = cache(async function fetchResume(): Promise<Resume> {
   return client.fetch(`
     *[_type == "resume"][0]{
       basics {
-        name, email, phone, url,
+        name, label, email, phone, url,
         summary, image, location,
         "profiles": coalesce(profiles, [])
       },

@@ -41,7 +41,7 @@ export function CVView({ resume }: CVViewProps) {
 
       <aside className="meta-col">
         <div className="avatar-wrap no-print">
-          <Avatar image={basics.image} name={basics.name} />
+          <Avatar image={basics.image} name={basics.name} label={t(basics.label)} />
         </div>
 
         <section className="bio">

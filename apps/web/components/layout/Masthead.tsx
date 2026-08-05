@@ -1,5 +1,6 @@
 import { usePathname } from 'next/navigation'
 import { useLang } from '@/lib/i18n'
+import type { Lang } from '@/lib/translations'
 import { sectionFromPath } from '@/lib/site'
 import type { Resume, Bilingual, Channel } from '@/lib/types'
 
@@ -20,6 +21,14 @@ function handle(url: string): string {
   } catch {
     return url
   }
+}
+
+/** "Kraków" + "PL" + "en" → "Kraków, Poland" (country name localized via Intl, not hardcoded). */
+function formatLocation(location: { city?: string; countryCode?: string }, lang: Lang): string {
+  const country = location.countryCode
+    ? new Intl.DisplayNames([lang], { type: 'region' }).of(location.countryCode)
+    : undefined
+  return [location.city, country].filter(Boolean).join(', ')
 }
 
 export function Masthead({ resume, theme, onToggleTheme, availabilityLabel, channels, calendarUrl }: MastheadProps) {
@@ -45,7 +54,7 @@ export function Masthead({ resume, theme, onToggleTheme, availabilityLabel, chan
         <NameTag className="name">
           {first} <em>{rest.join(' ')}</em>
         </NameTag>
-        <p className="role">{T.role} · {T.location}</p>
+        <p className="role">{t(resume.basics.label)} · {formatLocation(resume.basics.location, lang)}</p>
       </div>
       <div className="right">
         <span className="avail">{t(availabilityLabel)}</span>

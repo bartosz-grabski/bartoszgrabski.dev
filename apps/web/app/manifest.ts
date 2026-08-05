@@ -1,13 +1,20 @@
 import type { MetadataRoute } from 'next'
+import { fetchResume } from '@/lib/queries'
 import { localePath, defaultLocale } from '@/lib/site'
 
 export const dynamic = 'force-static'
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const { basics } = await fetchResume()
+  const country = basics.location.countryCode
+    ? new Intl.DisplayNames(['en'], { type: 'region' }).of(basics.location.countryCode)
+    : undefined
+  const location = [basics.location.city, country].filter(Boolean).join(', ')
+
   return {
-    name: 'Bartosz Grabski — Fullstack Developer',
+    name: `${basics.name} — ${basics.label.en}`,
     short_name: 'B. Grabski',
-    description: 'Fullstack developer in Kraków, Poland.',
+    description: `${basics.label.en} in ${location}.`,
     start_url: localePath(defaultLocale),
     display: 'standalone',
     background_color: '#ffffff',

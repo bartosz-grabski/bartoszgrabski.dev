@@ -14,6 +14,7 @@ export const resumeSchema = defineType({
       type: 'object',
       fields: [
         defineField({ name: 'name', title: 'Name', type: 'string', validation: r => r.required() }),
+        bilingualField('label', 'Role / Title', 'Shown next to the name, e.g. "Fullstack Developer".'),
         defineField({ name: 'email', title: 'Email', type: 'string' }),
         defineField({ name: 'phone', title: 'Phone', type: 'string' }),
         defineField({ name: 'url', title: 'Website URL', type: 'string' }),
