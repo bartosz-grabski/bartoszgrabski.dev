@@ -7,9 +7,10 @@ const builder = createImageUrlBuilder(client)
 interface AvatarProps {
   image: SanityImageAsset | null | undefined
   name: string
+  label: string
 }
 
-export function Avatar({ image, name }: AvatarProps) {
+export function Avatar({ image, name, label }: AvatarProps) {
   if (!image) {
     // Decorative placeholder — hidden from assistive tech (no real content).
     return <div className="avatar-slot" role="presentation" />
@@ -19,7 +20,7 @@ export function Avatar({ image, name }: AvatarProps) {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
-      alt={`${name} — Fullstack Developer`}
+      alt={`${name} — ${label}`}
       className="avatar-slot"
       width={220}
       height={275}

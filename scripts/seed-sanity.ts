@@ -15,6 +15,7 @@ const resume = {
   _type: 'resume',
   basics: {
     name: 'Bartosz Grabski',
+    label: { en: 'Fullstack Developer', pl: 'Programista Fullstack' },
     email: 'hello@bartoszgrabski.dev',
     url: 'bartoszgrabski.dev',
     summary: {

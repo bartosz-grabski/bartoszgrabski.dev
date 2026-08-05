@@ -5,11 +5,6 @@ import type { Resume, SiteSettings } from './types'
 
 const builder = createImageUrlBuilder(client)
 
-const JOB_TITLE: Record<Locale, string> = {
-  en: 'Fullstack Developer',
-  pl: 'Programista Fullstack',
-}
-
 /** Trailing slashes vary in CMS-entered URLs; normalize so sameAs dedupes cleanly. */
 const normalizeUrl = (u: string) => u.trim().replace(/\/$/, '')
 
@@ -64,7 +59,7 @@ export function buildJsonLd(
     '@type': 'Person',
     '@id': personId,
     name: basics.name,
-    jobTitle: JOB_TITLE[locale],
+    jobTitle: basics.label[locale] ?? basics.label.en,
     description: basics.summary[locale] ?? basics.summary.en,
     url: pageUrl,
     ...(imageUrl ? { image: imageUrl } : {}),
