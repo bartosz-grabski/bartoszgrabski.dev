@@ -2,6 +2,7 @@
 import { useLang } from '@/lib/i18n'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { RichText } from '@/components/ui/RichText'
+import { ContactForm } from '@/components/contact/ContactForm'
 import type { Resume, Bilingual, Channel, Contact } from '@/lib/types'
 
 const LINKS = {
@@ -86,6 +87,8 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
           ))}
         </div>
 
+        <Eyebrow>{T.sections.form}</Eyebrow>
+        <ContactForm />
       </div>
     </div>
   )
