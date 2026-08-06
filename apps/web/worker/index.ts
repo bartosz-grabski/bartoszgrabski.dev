@@ -21,9 +21,14 @@ async function verifyTurnstile(token: unknown, secret: string, ip: string | null
   form.append('response', token)
   if (ip) form.append('remoteip', ip)
 
-  const res = await fetch(TURNSTILE_VERIFY_URL, { method: 'POST', body: form })
-  const data = (await res.json()) as { success: boolean }
-  return data.success === true
+  try {
+    const res = await fetch(TURNSTILE_VERIFY_URL, { method: 'POST', body: form })
+    const data = (await res.json()) as { success: boolean }
+    return data.success === true
+  } catch (err) {
+    console.error('contact form: turnstile verification failed', err)
+    return false
+  }
 }
 
 function json(body: unknown, status = 200): Response {
@@ -44,6 +49,10 @@ export default {
     try {
       body = (await request.json()) as IncomingBody
     } catch {
+      return json({ ok: false, error: 'invalid_payload' }, 400)
+    }
+
+    if (typeof body !== 'object' || body === null || Array.isArray(body)) {
       return json({ ok: false, error: 'invalid_payload' }, 400)
     }
 
