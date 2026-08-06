@@ -38,6 +38,18 @@ function json(body: unknown, status = 200): Response {
   })
 }
 
+const HTML_ESCAPES: Record<string, string> = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (char) => HTML_ESCAPES[char])
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
@@ -93,7 +105,7 @@ export default {
         replyTo: email,
         subject: `Wiadomość ze strony — ${name}`,
         text: lines.join('\n'),
-        html: lines.map((line) => `<p>${line}</p>`).join(''),
+        html: lines.map((line) => `<p>${escapeHtml(line).replace(/\n/g, '<br>')}</p>`).join(''),
       })
     } catch (err) {
       console.error('contact form: email send failed', err)

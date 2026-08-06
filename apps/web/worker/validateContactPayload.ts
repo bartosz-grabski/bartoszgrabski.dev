@@ -29,6 +29,11 @@ export function validateContactPayload(body: unknown): ValidationResult {
   if (!isNonEmptyString(b.name, MAX_LENGTHS.name)) {
     return { ok: false, error: 'invalid_payload' }
   }
+  // Reject control characters (including CR/LF) so `name` can't be used for
+  // header injection when it's interpolated into the email `subject`.
+  if (/[\x00-\x1f\x7f]/.test(b.name.trim())) {
+    return { ok: false, error: 'invalid_payload' }
+  }
   if (!isNonEmptyString(b.email, MAX_LENGTHS.email) || !EMAIL_RE.test(b.email.trim())) {
     return { ok: false, error: 'invalid_payload' }
   }

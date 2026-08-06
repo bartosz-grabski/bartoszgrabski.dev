@@ -46,6 +46,17 @@ describe('validateContactPayload', () => {
     expect(validateContactPayload({ ...valid, name: 'a'.repeat(101) })).toEqual({ ok: false, error: 'invalid_payload' })
   })
 
+  it('rejects a name containing CRLF (header injection attempt)', () => {
+    expect(validateContactPayload({ ...valid, name: 'Jane\r\nBcc: evil@example.com' })).toEqual({
+      ok: false,
+      error: 'invalid_payload',
+    })
+  })
+
+  it('rejects a name containing other control characters', () => {
+    expect(validateContactPayload({ ...valid, name: 'Jane\x00Doe' })).toEqual({ ok: false, error: 'invalid_payload' })
+  })
+
   it('rejects a missing email', () => {
     const { email, ...rest } = valid
     expect(validateContactPayload(rest)).toEqual({ ok: false, error: 'invalid_payload' })
