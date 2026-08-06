@@ -86,6 +86,10 @@ export function ContactForm() {
 
       if (!res.ok || !data.ok) {
         setServerError(T.contactForm.errors[data.error ?? 'send_failed'])
+        turnstileTokenRef.current = ''
+        if (window.turnstile && widgetIdRef.current !== null) {
+          window.turnstile.reset(widgetIdRef.current)
+        }
         setState('idle')
         return
       }
@@ -99,6 +103,10 @@ export function ContactForm() {
       setState('idle')
     } catch {
       setServerError(T.contactForm.errors.send_failed)
+      turnstileTokenRef.current = ''
+      if (window.turnstile && widgetIdRef.current !== null) {
+        window.turnstile.reset(widgetIdRef.current)
+      }
       setState('idle')
     }
   }

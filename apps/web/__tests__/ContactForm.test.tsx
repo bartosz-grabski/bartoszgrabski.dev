@@ -96,6 +96,7 @@ describe('ContactForm', () => {
       await screen.findByText(/Something went wrong sending your message/),
     ).toBeInTheDocument()
     expect((screen.getByLabelText('Name') as HTMLInputElement).value).toBe('Jane Doe')
+    expect(window.turnstile!.reset).toHaveBeenCalledWith('widget-1')
   })
 
   it('disables the submit button while the request is in flight', async () => {
