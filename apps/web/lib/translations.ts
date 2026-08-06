@@ -26,7 +26,7 @@ export const translations = {
       message: 'Message',
       submit: 'Send message',
       sending: 'Sending…',
-      rodo: 'Data controller: Bartosz Grabski (hello@bartoszgrabski.dev). Form data is used solely to reply to your message — never for marketing or a newsletter, and never shared with third parties. Legal basis: GDPR Art. 6(1)(f), legitimate interest. You can request deletion at any time by emailing the address above.',
+      rodo: 'Data controller: Bartosz Grabski (hello@bartoszgrabski.dev). Form data is used solely to reply to your message — never for marketing or a newsletter, and never shared with third parties.',
       errors: {
         name: 'Please enter your name.',
         emailRequired: 'Please enter your email.',
@@ -71,7 +71,7 @@ export const translations = {
       message: 'Wiadomość',
       submit: 'Wyślij wiadomość',
       sending: 'Wysyłanie…',
-      rodo: 'Administratorem danych jest Bartosz Grabski (hello@bartoszgrabski.dev). Dane z formularza wykorzystuję wyłącznie po to, by odpowiedzieć na Twoją wiadomość — nie służą do marketingu ani newslettera i nie są nikomu przekazywane. Podstawa: art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes). Możesz w każdej chwili poprosić o usunięcie danych, pisząc na powyższy adres.',
+      rodo: 'Administratorem danych jest Bartosz Grabski (hello@bartoszgrabski.dev). Dane z formularza wykorzystuję wyłącznie po to, by odpowiedzieć na Twoją wiadomość — nie służą do marketingu ani newslettera i nie są nikomu przekazywane.',
       errors: {
         name: 'Podaj swoje imię.',
         emailRequired: 'Podaj adres e-mail.',
