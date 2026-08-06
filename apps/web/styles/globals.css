@@ -287,7 +287,8 @@ button { font-family: inherit; }
 .contact-row .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
 .contact-row .handle { font-family: var(--font-display); font-weight: 500; font-size: clamp(17px, 2vw, 22px); letter-spacing: -0.01em; color: var(--ink); transition: color 200ms ease; word-break: break-word; }
 .contact-row .arrow { font-size: 20px; color: var(--ink-faint); transition: transform 200ms ease, color 200ms ease; }
-.form-section { margin-top: var(--section-gap); }
+.contact-list + .eyebrow { margin-top: var(--section-gap); }
+.form-section { margin-top: 0; }
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
 .field label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
 .field input, .field textarea { background: transparent; border: none; border-bottom: 1px solid var(--rule-strong); color: var(--ink); font-family: var(--font-body); font-size: 17px; padding: 6px 0 8px; outline: none; transition: border-color 150ms ease; resize: vertical; }
@@ -315,7 +316,6 @@ button { font-family: inherit; }
   .now { --now-label-col: 1fr; }
   .contact { grid-template-columns: 1fr; }
   .contact-row { grid-template-columns: 90px 1fr auto; gap: 14px; }
-  .contact-list + .eyebrow { margin-top: var(--section-gap); }
   .tab { font-size: 18px; padding-right: 4px; }
 }
 @media (max-width: 480px) {
