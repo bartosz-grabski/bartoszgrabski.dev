@@ -2,8 +2,16 @@
     "$schema": "node_modules/wrangler/config-schema.json",
     "name": "bartoszgrabski-dev",
     "compatibility_date": "2026-05-22",
-    "pages_build_output_dir": "./out",
-    "send_email": [
-      { "name": "EMAIL" }
-    ]
+    "pages_build_output_dir": "./out"
+    // "send_email" binding is intentionally NOT declared here — Cloudflare
+    // Pages config validation rejects it ("Configuration file for Pages
+    // projects does not support 'send_email'"). For local `wrangler pages
+    // dev`, pass it inline: `wrangler pages dev out -b EMAIL=` won't work
+    // for a resource binding either; local Send Email emulation currently
+    // requires the binding to live here anyway, which conflicts with
+    // deploy validation — so local dev and production configure this
+    // differently. Production: add the Send Email binding for `EMAIL` via
+    // the Pages dashboard (Settings -> Functions -> Bindings). If "Send
+    // Email" isn't offered there, Pages Functions may not support this
+    // binding type yet — verify before relying on it.
 }
