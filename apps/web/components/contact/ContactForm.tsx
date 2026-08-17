@@ -26,7 +26,7 @@ function isKnownServerErrorCode(value: unknown): value is ServerErrorCode {
   return typeof value === 'string' && (KNOWN_SERVER_ERRORS as readonly string[]).includes(value)
 }
 
-type FieldName = 'name' | 'email' | 'message'
+type FieldName = 'name' | 'email' | 'message' | 'consent'
 type FieldErrors = Partial<Record<FieldName, string>>
 type SubmitState = 'idle' | 'sending'
 
@@ -40,6 +40,7 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [serverError, setServerError] = useState<string | null>(null)
   const [state, setState] = useState<SubmitState>('idle')
+  const [consentChecked, setConsentChecked] = useState(false)
 
   useEffect(() => {
     if (scriptLoaded && window.turnstile && widgetContainerRef.current && widgetIdRef.current === null) {
@@ -69,6 +70,8 @@ export function ContactForm() {
     else if (!EMAIL_RE.test(email)) errors.email = T.contactForm.errors.emailInvalid
 
     if (!String(fd.get('message') ?? '').trim()) errors.message = T.contactForm.errors.message
+
+    if (fd.get('consent') !== 'on') errors.consent = T.contactForm.errors.consent
 
     return errors
   }
@@ -108,6 +111,7 @@ export function ContactForm() {
 
       showToast(T.toasts.contactSent)
       form.reset()
+      setConsentChecked(false)
       resetTurnstileWidget()
     } catch {
       setServerError(T.contactForm.errors.send_failed)
@@ -187,17 +191,42 @@ export function ContactForm() {
           <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
 
-        <div ref={widgetContainerRef} className="turnstile-widget" />
-
         {serverError && (
           <p className="field-error" role="alert">
             {serverError}
           </p>
         )}
 
-        <button type="submit" className="btn primary" disabled={state === 'sending'}>
+        <div className={`field-checkbox${fieldErrors.consent ? ' invalid' : ''}`}>
+          <input
+            id="contact-consent"
+            name="consent"
+            type="checkbox"
+            checked={consentChecked}
+            onChange={(e) => {
+              setConsentChecked(e.target.checked)
+              if (e.target.checked) setFieldErrors(({ consent, ...rest }) => rest)
+            }}
+            aria-invalid={!!fieldErrors.consent}
+            aria-describedby={fieldErrors.consent ? 'contact-consent-error' : undefined}
+            required
+          />
+          <label htmlFor="contact-consent">
+            {T.contactForm.consent} <span aria-hidden="true">*</span>
+          </label>
+        </div>
+        {fieldErrors.consent && (
+          <p id="contact-consent-error" className="field-error" role="alert">
+            {fieldErrors.consent}
+          </p>
+        )}
+
+        <button type="submit" className="btn primary" disabled={state === 'sending'} aria-busy={state === 'sending'}>
+          {state === 'sending' && <span className="btn-spinner" aria-hidden="true" />}
           {state === 'sending' ? T.contactForm.sending : T.contactForm.submit}
         </button>
+
+        <div ref={widgetContainerRef} className="turnstile-widget" />
 
         <p className="form-note">{T.contactForm.rodo}</p>
       </form>

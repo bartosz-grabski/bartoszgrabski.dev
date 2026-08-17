@@ -24,6 +24,7 @@ function fillRequiredFields() {
   fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Jane Doe' } })
   fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'jane@example.com' } })
   fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello there.' } })
+  fireEvent.click(screen.getByLabelText(/I agree to my data being used/))
 }
 
 beforeEach(() => {
@@ -44,16 +45,37 @@ describe('ContactForm', () => {
     expect(screen.getByLabelText('Email')).toBeInTheDocument()
     expect(screen.getByLabelText('Phone (optional)')).toBeInTheDocument()
     expect(screen.getByLabelText('Message')).toBeInTheDocument()
-    expect(screen.getByText(/Data controller: Bartosz Grabski/)).toBeInTheDocument()
+    expect(screen.getByText(/never for marketing or a newsletter/)).toBeInTheDocument()
+  })
+
+  it('highlights the consent checkbox red and blocks submit when unchecked', () => {
+    renderForm()
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Jane Doe' } })
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'jane@example.com' } })
+    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello there.' } })
+
+    const consentCheckbox = screen.getByLabelText(/I agree to my data being used/)
+    fireEvent.click(screen.getByRole('button', { name: 'Send message' }))
+
+    expect(screen.getByText('Please confirm consent before sending.')).toBeInTheDocument()
+    expect(consentCheckbox).toHaveAttribute('aria-invalid', 'true')
+    expect(consentCheckbox.closest('.field-checkbox')).toHaveClass('invalid')
+    expect(global.fetch).not.toHaveBeenCalled()
+
+    fireEvent.click(consentCheckbox)
+    expect(consentCheckbox).toHaveAttribute('aria-invalid', 'false')
+    expect(consentCheckbox.closest('.field-checkbox')).not.toHaveClass('invalid')
   })
 
   it('shows validation errors and does not submit when required fields are empty', () => {
     renderForm()
+    fireEvent.click(screen.getByLabelText(/I agree to my data being used/))
     fireEvent.click(screen.getByRole('button', { name: 'Send message' }))
 
     expect(screen.getByText('Please enter your name.')).toBeInTheDocument()
     expect(screen.getByText('Please enter your email.')).toBeInTheDocument()
     expect(screen.getByText('Please enter a message.')).toBeInTheDocument()
+    expect(screen.getByLabelText('Name')).toHaveAttribute('aria-invalid', 'true')
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
