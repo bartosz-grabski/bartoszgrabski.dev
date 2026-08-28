@@ -12,16 +12,40 @@ export const uiStringsSchema = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'tabs',
+      name: 'nav',
       title: 'Navigation tabs',
-      type: 'object',
-      options: { collapsible: true, collapsed: true },
-      fields: [
-        bilingualField('services', 'Services tab'),
-        bilingualField('cv', 'CV tab'),
-        bilingualField('now', 'Now tab'),
-        bilingualField('contact', 'Contact tab'),
+      description: 'Drag to reorder. The order here is the order in the site header. (Routes are fixed — services is always the homepage; this only controls the menu.)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'section',
+              title: 'Page',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Services (homepage)', value: 'services' },
+                  { title: 'CV', value: 'cv' },
+                  { title: 'Now', value: 'now' },
+                  { title: 'Contact', value: 'contact' },
+                ],
+                layout: 'radio',
+              },
+              validation: (r) => r.required(),
+            }),
+            bilingualField('label', 'Tab label'),
+          ],
+          preview: { select: { title: 'label.en', subtitle: 'section' } },
+        },
       ],
+      validation: (r) =>
+        r.custom((items?: { section?: string }[]) => {
+          const sections = (items ?? []).map((i) => i.section).filter(Boolean)
+          if (new Set(sections).size !== sections.length) return 'Each page can only appear once'
+          return true
+        }),
     }),
     defineField({
       name: 'theme',

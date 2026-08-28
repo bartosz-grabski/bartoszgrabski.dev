@@ -2,18 +2,14 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLang } from '@/lib/i18n'
-import { localePath, sectionFromPath, type Section } from '@/lib/site'
+import { localePath, sectionFromPath } from '@/lib/site'
 
 export function Tabs() {
   const { T, lang } = useLang()
   const active = sectionFromPath(usePathname())
 
-  const items: { section: Section; label: string }[] = [
-    { section: '', label: T.tabs.services },
-    { section: 'cv', label: T.tabs.cv },
-    { section: 'now', label: T.tabs.now },
-    { section: 'contact', label: T.tabs.contact },
-  ]
+  // Order and labels come from the Sanity uiStrings nav array.
+  const items = T.nav
 
   return (
     <div className="tabs no-print">

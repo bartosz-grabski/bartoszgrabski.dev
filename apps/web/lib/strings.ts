@@ -1,6 +1,15 @@
+import type { Section } from './site'
 import type { Bilingual, UiStrings } from './types'
 
 export type Lang = 'en' | 'pl'
+
+/** Sanity nav section values → route sections ('' is the services index). */
+const NAV_SECTIONS: Record<string, Section> = {
+  services: '',
+  cv: 'cv',
+  now: 'now',
+  contact: 'contact',
+}
 
 /**
  * The per-language, render-ready shape components consume as `T`. All values
@@ -8,7 +17,8 @@ export type Lang = 'en' | 'pl'
  * missing document resolves to empty strings so rendering never throws.
  */
 export interface Translations {
-  tabs: { services: string; cv: string; now: string; contact: string }
+  /** Header tabs, in the order set in Sanity. */
+  nav: { section: Section; label: string }[]
   themeLight: string
   themeDark: string
   sections: {
@@ -41,12 +51,10 @@ export interface Translations {
 export function resolveStrings(ui: UiStrings | null | undefined, lang: Lang): Translations {
   const s = (field?: Bilingual | null) => (field ? field[lang] ?? field.en ?? '' : '')
   return {
-    tabs: {
-      services: s(ui?.tabs?.services),
-      cv: s(ui?.tabs?.cv),
-      now: s(ui?.tabs?.now),
-      contact: s(ui?.tabs?.contact),
-    },
+    nav: (ui?.nav ?? []).flatMap((item) => {
+      const section = NAV_SECTIONS[item.section]
+      return section === undefined ? [] : [{ section, label: s(item.label) }]
+    }),
     themeLight: s(ui?.theme?.light),
     themeDark: s(ui?.theme?.dark),
     sections: {

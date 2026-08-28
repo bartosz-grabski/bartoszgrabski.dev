@@ -4,7 +4,12 @@ const b = (en: string, pl: string = en): Bilingual => ({ en, pl })
 
 /** Test stand-in for the Sanity uiStrings document (EN values mirror production copy). */
 export const uiStringsFixture: UiStrings = {
-  tabs: { services: b('services', 'Usługi'), cv: b('cv', 'CV'), now: b('now', 'Teraz'), contact: b('contact', 'Kontakt') },
+  nav: [
+    { section: 'services', label: b('services', 'Usługi') },
+    { section: 'cv', label: b('cv', 'CV') },
+    { section: 'now', label: b('now', 'Teraz') },
+    { section: 'contact', label: b('contact', 'Kontakt') },
+  ],
   theme: { light: b('☀ light'), dark: b('☾ dark') },
   sections: {
     about: b('about'), skills: b('skills'), education: b('education'),

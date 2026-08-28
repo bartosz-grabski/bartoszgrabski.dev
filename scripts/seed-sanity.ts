@@ -354,12 +354,12 @@ const services = {
 const uiStrings = {
   _id: 'uiStrings',
   _type: 'uiStrings',
-  tabs: {
-    services: { en: 'services', pl: 'Usługi' },
-    cv: { en: 'cv', pl: 'CV' },
-    now: { en: 'now', pl: 'Teraz' },
-    contact: { en: 'contact', pl: 'Kontakt' },
-  },
+  nav: [
+    { _key: 'services', section: 'services', label: { en: 'services', pl: 'Usługi' } },
+    { _key: 'cv', section: 'cv', label: { en: 'cv', pl: 'CV' } },
+    { _key: 'now', section: 'now', label: { en: 'now', pl: 'Teraz' } },
+    { _key: 'contact', section: 'contact', label: { en: 'contact', pl: 'Kontakt' } },
+  ],
   theme: {
     light: { en: '☀ light', pl: '☀ Jasny' },
     dark: { en: '☾ dark', pl: '☾ Ciemny' },

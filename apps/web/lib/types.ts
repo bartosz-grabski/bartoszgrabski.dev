@@ -151,8 +151,12 @@ export interface Services {
  * Every UI label on the site, bilingual, managed in Sanity (uiStrings document).
  * Fields holding `{placeholders}` are templates resolved in lib/strings.ts.
  */
+/** Pages a nav tab can point at; 'services' is the index route. */
+export type NavSection = 'services' | 'cv' | 'now' | 'contact'
+
 export interface UiStrings {
-  tabs: { services: Bilingual; cv: Bilingual; now: Bilingual; contact: Bilingual }
+  /** Ordered — the Studio array order is the header order. */
+  nav: { section: NavSection; label: Bilingual }[]
   theme: { light: Bilingual; dark: Bilingual }
   sections: {
     about: Bilingual; skills: Bilingual; education: Bilingual

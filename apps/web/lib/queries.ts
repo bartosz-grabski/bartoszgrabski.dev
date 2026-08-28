@@ -50,7 +50,8 @@ export const fetchSiteSettings = cache(async function fetchSiteSettings(): Promi
 export const fetchUiStrings = cache(async function fetchUiStrings(): Promise<UiStrings | null> {
   return client.fetch(`
     *[_type == "uiStrings"][0]{
-      tabs, theme, sections, nowIntro, nowAsOf, channels,
+      "nav": coalesce(nav[]{ section, label }, []),
+      theme, sections, nowIntro, nowAsOf, channels,
       contactForm, buttons, toasts, footer, atSep, langLevels
     }
   `)
