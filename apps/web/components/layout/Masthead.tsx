@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation'
 import { useLang } from '@/lib/i18n'
-import type { Lang } from '@/lib/translations'
+import type { Lang } from '@/lib/strings'
 import { sectionFromPath } from '@/lib/site'
 import type { Resume, Bilingual, Channel } from '@/lib/types'
 
@@ -37,10 +37,12 @@ export function Masthead({ resume, theme, onToggleTheme, availabilityLabel, chan
   const [first, ...rest] = resume.basics.name.split(' ')
   const otherLang = lang === 'en' ? 'pl' : 'en'
 
-  // The name is the page's <h1> on the CV index, where the person *is* the
-  // topic. On the Now/Contact sub-pages it's just site branding, so it drops to
-  // a <p> and each sub-page supplies its own descriptive <h1>.
-  const NameTag = sectionFromPath(pathname) === '' ? 'h1' : 'p'
+  // The name is the page's <h1> on the services index and the CV page, where
+  // the person *is* the topic. On the Now/Contact sub-pages it's just site
+  // branding, so it drops to a <p> and each sub-page supplies its own
+  // descriptive <h1>.
+  const section = sectionFromPath(pathname)
+  const NameTag = section === '' || section === 'cv' ? 'h1' : 'p'
 
   const printContacts = [
     resume.basics.email,

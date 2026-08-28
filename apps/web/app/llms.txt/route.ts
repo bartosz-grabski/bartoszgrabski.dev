@@ -64,8 +64,10 @@ Personal site and CV of ${basics.name}, a fullstack developer based in ${locatio
 
 ## Pages
 
-- [Home / CV (EN)](${localeUrl('en')}): full résumé — experience, skills, projects, education.
-- [Home / CV (PL)](${localeUrl('pl')}): Polish version of the résumé.
+- [Home / Services (EN)](${localeUrl('en')}): what ${basics.name.split(' ')[0]} offers — websites, web & mobile apps, AI integrations.
+- [Home / Services (PL)](${localeUrl('pl')}): Polish version of the services page.
+- [CV (EN)](${localeUrl('en', 'cv')}): full résumé — experience, skills, projects, education.
+- [CV (PL)](${localeUrl('pl', 'cv')}): Polish version of the résumé.
 - [Now (EN)](${localeUrl('en', 'now')}): what ${basics.name.split(' ')[0]} is currently building, learning, and reading.
 - [Now (PL)](${localeUrl('pl', 'now')}): Polish version of the "now" page.
 - [Contact (EN)](${localeUrl('en', 'contact')}): how to get in touch and book a call.

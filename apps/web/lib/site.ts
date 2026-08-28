@@ -5,8 +5,8 @@ export const locales = ['en', 'pl'] as const
 export type Locale = (typeof locales)[number]
 export const defaultLocale: Locale = 'en'
 
-/** Sections that exist under every locale. '' is the CV (index) view. */
-export const sections = ['', 'now', 'contact'] as const
+/** Sections that exist under every locale. '' is the services (index) view. */
+export const sections = ['', 'cv', 'now', 'contact'] as const
 export type Section = (typeof sections)[number]
 
 /** Canonical origin, no trailing slash. Override via NEXT_PUBLIC_SITE_URL. */

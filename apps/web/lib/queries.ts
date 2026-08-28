@@ -1,6 +1,6 @@
 import { cache } from 'react'
 import { client } from './sanity'
-import type { Resume, Now, SiteSettings } from './types'
+import type { Resume, Now, Services, SiteSettings, UiStrings } from './types'
 
 // NOTE: GROQ returns `null` (not `[]`) for array fields that are absent on a
 // document. The TS types below declare these as plain arrays, so every array
@@ -43,6 +43,35 @@ export const fetchSiteSettings = cache(async function fetchSiteSettings(): Promi
     contact { heading, availabilityLine, bookingLine, signature },
     seo { title, description }
   }`)
+})
+
+// Every UI label on the site, bilingual. `null` until the uiStrings document
+// is seeded — labels then resolve to empty strings (see lib/strings.ts).
+export const fetchUiStrings = cache(async function fetchUiStrings(): Promise<UiStrings | null> {
+  return client.fetch(`
+    *[_type == "uiStrings"][0]{
+      tabs, theme, sections, nowIntro, nowAsOf, channels,
+      contactForm, buttons, toasts, footer, atSep, langLevels
+    }
+  `)
+})
+
+// `null` until the services document is seeded.
+export const fetchServices = cache(async function fetchServices(): Promise<Services | null> {
+  return client.fetch(`
+    *[_type == "services"][0]{
+      title, lede,
+      "blocks": coalesce(blocks[]{
+        cmd, tag, blurb,
+        "bullets": coalesce(bullets[]{ text }, []),
+        "stack": coalesce(stack[]{ en, pl }, []),
+        note
+      }, []),
+      howHeading,
+      "steps": coalesce(steps[]{ title, text }, []),
+      cta { line, blurb, book }
+    }
+  `)
 })
 
 export const fetchNow = cache(async function fetchNow(): Promise<Now> {

@@ -120,6 +120,66 @@ export interface Contact {
   signature?: Bilingual
 }
 
+export interface ServiceBlock {
+  cmd: string
+  tag?: Bilingual
+  blurb?: Bilingual
+  bullets: { text: Bilingual }[]
+  stack: Bilingual[]
+  note?: Bilingual
+}
+
+export interface ServiceStep {
+  title: Bilingual
+  text?: Bilingual
+}
+
+export interface Services {
+  title?: Bilingual
+  lede?: Bilingual
+  blocks: ServiceBlock[]
+  howHeading?: Bilingual
+  steps: ServiceStep[]
+  cta?: {
+    line?: Bilingual
+    blurb?: Bilingual
+    book?: Bilingual
+  }
+}
+
+/**
+ * Every UI label on the site, bilingual, managed in Sanity (uiStrings document).
+ * Fields holding `{placeholders}` are templates resolved in lib/strings.ts.
+ */
+export interface UiStrings {
+  tabs: { services: Bilingual; cv: Bilingual; now: Bilingual; contact: Bilingual }
+  theme: { light: Bilingual; dark: Bilingual }
+  sections: {
+    about: Bilingual; skills: Bilingual; education: Bilingual
+    speaking: Bilingual; languages: Bilingual; experience: Bilingual
+    now: Bilingual; building: Bilingual; learning: Bilingual
+    reading: Bilingual; around: Bilingual
+    channels: Bilingual; form: Bilingual
+  }
+  nowIntro: Bilingual
+  nowAsOf: Bilingual // template: {date}
+  channels: { email: Bilingual; github: Bilingual; linkedin: Bilingual; calendar: Bilingual }
+  contactForm: {
+    name: Bilingual; email: Bilingual; phone: Bilingual; message: Bilingual
+    submit: Bilingual; sending: Bilingual; rodo: Bilingual; consent: Bilingual
+    errors: {
+      name: Bilingual; emailRequired: Bilingual; emailInvalid: Bilingual
+      message: Bilingual; consent: Bilingual
+      invalid_payload: Bilingual; turnstile_failed: Bilingual; send_failed: Bilingual
+    }
+  }
+  buttons: { json: Bilingual; pdf: Bilingual }
+  toasts: { json: Bilingual; contactSent: Bilingual }
+  footer: { copy: Bilingual; built: Bilingual } // copy template: {year}, {name}
+  atSep: Bilingual
+  langLevels: { native: Bilingual; fluent: Bilingual; intermediate: Bilingual }
+}
+
 export interface Seo {
   title?: Bilingual
   description?: Bilingual

@@ -285,6 +285,36 @@ button { font-family: inherit; }
 .book-title { font-family: var(--font-display); font-weight: 500; }
 .book-author { color: var(--ink-faint); }
 
+.services { max-width: 900px; }
+.services-head { margin-bottom: 8px; }
+.services-title { font-family: var(--font-display); font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 6px; }
+.services-lede { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0; max-width: 66ch; text-wrap: pretty; }
+.svc { margin-top: clamp(28px, 4vw, 44px); border: 1px solid var(--rule); border-radius: 4px; background: var(--bg-elev); overflow: hidden; }
+.svc-bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid var(--rule); background: var(--bg); }
+.svc-cmd { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin: 0; }
+.svc-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.svc-body { padding: 18px 16px 20px; }
+.svc-body > p { margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); max-width: 64ch; text-wrap: pretty; }
+.svc-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.svc-list li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--ink); }
+.svc-list li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 10px; height: 1px; background: var(--accent); }
+.svc-stack { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-soft); border: 1px solid var(--rule-strong); border-radius: 3px; padding: 3px 8px; }
+.svc-note { margin: 14px 0 0; font-size: 12px; color: var(--ink-faint); }
+.svc-how { margin-top: var(--section-gap); }
+/* Step count is Sanity-managed, so the grid adapts to however many there are. */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.step { border-top: 1px solid var(--rule-strong); padding-top: 12px; }
+.step-n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-soft); }
+.step-t { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin: 4px 0; }
+.step p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+.svc-cta { margin-top: var(--section-gap); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 22px 20px; background: var(--bg-elev); }
+.cta-line { font-family: var(--font-display); font-size: clamp(16px, 2.4vw, 20px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 6px; color: var(--ink); }
+.cta-blurb { margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); max-width: 56ch; text-wrap: pretty; }
+.cta-links { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 720px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .steps { grid-template-columns: 1fr; } }
+
 .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--col-gap); align-items: start; }
 .contact .statement h1 { font-family: var(--font-display); font-size: clamp(36px, 5.5vw, 64px); font-weight: 600; line-height: 1; letter-spacing: -0.03em; margin: 0 0 20px; }
 .contact .statement h1 em { color: var(--accent); font-style: normal; }

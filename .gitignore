@@ -11,6 +11,7 @@ node_modules/
 apps/web/.next/
 apps/web/out/
 apps/studio/dist/
+*.tsbuildinfo
 
 # OS
 .DS_Store

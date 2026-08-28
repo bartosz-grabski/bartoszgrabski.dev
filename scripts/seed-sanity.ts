@@ -1,4 +1,4 @@
-import { createClient } from '@sanity/client'
+import { createClient, type IdentifiedSanityDocumentStub } from '@sanity/client'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -235,6 +235,210 @@ const now = {
   ],
 }
 
+const services = {
+  _id: 'services',
+  _type: 'services',
+  title: { en: 'services', pl: 'usługi' },
+  lede: {
+    en: 'Three things I do, end to end: the site people land on, the product they use, and the AI that makes it faster. Design, build and deploy handled in one place.',
+    pl: 'Trzy rzeczy, które robię od początku do końca: strona, na którą trafiają ludzie, produkt, z którego korzystają, i AI, które przyspiesza ich pracę. Projekt, budowa i wdrożenie — wszystko w jednym miejscu.',
+  },
+  blocks: [
+    {
+      _key: 'web',
+      cmd: 'web',
+      tag: { en: 'Websites & landing pages', pl: 'Strony i landing page' },
+      blurb: {
+        en: 'Fast, well-made sites that look right on a phone and a laptop. Built to load quickly, rank well, and be editable without calling me every time.',
+        pl: 'Szybkie, dopracowane strony, które dobrze wyglądają na telefonie i na laptopie. Zbudowane tak, by szybko się ładowały, dobrze pozycjonowały i dały się edytować bez dzwonienia do mnie za każdym razem.',
+      },
+      bullets: [
+        { _key: 'web-1', text: { en: 'Marketing sites, landing pages, portfolios', pl: 'Strony marketingowe, landing page, portfolio' } },
+        { _key: 'web-2', text: { en: 'CMS setup so your team edits content themselves', pl: 'Konfiguracja CMS — treści edytuje Twój zespół' } },
+        { _key: 'web-3', text: { en: 'Core Web Vitals, SEO basics and analytics wired in', pl: 'Core Web Vitals, podstawy SEO i analityka w standardzie' } },
+        { _key: 'web-4', text: { en: 'Accessibility to WCAG 2.2 AA', pl: 'Dostępność zgodna z WCAG 2.2 AA' } },
+      ],
+      stack: [
+        { _key: 'web-s1', en: 'Next.js', pl: 'Next.js' },
+        { _key: 'web-s2', en: 'Astro', pl: 'Astro' },
+        { _key: 'web-s3', en: 'TypeScript', pl: 'TypeScript' },
+        { _key: 'web-s4', en: 'Sanity', pl: 'Sanity' },
+        { _key: 'web-s5', en: 'Vercel', pl: 'Vercel' },
+      ],
+      note: { en: 'Typical engagement: 2–5 weeks.', pl: 'Typowy projekt: 2–5 tygodni.' },
+    },
+    {
+      _key: 'apps',
+      cmd: 'apps',
+      tag: { en: 'Web & mobile applications', pl: 'Aplikacje webowe i mobilne' },
+      blurb: {
+        en: 'Web and mobile apps from the first sketch to a working release. I design the data model first, so the thing still holds together after the third round of new requirements.',
+        pl: 'Aplikacje webowe i mobilne — od pierwszego szkicu do działającego wydania. Zaczynam od modelu danych, żeby całość trzymała się kupy także po trzeciej rundzie nowych wymagań.',
+      },
+      bullets: [
+        { _key: 'apps-1', text: { en: 'Internal tools, dashboards, client portals', pl: 'Narzędzia wewnętrzne, dashboardy, portale klienckie' } },
+        { _key: 'apps-2', text: { en: 'Mobile apps for iOS and Android from one codebase', pl: 'Aplikacje mobilne na iOS i Androida z jednej bazy kodu' } },
+        { _key: 'apps-3', text: { en: 'Auth, billing, roles and permissions', pl: 'Logowanie, płatności, role i uprawnienia' } },
+        { _key: 'apps-4', text: { en: 'CI/CD with preview environments per change', pl: 'CI/CD ze środowiskami preview dla każdej zmiany' } },
+      ],
+      stack: [
+        { _key: 'apps-s1', en: 'React', pl: 'React' },
+        { _key: 'apps-s2', en: 'React Native', pl: 'React Native' },
+        { _key: 'apps-s3', en: 'Node.js', pl: 'Node.js' },
+        { _key: 'apps-s4', en: 'PostgreSQL', pl: 'PostgreSQL' },
+        { _key: 'apps-s5', en: 'Fly.io', pl: 'Fly.io' },
+      ],
+      note: { en: 'Typical engagement: 6–12 weeks, or ongoing.', pl: 'Typowy projekt: 6–12 tygodni albo współpraca ciągła.' },
+    },
+    {
+      _key: 'ai',
+      cmd: 'ai',
+      tag: { en: 'AI integrations & automation', pl: 'Integracje AI i automatyzacja' },
+      blurb: {
+        en: 'AI that saves real hours, not a chatbot bolted onto a homepage. Usually it starts with one repetitive task and grows from there.',
+        pl: 'AI, które oszczędza realne godziny — a nie chatbot doklejony do strony głównej. Zwykle zaczyna się od jednego powtarzalnego zadania i rośnie od tego miejsca.',
+      },
+      bullets: [
+        { _key: 'ai-1', text: { en: 'Assistants and chat grounded in your own documents (RAG)', pl: 'Asystenci i czat oparte na Twoich dokumentach (RAG)' } },
+        { _key: 'ai-2', text: { en: 'Document and email processing — extract, classify, route', pl: 'Przetwarzanie dokumentów i maili — ekstrakcja, klasyfikacja, routing' } },
+        { _key: 'ai-3', text: { en: 'Workflow automation between the tools you already pay for', pl: 'Automatyzacja przepływów między narzędziami, za które już płacisz' } },
+        { _key: 'ai-4', text: { en: 'Evaluation and cost controls, so quality and spend stay predictable', pl: 'Ewaluacja i kontrola kosztów, by jakość i wydatki były przewidywalne' } },
+      ],
+      stack: [
+        { _key: 'ai-s1', en: 'Claude API', pl: 'Claude API' },
+        { _key: 'ai-s2', en: 'OpenAI', pl: 'OpenAI' },
+        { _key: 'ai-s3', en: 'Vector search', pl: 'Wyszukiwanie wektorowe' },
+        { _key: 'ai-s4', en: 'Python', pl: 'Python' },
+        { _key: 'ai-s5', en: 'Queues', pl: 'Kolejki' },
+      ],
+      note: { en: 'Typical engagement: 2-week pilot, then scale.', pl: 'Typowy start: 2-tygodniowy pilotaż, potem skalowanie.' },
+    },
+  ],
+  howHeading: { en: 'how it runs', pl: 'jak to przebiega' },
+  steps: [
+    {
+      _key: 'call',
+      title: { en: 'Call', pl: 'Rozmowa' },
+      text: {
+        en: "30 minutes on what you need and whether I'm the right fit.",
+        pl: '30 minut o tym, czego potrzebujesz i czy jestem właściwą osobą.',
+      },
+    },
+    {
+      _key: 'scope',
+      title: { en: 'Scope', pl: 'Zakres' },
+      text: {
+        en: 'Fixed written scope, timeline and price before anything starts.',
+        pl: 'Spisany zakres, harmonogram i cena — zanim cokolwiek się zacznie.',
+      },
+    },
+    {
+      _key: 'handover',
+      title: { en: 'Handover', pl: 'Przekazanie' },
+      text: {
+        en: 'Deployed, documented, yours. Support afterwards if you want it.',
+        pl: 'Wdrożone, udokumentowane, Twoje. Potem wsparcie, jeśli chcesz.',
+      },
+    },
+  ],
+  cta: {
+    line: { en: 'get in touch', pl: 'odezwij się' },
+    blurb: {
+      en: 'Send a couple of lines about the project, or book a 30-minute intro call. I reply within 48 hours.',
+      pl: 'Napisz kilka zdań o projekcie albo zarezerwuj 30-minutową rozmowę wstępną. Odpowiadam w ciągu 48 godzin.',
+    },
+    book: { en: 'book a call', pl: 'umów rozmowę' },
+  },
+}
+
+const uiStrings = {
+  _id: 'uiStrings',
+  _type: 'uiStrings',
+  tabs: {
+    services: { en: 'services', pl: 'Usługi' },
+    cv: { en: 'cv', pl: 'CV' },
+    now: { en: 'now', pl: 'Teraz' },
+    contact: { en: 'contact', pl: 'Kontakt' },
+  },
+  theme: {
+    light: { en: '☀ light', pl: '☀ Jasny' },
+    dark: { en: '☾ dark', pl: '☾ Ciemny' },
+  },
+  sections: {
+    about: { en: 'about', pl: 'o mnie' },
+    skills: { en: 'skills', pl: 'umiejętności' },
+    education: { en: 'education', pl: 'wykształcenie' },
+    speaking: { en: 'speaking', pl: 'wystąpienia' },
+    languages: { en: 'languages', pl: 'języki' },
+    experience: { en: 'experience', pl: 'doświadczenie' },
+    now: { en: 'now', pl: 'teraz' },
+    building: { en: 'building', pl: 'buduję' },
+    learning: { en: 'learning', pl: 'uczę się' },
+    reading: { en: 'reading', pl: 'czytam' },
+    around: { en: 'around', pl: 'wokół' },
+    channels: { en: 'channels', pl: 'kanały' },
+    form: { en: 'message', pl: 'wiadomość' },
+  },
+  nowIntro: {
+    en: "A snapshot of what I'm working on, learning, and reading. Updated when things change — inspired by Derek Sivers' 'now' idea.",
+    pl: "Migawka tego, nad czym pracuję, czego się uczę i co czytam. Aktualizowane, gdy coś się zmienia — inspirowane stroną 'now' Dereka Siversa.",
+  },
+  nowAsOf: { en: 'As of {date}', pl: 'Stan na {date}' },
+  channels: {
+    email: { en: 'Email', pl: 'E-mail' },
+    github: { en: 'GitHub', pl: 'GitHub' },
+    linkedin: { en: 'LinkedIn', pl: 'LinkedIn' },
+    calendar: { en: 'Book a call', pl: 'Umów rozmowę' },
+  },
+  contactForm: {
+    name: { en: 'Name', pl: 'Imię' },
+    email: { en: 'Email', pl: 'Email' },
+    phone: { en: 'Phone (optional)', pl: 'Telefon (opcjonalnie)' },
+    message: { en: 'Message', pl: 'Wiadomość' },
+    submit: { en: 'Send message', pl: 'Wyślij wiadomość' },
+    sending: { en: 'Sending…', pl: 'Wysyłanie…' },
+    rodo: {
+      en: 'Your data is used solely to reply to your message — never for marketing or a newsletter, and never shared with third parties.',
+      pl: 'Twoje dane wykorzystuję wyłącznie po to, by odpowiedzieć na Twoją wiadomość — nie służą do marketingu ani newslettera i nie są nikomu przekazywane.',
+    },
+    consent: {
+      en: 'I agree to my data being used to reply to this message.',
+      pl: 'Zgadzam się na wykorzystanie moich danych w celu odpowiedzi na tę wiadomość.',
+    },
+    errors: {
+      name: { en: 'Please enter your name.', pl: 'Podaj swoje imię.' },
+      emailRequired: { en: 'Please enter your email.', pl: 'Podaj adres e-mail.' },
+      emailInvalid: { en: 'Please enter a valid email address.', pl: 'Podaj prawidłowy adres e-mail.' },
+      message: { en: 'Please enter a message.', pl: 'Wpisz treść wiadomości.' },
+      consent: { en: 'Please confirm consent before sending.', pl: 'Potwierdź zgodę przed wysłaniem.' },
+      invalid_payload: { en: 'Please check the form and try again.', pl: 'Sprawdź formularz i spróbuj ponownie.' },
+      turnstile_failed: { en: 'Verification failed — please try again.', pl: 'Weryfikacja nie powiodła się — spróbuj ponownie.' },
+      send_failed: {
+        en: 'Something went wrong sending your message. Please try again or email hello@bartoszgrabski.dev directly.',
+        pl: 'Coś poszło nie tak przy wysyłaniu wiadomości. Spróbuj ponownie albo napisz bezpośrednio na hello@bartoszgrabski.dev.',
+      },
+    },
+  },
+  buttons: {
+    json: { en: '↓ json', pl: '↓ JSON' },
+    pdf: { en: '↓ pdf', pl: '↓ PDF' },
+  },
+  toasts: {
+    json: { en: 'CV downloaded as JSON', pl: 'CV pobrane jako JSON' },
+    contactSent: { en: 'Message sent', pl: 'Wiadomość wysłana' },
+  },
+  footer: {
+    copy: { en: '© {year} {name}', pl: '© {year} {name}' },
+    built: { en: 'Built by hand · Last updated May 2026', pl: 'Wykonane ręcznie · Ostatnia aktualizacja: maj 2026' },
+  },
+  atSep: { en: ' at ', pl: ' w ' },
+  langLevels: {
+    native: { en: 'Native', pl: 'ojczysty' },
+    fluent: { en: 'Fluent', pl: 'biegły' },
+    intermediate: { en: 'Intermediate', pl: 'średniozaawansowany' },
+  },
+}
+
 const siteSettings = {
   _id: 'siteSettings',
   _type: 'siteSettings',
@@ -272,13 +476,26 @@ const siteSettings = {
   },
 }
 
+const documents: Record<string, IdentifiedSanityDocumentStub> = { resume, now, services, siteSettings, uiStrings }
+
+// Seed everything, or only the documents named on the command line, e.g.
+//   npm run seed              → all documents
+//   npm run seed -- services  → just the services document
 async function seed() {
-  console.log('Seeding resume…')
-  await client.createOrReplace(resume)
-  console.log('Seeding now…')
-  await client.createOrReplace(now)
-  console.log('Seeding siteSettings…')
-  await client.createOrReplace(siteSettings)
+  const requested = process.argv.slice(2)
+  const unknown = requested.filter((name) => !(name in documents))
+  if (unknown.length) {
+    console.error(`Unknown document(s): ${unknown.join(', ')}. Known: ${Object.keys(documents).join(', ')}`)
+    process.exit(1)
+  }
+  const names = requested.length
+    ? (requested as (keyof typeof documents)[])
+    : (Object.keys(documents) as (keyof typeof documents)[])
+
+  for (const name of names) {
+    console.log(`Seeding ${name}…`)
+    await client.createOrReplace(documents[name])
+  }
   console.log('Done.')
 }
 

@@ -5,13 +5,14 @@ import { ToastProvider } from '@/lib/toast'
 import { Masthead } from '@/components/layout/Masthead'
 import { Tabs } from '@/components/layout/Tabs'
 import { Footer } from '@/components/layout/Footer'
-import type { Resume, SiteSettings } from '@/lib/types'
-import type { Lang } from '@/lib/translations'
+import type { Resume, SiteSettings, UiStrings } from '@/lib/types'
+import type { Lang } from '@/lib/strings'
 
 interface AppChromeProps {
   lang: Lang
   resume: Resume
   siteSettings: SiteSettings
+  uiStrings: UiStrings | null
   children: ReactNode
 }
 
@@ -20,7 +21,7 @@ interface AppChromeProps {
  * toggle and toast host. Lives in the locale layout so it survives soft
  * navigations between /[lang], /[lang]/now and /[lang]/contact.
  */
-export function AppChrome({ lang, resume, siteSettings, children }: AppChromeProps) {
+export function AppChrome({ lang, resume, siteSettings, uiStrings, children }: AppChromeProps) {
   // Starts at a fixed value so the server and first client render agree (no
   // hydration mismatch). The real theme is applied to <html data-theme> by the
   // inline anti-flash script in the layout; this effect syncs React state to it
@@ -43,7 +44,7 @@ export function AppChrome({ lang, resume, siteSettings, children }: AppChromePro
   }, [theme])
 
   return (
-    <LangProvider lang={lang}>
+    <LangProvider lang={lang} strings={uiStrings}>
       <ToastProvider>
         <div className="shell">
           <Masthead

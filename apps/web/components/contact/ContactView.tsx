@@ -23,17 +23,12 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
   const firstName = resume.basics.name.split(' ')[0]
   const period = t(availabilityLabel).toLowerCase()
 
-  // Prefer Sanity-managed copy; fall back to the hardcoded translations.
-  // Each field is checked individually — a contact document may exist with
-  // only some fields populated.
-  const headingText = contact?.heading ? t(contact.heading) : null
-  const availabilityText = contact?.availabilityLine
-    ? t(contact.availabilityLine).replace('{availability}', period)
-    : T.contactSub1(t(availabilityLabel))
-  const bookingText = contact?.bookingLine ? t(contact.bookingLine) : T.contactSub2
-  const signText = contact?.signature
-    ? t(contact.signature).replace('{name}', firstName)
-    : T.contactSign(firstName)
+  // All statement copy is Sanity-managed (siteSettings → contact). Fields are
+  // resolved individually so a partially-filled document still renders.
+  const headingText = t(contact?.heading)
+  const availabilityText = t(contact?.availabilityLine).replace('{availability}', period)
+  const bookingText = t(contact?.bookingLine)
+  const signText = t(contact?.signature).replace('{name}', firstName)
 
   const calHref = calendarUrl ?? LINKS.calendar
 
@@ -52,21 +47,10 @@ export function ContactView({ resume, availabilityLabel, calendarUrl, channels, 
   return (
     <div className="contact" data-view="contact">
       <div className="statement">
-        <h1>
-          {headingText !== null ? (
-            <RichText text={headingText} />
-          ) : (
-            <>
-              {T.contactHead[0]}
-              {T.contactHead[0] && T.contactHead[1] ? ' ' : ''}
-              {T.contactHead[1] && <em>{T.contactHead[1]}</em>}
-              {T.contactHead[2]}
-            </>
-          )}
-        </h1>
-        <p><RichText text={availabilityText} /></p>
-        <p><RichText text={bookingText} /></p>
-        <p className="signed"><RichText text={signText} /></p>
+        <h1><RichText text={headingText} /></h1>
+        {availabilityText && <p><RichText text={availabilityText} /></p>}
+        {bookingText && <p><RichText text={bookingText} /></p>}
+        {signText && <p className="signed"><RichText text={signText} /></p>}
       </div>
 
       <div>

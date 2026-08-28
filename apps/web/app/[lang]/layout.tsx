@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata, Viewport } from 'next'
 import '@/styles/globals.css'
 import '@/styles/terminal.css'
-import { fetchResume, fetchSiteSettings } from '@/lib/queries'
+import { fetchResume, fetchSiteSettings, fetchUiStrings } from '@/lib/queries'
 import { buildJsonLd } from '@/lib/jsonLd'
 import { AppChrome } from '@/components/layout/AppChrome'
 import { ThemeScript } from '@/components/layout/ThemeScript'
@@ -117,7 +117,11 @@ export default async function LocaleLayout({
   const { lang } = await params
   if (!isLocale(lang)) notFound()
 
-  const [resume, siteSettings] = await Promise.all([fetchResume(), fetchSiteSettings()])
+  const [resume, siteSettings, uiStrings] = await Promise.all([
+    fetchResume(),
+    fetchSiteSettings(),
+    fetchUiStrings(),
+  ])
   const jsonLd = buildJsonLd(resume, siteSettings, lang)
 
   return (
@@ -136,7 +140,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
-        <AppChrome lang={lang} resume={resume} siteSettings={siteSettings}>
+        <AppChrome lang={lang} resume={resume} siteSettings={siteSettings} uiStrings={uiStrings}>
           {children}
         </AppChrome>
       </body>

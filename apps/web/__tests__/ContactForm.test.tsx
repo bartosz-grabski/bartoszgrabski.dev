@@ -1,6 +1,13 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { ToastProvider } from '@/lib/toast'
+import { LangProvider } from '@/lib/i18n'
 import { ContactForm } from '@/components/contact/ContactForm'
+import { uiStringsFixture } from '../test-utils/uiStrings'
+
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+  usePathname: () => '/en/contact',
+}))
 
 jest.mock('next/script', () => {
   const React = require('react')
@@ -14,9 +21,11 @@ jest.mock('next/script', () => {
 
 function renderForm() {
   return render(
-    <ToastProvider>
-      <ContactForm />
-    </ToastProvider>,
+    <LangProvider lang="en" strings={uiStringsFixture}>
+      <ToastProvider>
+        <ContactForm />
+      </ToastProvider>
+    </LangProvider>,
   )
 }
 

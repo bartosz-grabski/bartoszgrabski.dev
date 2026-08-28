@@ -9,7 +9,8 @@ export function Tabs() {
   const active = sectionFromPath(usePathname())
 
   const items: { section: Section; label: string }[] = [
-    { section: '', label: T.tabs.cv },
+    { section: '', label: T.tabs.services },
+    { section: 'cv', label: T.tabs.cv },
     { section: 'now', label: T.tabs.now },
     { section: 'contact', label: T.tabs.contact },
   ]
@@ -19,7 +20,7 @@ export function Tabs() {
       <nav>
         {items.map((item) => (
           <Link
-            key={item.section || 'cv'}
+            key={item.section || 'services'}
             href={localePath(lang, item.section)}
             className="tab"
             aria-current={active === item.section ? 'page' : undefined}
