@@ -298,9 +298,6 @@ button { font-family: inherit; }
 .svc-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
 .svc-list li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--ink); }
 .svc-list li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 10px; height: 1px; background: var(--accent); }
-.svc-stack { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-soft); border: 1px solid var(--rule-strong); border-radius: 3px; padding: 3px 8px; }
-.svc-note { margin: 14px 0 0; font-size: 12px; color: var(--ink-faint); }
 .svc-how { margin-top: var(--section-gap); }
 /* Step count is Sanity-managed, so the grid adapts to however many there are. */
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }

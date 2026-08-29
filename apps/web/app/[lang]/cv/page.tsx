@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { fetchResume } from '@/lib/queries'
 import { CVView } from '@/components/cv/CVView'
-import { isLocale, defaultLocale, sectionAlternates, type Locale } from '@/lib/site'
+import { isLocale, defaultLocale, type Locale } from '@/lib/site'
+import { sectionMetadata, BreadcrumbJsonLd, type SectionMeta } from '@/lib/seo'
 
-const META: Record<Locale, { title: string; description: string }> = {
+const META: Record<Locale, SectionMeta> = {
   en: {
     title: 'CV',
     description:
@@ -23,16 +24,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params
   const locale: Locale = isLocale(lang) ? lang : defaultLocale
-  const m = META[locale]
-  return {
-    title: m.title,
-    description: m.description,
-    alternates: sectionAlternates(locale, 'cv'),
-    openGraph: { title: `${m.title} · Bartosz Grabski`, description: m.description },
-  }
+  return sectionMetadata(locale, 'cv', META[locale])
 }
 
-export default async function CVPage() {
+export default async function CVPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const locale: Locale = isLocale(lang) ? lang : defaultLocale
   const resume = await fetchResume()
-  return <CVView resume={resume} />
+  return (
+    <>
+      <BreadcrumbJsonLd locale={locale} section="cv" name={META[locale].title} />
+      <CVView resume={resume} />
+    </>
+  )
 }

@@ -1,16 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { bilingualField, bilingualText } from './helpers'
 
-/** Inline `{ en, pl }` object for array members (arrays can't hold bare bilingual fields). */
-const bilingualMember = {
-  type: 'object' as const,
-  fields: [
-    defineField({ name: 'en', title: 'English', type: 'string', validation: (r) => r.required() }),
-    defineField({ name: 'pl', title: 'Polski', type: 'string', validation: (r) => r.required() }),
-  ],
-  preview: { select: { title: 'en', subtitle: 'pl' } },
-}
-
 export const servicesSchema = defineType({
   name: 'services',
   title: 'Services',
@@ -47,13 +37,6 @@ export const servicesSchema = defineType({
                 },
               ],
             }),
-            defineField({
-              name: 'stack',
-              title: 'Tech chips',
-              type: 'array',
-              of: [bilingualMember],
-            }),
-            bilingualField('note', 'Note — small print at the bottom (e.g. "Typical engagement: 2–5 weeks.")'),
           ],
           preview: { select: { title: 'cmd', subtitle: 'tag.en' } },
         },
@@ -84,7 +67,40 @@ export const servicesSchema = defineType({
       fields: [
         bilingualField('line', 'Headline — shown as "$ <line>" with a blinking cursor'),
         bilingualText('blurb', 'Blurb under the headline'),
-        bilingualField('book', 'Label of the primary "book a call" button'),
+        defineField({
+          name: 'links',
+          title: 'Buttons',
+          description: 'Drag to reorder. Internal pages use a path (/contact, /cv); external links a full URL (https://…, mailto:…, tel:…).',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                bilingualField('label', 'Label'),
+                defineField({
+                  name: 'url',
+                  title: 'URL or internal path',
+                  type: 'string',
+                  validation: (r) => r.required(),
+                }),
+                defineField({
+                  name: 'style',
+                  title: 'Style',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Default (outline)', value: 'default' },
+                      { title: 'Light (filled accent)', value: 'light' },
+                    ],
+                    layout: 'radio',
+                  },
+                  initialValue: 'default',
+                }),
+              ],
+              preview: { select: { title: 'label.en', subtitle: 'url' } },
+            },
+          ],
+        }),
       ],
     }),
   ],

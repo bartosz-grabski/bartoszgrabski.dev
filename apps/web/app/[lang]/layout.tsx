@@ -124,6 +124,10 @@ export default async function LocaleLayout({
   ])
   const jsonLd = buildJsonLd(resume, siteSettings, lang)
 
+  // Static export: this runs at build time, and content is fetched fresh in the
+  // same pass — so the build timestamp is the honest "last updated" date.
+  const lastUpdated = new Date().toISOString()
+
   return (
     <html lang={lang} data-theme="light" className={jetbrainsMono.variable} suppressHydrationWarning>
       <head>
@@ -140,7 +144,13 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
-        <AppChrome lang={lang} resume={resume} siteSettings={siteSettings} uiStrings={uiStrings}>
+        <AppChrome
+          lang={lang}
+          resume={resume}
+          siteSettings={siteSettings}
+          uiStrings={uiStrings}
+          lastUpdated={lastUpdated}
+        >
           {children}
         </AppChrome>
       </body>

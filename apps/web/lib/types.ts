@@ -125,13 +125,18 @@ export interface ServiceBlock {
   tag?: Bilingual
   blurb?: Bilingual
   bullets: { text: Bilingual }[]
-  stack: Bilingual[]
-  note?: Bilingual
 }
 
 export interface ServiceStep {
   title: Bilingual
   text?: Bilingual
+}
+
+export interface ServiceCtaLink {
+  label: Bilingual
+  /** Internal path ('/contact') or external URL ('https://…', 'mailto:…', 'tel:…'). */
+  url: string
+  style?: 'default' | 'light'
 }
 
 export interface Services {
@@ -143,7 +148,7 @@ export interface Services {
   cta?: {
     line?: Bilingual
     blurb?: Bilingual
-    book?: Bilingual
+    links: ServiceCtaLink[]
   }
 }
 

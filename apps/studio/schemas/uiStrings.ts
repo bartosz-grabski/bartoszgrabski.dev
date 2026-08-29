@@ -151,7 +151,7 @@ export const uiStringsSchema = defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         bilingualField('copy', 'Copyright line — use {year} and {name}'),
-        bilingualField('built', 'Built-by line'),
+        bilingualField('built', 'Built-by line — use {date} for the last-updated (build) date'),
       ],
     }),
     bilingualField('atSep', 'Role/company separator (e.g. " at " / " w ")'),

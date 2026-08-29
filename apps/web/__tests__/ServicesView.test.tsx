@@ -21,16 +21,12 @@ const services: Services = {
       tag: { en: 'Websites', pl: 'Strony' },
       blurb: { en: 'Fast sites.', pl: 'Szybkie strony.' },
       bullets: [{ text: { en: 'Landing pages', pl: 'Landing page' } }],
-      stack: [{ en: 'Next.js', pl: 'Next.js' }],
-      note: { en: '2–5 weeks.', pl: '2–5 tygodni.' },
     },
     {
       cmd: 'ai',
       tag: { en: 'AI automation', pl: 'Automatyzacja AI' },
       blurb: { en: 'AI that saves hours.', pl: 'AI, które oszczędza godziny.' },
       bullets: [{ text: { en: 'RAG assistants', pl: 'Asystenci RAG' } }],
-      stack: [{ en: 'Vector search', pl: 'Wyszukiwanie wektorowe' }],
-      note: { en: '2-week pilot.', pl: '2-tygodniowy pilotaż.' },
     },
   ],
   howHeading: { en: 'how it runs', pl: 'jak to przebiega' },
@@ -42,30 +38,26 @@ const services: Services = {
   cta: {
     line: { en: 'get in touch', pl: 'odezwij się' },
     blurb: { en: 'Send a couple of lines.', pl: 'Napisz kilka zdań.' },
-    book: { en: 'book a call', pl: 'umów rozmowę' },
+    links: [
+      { label: { en: 'book a call', pl: 'umów rozmowę' }, url: 'https://cal.com/bartosz-grabski', style: 'light' },
+      { label: { en: 'contact', pl: 'kontakt' }, url: '/contact', style: 'default' },
+      { label: { en: 'hello@bartoszgrabski.dev', pl: 'hello@bartoszgrabski.dev' }, url: 'mailto:hello@bartoszgrabski.dev' },
+    ],
   },
 }
 
-const props = {
-  services,
-  email: 'hello@bartoszgrabski.dev',
-  phone: '+48 604 998 453',
-  calendarUrl: 'https://cal.com/bgrabski/intro',
-}
-
 describe('ServicesView', () => {
-  it('renders a panel per service block', () => {
-    renderWithLang(<ServicesView {...props} />)
+  it('renders a panel per service block with description and bullets only', () => {
+    renderWithLang(<ServicesView services={services} />)
     for (const cmd of ['web', 'ai']) {
       expect(screen.getByRole('heading', { level: 3, name: cmd })).toBeInTheDocument()
     }
+    expect(screen.getByText('Fast sites.')).toBeInTheDocument()
     expect(screen.getByText('Landing pages')).toBeInTheDocument()
-    expect(screen.getByText('Next.js')).toBeInTheDocument()
-    expect(screen.getByText('2–5 weeks.')).toBeInTheDocument()
   })
 
   it('renders the process steps in order with numbering', () => {
-    renderWithLang(<ServicesView {...props} />)
+    renderWithLang(<ServicesView services={services} />)
     const titles = screen
       .getAllByRole('heading', { level: 3 })
       .map((h) => h.textContent)
@@ -75,37 +67,34 @@ describe('ServicesView', () => {
     expect(screen.getByText('03')).toBeInTheDocument()
   })
 
-  it('links the CTA to calendar, email and phone', () => {
-    renderWithLang(<ServicesView {...props} />)
-    expect(screen.getByRole('link', { name: 'book a call' })).toHaveAttribute(
-      'href',
-      'https://cal.com/bgrabski/intro',
-    )
-    expect(screen.getByRole('link', { name: props.email })).toHaveAttribute(
-      'href',
-      `mailto:${props.email}`,
-    )
-    // tel: href strips spaces so it dials correctly
-    expect(screen.getByRole('link', { name: props.phone })).toHaveAttribute(
-      'href',
-      'tel:+48604998453',
-    )
+  it('renders CTA buttons from the Sanity links list', () => {
+    renderWithLang(<ServicesView services={services} />)
+    const book = screen.getByRole('link', { name: 'book a call' })
+    expect(book).toHaveAttribute('href', 'https://cal.com/bartosz-grabski')
+    expect(book).toHaveAttribute('target', '_blank')
+    expect(book).toHaveClass('btn', 'primary') // "light" style → filled accent
+
+    const email = screen.getByRole('link', { name: 'hello@bartoszgrabski.dev' })
+    expect(email).toHaveAttribute('href', 'mailto:hello@bartoszgrabski.dev')
+    expect(email).toHaveClass('btn')
+    expect(email).not.toHaveClass('primary')
+    expect(email).not.toHaveAttribute('target')
   })
 
-  it('omits the phone button when no phone is provided', () => {
-    renderWithLang(<ServicesView services={services} email={props.email} />)
-    expect(screen.queryByRole('link', { name: props.phone })).not.toBeInTheDocument()
+  it('locale-prefixes internal links', () => {
+    renderWithLang(<ServicesView services={services} />)
+    expect(screen.getByRole('link', { name: 'contact' })).toHaveAttribute('href', '/en/contact')
   })
 
   it('renders Polish copy under the pl locale', () => {
-    renderWithLang(<ServicesView {...props} />, 'pl')
+    renderWithLang(<ServicesView services={services} />, 'pl')
     expect(screen.getByRole('heading', { level: 2, name: 'usługi' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'umów rozmowę' })).toBeInTheDocument()
-    expect(screen.getByText('Wyszukiwanie wektorowe')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'kontakt' })).toHaveAttribute('href', '/pl/contact')
   })
 
   it('renders nothing until the services document exists', () => {
-    const { container } = renderWithLang(<ServicesView services={null} email={props.email} />)
+    const { container } = renderWithLang(<ServicesView services={null} />)
     expect(container).toBeEmptyDOMElement()
   })
 })

@@ -43,7 +43,7 @@ export const uiStringsFixture: UiStrings = {
   },
   buttons: { json: b('↓ json'), pdf: b('↓ pdf') },
   toasts: { json: b('CV downloaded as JSON'), contactSent: b('Message sent') },
-  footer: { copy: b('© {year} {name}'), built: b('Built by hand') },
+  footer: { copy: b('© {year} {name}'), built: b('Built by hand · Last updated {date}') },
   atSep: b(' at ', ' w '),
   langLevels: { native: b('Native', 'ojczysty'), fluent: b('Fluent', 'biegły'), intermediate: b('Intermediate', 'średniozaawansowany') },
 }

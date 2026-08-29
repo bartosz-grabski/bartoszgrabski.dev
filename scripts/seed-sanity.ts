@@ -258,14 +258,6 @@ const services = {
         { _key: 'web-3', text: { en: 'Core Web Vitals, SEO basics and analytics wired in', pl: 'Core Web Vitals, podstawy SEO i analityka w standardzie' } },
         { _key: 'web-4', text: { en: 'Accessibility to WCAG 2.2 AA', pl: 'Dostępność zgodna z WCAG 2.2 AA' } },
       ],
-      stack: [
-        { _key: 'web-s1', en: 'Next.js', pl: 'Next.js' },
-        { _key: 'web-s2', en: 'Astro', pl: 'Astro' },
-        { _key: 'web-s3', en: 'TypeScript', pl: 'TypeScript' },
-        { _key: 'web-s4', en: 'Sanity', pl: 'Sanity' },
-        { _key: 'web-s5', en: 'Vercel', pl: 'Vercel' },
-      ],
-      note: { en: 'Typical engagement: 2–5 weeks.', pl: 'Typowy projekt: 2–5 tygodni.' },
     },
     {
       _key: 'apps',
@@ -281,14 +273,6 @@ const services = {
         { _key: 'apps-3', text: { en: 'Auth, billing, roles and permissions', pl: 'Logowanie, płatności, role i uprawnienia' } },
         { _key: 'apps-4', text: { en: 'CI/CD with preview environments per change', pl: 'CI/CD ze środowiskami preview dla każdej zmiany' } },
       ],
-      stack: [
-        { _key: 'apps-s1', en: 'React', pl: 'React' },
-        { _key: 'apps-s2', en: 'React Native', pl: 'React Native' },
-        { _key: 'apps-s3', en: 'Node.js', pl: 'Node.js' },
-        { _key: 'apps-s4', en: 'PostgreSQL', pl: 'PostgreSQL' },
-        { _key: 'apps-s5', en: 'Fly.io', pl: 'Fly.io' },
-      ],
-      note: { en: 'Typical engagement: 6–12 weeks, or ongoing.', pl: 'Typowy projekt: 6–12 tygodni albo współpraca ciągła.' },
     },
     {
       _key: 'ai',
@@ -304,14 +288,6 @@ const services = {
         { _key: 'ai-3', text: { en: 'Workflow automation between the tools you already pay for', pl: 'Automatyzacja przepływów między narzędziami, za które już płacisz' } },
         { _key: 'ai-4', text: { en: 'Evaluation and cost controls, so quality and spend stay predictable', pl: 'Ewaluacja i kontrola kosztów, by jakość i wydatki były przewidywalne' } },
       ],
-      stack: [
-        { _key: 'ai-s1', en: 'Claude API', pl: 'Claude API' },
-        { _key: 'ai-s2', en: 'OpenAI', pl: 'OpenAI' },
-        { _key: 'ai-s3', en: 'Vector search', pl: 'Wyszukiwanie wektorowe' },
-        { _key: 'ai-s4', en: 'Python', pl: 'Python' },
-        { _key: 'ai-s5', en: 'Queues', pl: 'Kolejki' },
-      ],
-      note: { en: 'Typical engagement: 2-week pilot, then scale.', pl: 'Typowy start: 2-tygodniowy pilotaż, potem skalowanie.' },
     },
   ],
   howHeading: { en: 'how it runs', pl: 'jak to przebiega' },
@@ -347,7 +323,26 @@ const services = {
       en: 'Send a couple of lines about the project, or book a 30-minute intro call. I reply within 48 hours.',
       pl: 'Napisz kilka zdań o projekcie albo zarezerwuj 30-minutową rozmowę wstępną. Odpowiadam w ciągu 48 godzin.',
     },
-    book: { en: 'book a call', pl: 'umów rozmowę' },
+    links: [
+      {
+        _key: 'book',
+        label: { en: 'book a call', pl: 'umów rozmowę' },
+        url: 'https://cal.com/bartosz-grabski',
+        style: 'light',
+      },
+      {
+        _key: 'contact',
+        label: { en: 'contact', pl: 'kontakt' },
+        url: '/contact',
+        style: 'default',
+      },
+      {
+        _key: 'email',
+        label: { en: 'hello@bartoszgrabski.dev', pl: 'hello@bartoszgrabski.dev' },
+        url: 'mailto:hello@bartoszgrabski.dev',
+        style: 'default',
+      },
+    ],
   },
 }
 
@@ -429,7 +424,7 @@ const uiStrings = {
   },
   footer: {
     copy: { en: '© {year} {name}', pl: '© {year} {name}' },
-    built: { en: 'Built by hand · Last updated May 2026', pl: 'Wykonane ręcznie · Ostatnia aktualizacja: maj 2026' },
+    built: { en: 'Built by hand · Last updated {date}', pl: 'Wykonane ręcznie · Ostatnia aktualizacja: {date}' },
   },
   atSep: { en: ' at ', pl: ' w ' },
   langLevels: {

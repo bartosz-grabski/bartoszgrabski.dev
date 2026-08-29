@@ -13,6 +13,8 @@ interface AppChromeProps {
   resume: Resume
   siteSettings: SiteSettings
   uiStrings: UiStrings | null
+  /** ISO timestamp of the build, shown as "last updated" in the footer. */
+  lastUpdated: string
   children: ReactNode
 }
 
@@ -21,7 +23,7 @@ interface AppChromeProps {
  * toggle and toast host. Lives in the locale layout so it survives soft
  * navigations between /[lang], /[lang]/now and /[lang]/contact.
  */
-export function AppChrome({ lang, resume, siteSettings, uiStrings, children }: AppChromeProps) {
+export function AppChrome({ lang, resume, siteSettings, uiStrings, lastUpdated, children }: AppChromeProps) {
   // Starts at a fixed value so the server and first client render agree (no
   // hydration mismatch). The real theme is applied to <html data-theme> by the
   // inline anti-flash script in the layout; this effect syncs React state to it
@@ -57,7 +59,7 @@ export function AppChrome({ lang, resume, siteSettings, uiStrings, children }: A
           />
           <Tabs />
           <div>{children}</div>
-          <Footer name={resume.basics.name} />
+          <Footer name={resume.basics.name} lastUpdated={lastUpdated} />
         </div>
       </ToastProvider>
     </LangProvider>

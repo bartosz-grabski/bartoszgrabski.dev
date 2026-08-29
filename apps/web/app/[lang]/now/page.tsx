@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { fetchNow } from '@/lib/queries'
 import { fetchCurrentlyReading } from '@/lib/goodreads'
 import { NowView } from '@/components/now/NowView'
-import { isLocale, defaultLocale, sectionAlternates, type Locale } from '@/lib/site'
+import { isLocale, defaultLocale, type Locale } from '@/lib/site'
+import { sectionMetadata, BreadcrumbJsonLd, type SectionMeta } from '@/lib/seo'
 
-const META: Record<Locale, { title: string; description: string }> = {
+const META: Record<Locale, SectionMeta> = {
   en: {
     title: 'Now',
     description: "What Bartosz Grabski is working on, learning and reading right now — a Derek Sivers–style now page.",
@@ -22,16 +23,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params
   const locale: Locale = isLocale(lang) ? lang : defaultLocale
-  const m = META[locale]
-  return {
-    title: m.title,
-    description: m.description,
-    alternates: sectionAlternates(locale, 'now'),
-    openGraph: { title: `${m.title} · Bartosz Grabski`, description: m.description },
-  }
+  return sectionMetadata(locale, 'now', META[locale])
 }
 
-export default async function NowPage() {
+export default async function NowPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const locale: Locale = isLocale(lang) ? lang : defaultLocale
   const [now, goodreads] = await Promise.all([fetchNow(), fetchCurrentlyReading()])
 
   const sanityDate = now._updatedAt
@@ -41,5 +38,10 @@ export default async function NowPage() {
       ? goodreadsDate
       : sanityDate ?? new Date().toISOString()
 
-  return <NowView now={now} books={goodreads.books} asOf={asOf} />
+  return (
+    <>
+      <BreadcrumbJsonLd locale={locale} section="now" name={META[locale].title} />
+      <NowView now={now} books={goodreads.books} asOf={asOf} />
+    </>
+  )
 }
