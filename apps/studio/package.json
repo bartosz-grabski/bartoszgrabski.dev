@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "deploy": "sanity deploy"
+    "deploy": "sanity build && wrangler deploy",
+    "deploy:sanity": "sanity deploy"
   },
   "dependencies": {
     "@sanity/vision": "^6.1.0",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "wrangler": "^4.93.1"
   }
 }

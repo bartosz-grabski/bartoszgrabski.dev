@@ -16,6 +16,7 @@ Personal website for Bartosz Grabski — a monorepo with two apps:
 ```bash
 npm run dev:web      # Next.js on localhost:3000
 npm run dev:studio   # Sanity Studio
+npm run deploy:studio # Build Studio + deploy to Cloudflare (admin.bartoszgrabski.dev)
 npm run seed         # Seed Sanity with initial data (scripts/seed-sanity.ts)
 ```
 ### Node.js Environment
@@ -24,6 +25,12 @@ This project requires a specific Node.js version defined in `.nvmrc`. Always ens
 ```bash
 nvm use                     # Switch to the Node version defined in .nvmrc
 # If the version is not installed locally, run: nvm install
+```
+
+## Deploy
+
+- **Studio** is self-hosted on Cloudflare Workers (static assets) at https://admin.bartoszgrabski.dev. Config: `apps/studio/wrangler.jsonc`. Deploy with `npm run deploy:studio` (Node 22, wrangler logged in). The old Sanity-hosted deploy is still available as `npm run deploy:sanity --workspace=apps/studio`.
+- New Studio origins must be added to Sanity CORS: `sanity cors add <origin> --credentials`.
 
 ## Notes
 
