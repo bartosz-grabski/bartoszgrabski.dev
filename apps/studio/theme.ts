@@ -1,33 +1,34 @@
 import { buildLegacyTheme } from 'sanity'
 
 /**
- * Mirrors the website's terminal palette (apps/web/styles/terminal.css, dark scheme).
+ * Mirrors the website's dark theme (apps/web/styles/globals.css, `[data-theme="dark"]`).
+ * oklch accents converted to hex: accent oklch(72% 0.11 252) → #70a9e8, danger oklch(68% 0.18 25) → #f3625d.
  */
 export const theme = buildLegacyTheme({
   '--font-family-base': '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
   '--font-family-monospace': '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
 
-  '--black': '#0a0f0c',
-  '--white': '#f1f4ef',
-  '--gray-base': '#7fa37c',
-  '--gray': '#7fa37c',
+  '--black': '#0c0e12',
+  '--white': '#eef0f4',
+  '--gray-base': '#5e6470',
+  '--gray': '#a8aeba',
 
-  '--component-bg': '#0f1612',
-  '--component-text-color': '#c7e6c5',
+  '--component-bg': '#14171d',
+  '--component-text-color': '#eef0f4',
 
-  '--brand-primary': '#6dff95',
-  '--focus-color': '#6dff95',
-  '--default-button-primary-color': '#6dff95',
-  '--default-button-color': '#4a6648',
-  '--default-button-success-color': '#6dff95',
+  '--brand-primary': '#70a9e8',
+  '--focus-color': '#70a9e8',
+  '--default-button-primary-color': '#70a9e8',
+  '--default-button-color': '#5e6470',
+  '--default-button-success-color': '#5fcf8a',
   '--default-button-warning-color': '#e6c86d',
-  '--default-button-danger-color': '#ff6d6d',
+  '--default-button-danger-color': '#f3625d',
 
-  '--state-info-color': '#6dff95',
-  '--state-success-color': '#6dff95',
+  '--state-info-color': '#70a9e8',
+  '--state-success-color': '#5fcf8a',
   '--state-warning-color': '#e6c86d',
-  '--state-danger-color': '#ff6d6d',
+  '--state-danger-color': '#f3625d',
 
-  '--main-navigation-color': '#0a0f0c',
-  '--main-navigation-color--inverted': '#c7e6c5',
+  '--main-navigation-color': '#0c0e12',
+  '--main-navigation-color--inverted': '#eef0f4',
 })
